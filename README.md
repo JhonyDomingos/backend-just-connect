@@ -101,5 +101,5 @@ Se houver conflitos, pesquise sobre como resolvê-los em projetos open-source.
 **Para acessar e navegar entre as branches:**
 
 ```bash
-git checkout nome_da_branch   # para trocar de branch
-git checkout -b nome_da_branch # para criar uma nova branch
+git checkout nome_da_branch   # para trocar de branch.
+git checkout -b nome_da_branch # para criar uma nova branch.
