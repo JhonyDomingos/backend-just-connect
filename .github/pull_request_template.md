@@ -31,4 +31,4 @@ Mark with an "x" in the fields you want to select:
 
 This pull request has dependencies on the following others:
 
-- link-to-dependency PR or N/A
+- link-to-dependency PR or N/A.
