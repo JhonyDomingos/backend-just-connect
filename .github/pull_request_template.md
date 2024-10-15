@@ -1,4 +1,5 @@
-## Change Type
+# Change Type
+
 Mark with an "x" in the fields you want to select:
 
 - [ ] Bug Fix (non-breaking change that fixes an issue)
@@ -19,6 +20,7 @@ Mark with an "x" in the fields you want to select:
 - [task-id](task-link) or N/A
 
 ## Checklist
+
 Mark with an "x" in the fields you want to select:
 
 - [ ] My changes are 400 lines or less
