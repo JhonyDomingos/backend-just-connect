@@ -25,8 +25,13 @@ Antes de começar, certifique-se de ter o Node.js e o npm (Node Package Manager)
     ```bash
     npm install
     ```
+4. **Rodar o docker:**
 
-4. **Inicie o servidor de desenvolvimento:**
+    ```bash
+    npm run docker:up
+    ```
+
+5. **Inicie o servidor de desenvolvimento:**
 
     ```bash
     npm run dev
