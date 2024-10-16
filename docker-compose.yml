@@ -1,0 +1,16 @@
+services:
+  dev-db:
+    image: postgres:latest
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456789
+      POSTGRES_DB: backend-just-connect
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
+    driver: local
