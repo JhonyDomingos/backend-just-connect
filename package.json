@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",  
+    "studio": "npx prisma studio",
+    "docker:up": "docker compose up"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
