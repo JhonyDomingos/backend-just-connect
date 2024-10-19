@@ -16,18 +16,63 @@ datasource db {
 model User {
   id               String  @id @default(uuid())
   name             String?
-  username         String  @unique
+  username         String  @unique @db.VarChar(20)
   email            String  @unique
   password         String
-  bio_description  String?
+  bio_description  String? @db.VarChar(140)
   role             String  @default("user")
   admin_user_block Boolean @default(false)
   linkedin         String?
   instagram        String?
   github           String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  posts            Post[]   //lista de postagens
+  comments         Comment[]//lista de comentários
 
   @@map("users")
+}
+
+model Post {
+  id               String   @id @default(uuid())
+  user             User     @relation(fields: [userId], references: [id])
+  userId           String   // Uma postagem tem um autor/usuário
+  title            String   @db.VarChar(50)
+  description      String   @db.Text
+  statusOpen       Boolean  @default(true)
+  postCreatedAt    DateTime @default(now())
+  postUpdatedAt    DateTime @updatedAt
+  adminPostBlock   Boolean  @default(false)
+  comment          Comment[] //lista de comentários
+  tags             Tag[]    //lista de tags
+
+  @@map("posts")
+}
+
+model Comment {
+  id               String   @id @default(uuid())
+  user             User     @relation(fields: [userId], references: [id])
+  userId           String   // Um comentário tem um autor/usuário
+  post             Post     @relation(fields: [postId], references: [id])
+  postId           String   // Um comentário pertence a uma postagem
+  comment          String   @db.Text
+  score            Int      @default(0)
+  commentCreatedAt DateTime @default(now())
+  commentUpdatedAt DateTime @updatedAt
+  adminCommentBlock Boolean @default(false)
+
+  @@map("comments")
+}
+
+model Tag {
+  id               String   @id @default(uuid())
+  tag              String   @db.VarChar(15)
+  posts            Post[]   //lista de postagens
+
+  @@map("tags")
+}
+
+enum Role { //Regra (role) do usuário
+  USER
+  ADMIN
 }
