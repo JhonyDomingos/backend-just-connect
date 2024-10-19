@@ -5,6 +5,7 @@ import { AuthController } from './controllers/auth/AuthController';
 import { isAuthenticated } from './middlewares/auth/isAuthenticated';
 import { FindAllUserController } from './controllers/user/FindAllUserController';
 import { EditUserController } from './controllers/user/EditUserController';
+import { DeleteUserController } from './controllers/user/DeleteUserController';
 
 const router = Router();
 
@@ -24,6 +25,9 @@ router.get('/users', isAuthenticated, new FindAllUserController().handle);
 
 // Edit (Authenticated)
 router.put('/users/:id', isAuthenticated, new EditUserController().handle);
+
+// Delete (Authenticated)
+router.delete('/users/:id', isAuthenticated, new DeleteUserController().handle);
 
 // Auth
 router.post('/auth', new AuthController().handle);

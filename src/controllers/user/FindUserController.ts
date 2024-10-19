@@ -3,11 +3,11 @@ import { FindUserService } from '../../services/user/FindUserService';
 
 class FindUserController {
   async handle(request: Request, response: Response) {
-    const user_id = request?.user_id;
+    const { id } = request.params;
 
     const findUserService = new FindUserService();
 
-    const user = await findUserService.execute(user_id);
+    const user = await findUserService.execute(id);
 
     return response.json(user);
   }
