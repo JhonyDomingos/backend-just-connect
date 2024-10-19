@@ -4,7 +4,7 @@ import { FindUserController } from './controllers/user/FindUserController';
 import { AuthController } from './controllers/auth/AuthController';
 import { isAuthenticated } from './middlewares/auth/isAuthenticated';
 import { FindAllUserController } from './controllers/user/FindAllUserController';
-
+import { EditUserController } from './controllers/user/EditUserController';
 
 const router = Router();
 
@@ -21,6 +21,9 @@ router.get('/users/:id', isAuthenticated, new FindUserController().handle);
 
 // Find All (Authenticated)
 router.get('/users', isAuthenticated, new FindAllUserController().handle);
+
+// Edit (Authenticated)
+router.put('/users/:id', isAuthenticated, new EditUserController().handle);
 
 // Auth
 router.post('/auth', new AuthController().handle);
