@@ -8,7 +8,6 @@ router.get('/', (req: Request, res: Response) => {
 });
 
 // User Routes
-const createUserController = new CreateUserController();
 router.post('/users', new CreateUserController().handle);
 
 export { router };
