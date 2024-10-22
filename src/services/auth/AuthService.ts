@@ -35,7 +35,8 @@ class AuthService {
         const token = sign(
           {
             email: user?.email,
-            username: user?.username
+            username: user?.username,
+            role: user?.role
           }, 
           process.env.JWT_SECRET as string, {
             subject: user?.id,
@@ -43,10 +44,6 @@ class AuthService {
         });
 
         return {
-          id: user?.id,
-          email: user?.email,
-          username: user?.username,
-          role: user?.role,
           token: token
         };
     }

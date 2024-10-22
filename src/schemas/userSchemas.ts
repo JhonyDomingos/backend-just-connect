@@ -2,7 +2,8 @@ import { z } from "zod";
 
 const userSchema = z.object({
   id: z.string().uuid().optional(),
-  name: z.string().max(255),
+  name: z.string().max(100)
+    .regex(/^[\p{L}\s]+$/u, { message: "Name must contain only alphabet characters and spaces." }),
   username: z.string().max(20).min(3)
     .regex(/^[a-zA-Z0-9]+$/, { message: "Username must contain only letters and numbers." }),
   email: z.string().email(),
