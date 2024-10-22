@@ -1,10 +1,10 @@
 import prismaClient from '../../prisma';
 import { hash } from "bcryptjs";
-import { UserRequest } from "../../interfaces/user/UserRequest"
+import { CreateUserData } from '../../schemas/userSchemas';
 
 class CreateUserService {
 
-  async execute({ name, username, email, password }: UserRequest) {
+  async execute({ name, username, email, password }: CreateUserData) {
     if (!username) {
       throw new Error("Username incorrect");
     }
@@ -40,6 +40,7 @@ class CreateUserService {
         email: true
       }
     });
+
     return user;
   }
 }
