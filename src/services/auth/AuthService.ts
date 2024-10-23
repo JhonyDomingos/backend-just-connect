@@ -45,7 +45,8 @@ class AuthService {
         });
 
         return {
-          token: token
+          token: token,
+          id: user.id
         };
     }
 }
