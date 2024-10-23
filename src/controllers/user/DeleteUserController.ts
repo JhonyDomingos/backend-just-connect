@@ -3,10 +3,9 @@ import { DeleteUserService } from "../../services/user/DeleteUserService";
 import { AppError } from "../../Error/AppError.error";
 
 class DeleteUserController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
- 
     const deleteUserService = new DeleteUserService();
 
     await deleteUserService.execute(id);

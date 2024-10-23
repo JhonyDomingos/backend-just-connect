@@ -5,7 +5,7 @@ import { userPrivateRoutes } from './private/user.private.routes';
 
 const router = Router();
 
-router.get('/', (req: Request, res: Response) => {
+router.get('/', (_: Request, res: Response) => {
   res.send('Hello World');
 });
 

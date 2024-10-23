@@ -5,7 +5,7 @@ import { AppError } from "../../Error/AppError.error";
 
 export function isAuthenticated(
   request: Request,
-  response: Response,
+  _: Response,
   next: NextFunction
 ) {
   const authToken = request.headers.authorization;

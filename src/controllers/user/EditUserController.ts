@@ -3,7 +3,7 @@ import { EditUserService } from "../../services/user/EditUserService";
 import { UserRequest } from "../../interfaces/user/UserRequest";
 
 class EditUserController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const {
       name,
