@@ -3,7 +3,7 @@ import "express-async-errors";
 import { router } from "./routes/index.routes";
 import swaggerUi from "swagger-ui-express";
 import swaggerOutput from "../swagger_output.json";
-import { HandleErrors } from "./middlewares/handleErros/HandleErrors.middleware";
+import { HandleErrors } from "./middlewares/handleErrors/HandleErrors.middleware";
 import cors from "cors";
 const app = express();
 const port = 3000;
