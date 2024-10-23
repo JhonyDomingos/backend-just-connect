@@ -1,10 +1,11 @@
 import prismaClient from '../../prisma';
 import { hash } from "bcryptjs";
-import { CreateUserData } from '../../schemas/userSchemas';
+import { CreateUserData, ReturnUserData } from '../../interfaces/user/UserTypes';
+import { userReturnSchema } from '../../schemas/userSchemas';
 
 class CreateUserService {
 
-  async execute({ name, username, email, password }: CreateUserData) {
+  async execute({ name, username, email, password }: CreateUserData): Promise<ReturnUserData> {
     if (!username) {
       throw new Error("Username incorrect");
     }
@@ -31,17 +32,11 @@ class CreateUserService {
         name,
         username,
         email,
-        password: passwordHash,
-      },
-      select: {
-        id: true,
-        name: true,
-        username: true,
-        email: true
+        password: passwordHash
       }
     });
 
-    return user;
+    return userReturnSchema.parse(user);
   }
 }
 

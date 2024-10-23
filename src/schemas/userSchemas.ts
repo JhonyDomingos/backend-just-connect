@@ -22,7 +22,7 @@ const userSchema = z.object({
   comments: z.array(z.unknown()).optional(),
 });
 
-const registerSchema = userSchema.pick({
+const userRegisterSchema = userSchema.pick({
   name: true,
   username: true,
   email: true,
@@ -32,6 +32,12 @@ const registerSchema = userSchema.pick({
   .extend({ confirmPassword: z.string().min(8) })
   .refine(({ password, confirmPassword }) => password === confirmPassword, { message: "Passwords doesn't match." });
 
-type CreateUserData = z.infer<typeof registerSchema>
+const userReturnSchema = userSchema.pick({
+  name: true,
+  username: true,
+  email: true,
+  createdAt: true,
+  updatedAt: true
+})
 
-export { registerSchema, CreateUserData }
+export { userRegisterSchema, userReturnSchema }

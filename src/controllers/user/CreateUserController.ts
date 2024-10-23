@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
 import { CreateUserService } from '../../services/user/CreateUserService';
-import { CreateUserData, registerSchema } from '../../schemas/userSchemas';
+import { userRegisterSchema } from '../../schemas/userSchemas';
+import { CreateUserData } from '../../interfaces/user/UserTypes';
 
 class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
-      const userData: CreateUserData = registerSchema.parse(request.body)
+      const userData: CreateUserData = userRegisterSchema.parse(request.body)
       
       const createUserService = new CreateUserService()
       const user = await createUserService.execute(userData)
