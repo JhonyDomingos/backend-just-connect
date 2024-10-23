@@ -2,16 +2,17 @@ import prismaClient from '../../prisma';
 import { hash } from "bcryptjs";
 import { CreateUserData, ReturnUserData } from '../../interfaces/user/UserTypes';
 import { userReturnSchema } from '../../schemas/userSchemas';
+import { AppError } from '../../Error/AppError.error';
 
 class CreateUserService {
 
   async execute({ name, username, email, password }: CreateUserData): Promise<ReturnUserData> {
     if (!username) {
-      throw new Error("Username incorrect");
+      throw new AppError("Username incorrect", 400);
     }
 
     if (!email) {
-      throw new Error("Email incorrect");
+      throw new AppError("Email incorrect", 400);
     }
 
     const userAlreadyExists = await prismaClient.user.findFirst({
@@ -22,7 +23,7 @@ class CreateUserService {
     });
 
     if (userAlreadyExists) {
-      throw new Error("Email or Username already exists");
+      throw new AppError("Email or Username already exists", 409);
     }
 
     const passwordHash = await hash(password, 10);
