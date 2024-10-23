@@ -23,6 +23,6 @@ const doc = {
 };
 
 const outputFile = './swagger_output.json';
-const endpointsFiles = ['./src/routes.ts'];
+const endpointsFiles = ['./src/routes/index.routes.ts'];
 
 swaggerAutogen({openapi: '3.0.0'})(outputFile, endpointsFiles, doc);

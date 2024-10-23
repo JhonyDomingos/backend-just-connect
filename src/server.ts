@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import "express-async-errors";
-import { router } from "./routes";
+import { router } from "./routes/index.routes";
 import swaggerUi from "swagger-ui-express";
 import swaggerOutput from "../swagger_output.json";
 
@@ -8,6 +8,7 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
+
 app.use(router);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOutput));
