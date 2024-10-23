@@ -11,12 +11,12 @@ const port = 3000;
 app.use(json());
 app.use(cors());
 
-
 app.use(router);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 app.use(HandleErrors.execute);
 
-
 app.listen(port, () => {
-  console.log(`Server running at ${port} port`);
+  console.log(
+    `Server running at ${port} port documetation at http://localhost:3000/api-docs`
+  );
 });
