@@ -25,8 +25,8 @@ model User {
   linkedin            String?
   instagram           String?
   github              String?
-  user_created_at     DateTime  @default(now())
-  user_updated_at     DateTime  @updatedAt
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @updatedAt
   posts               Post[]
   comments            Comment[]
 
@@ -40,8 +40,8 @@ model Post {
   title               String    @db.VarChar(50)
   description         String    @db.Text
   statusOpen          Boolean   @default(true)
-  post_created_at     DateTime  @default(now())
-  post_updated_at     DateTime  @updatedAt
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @updatedAt
   admin_post_block    Boolean   @default(false)
   comment             Comment[]
   tags                Tag[]
@@ -57,8 +57,8 @@ model Comment {
   post_id             String
   comment             String    @db.Text
   score               Int       @default(0)
-  comment_created_at  DateTime  @default(now())
-  comment_updated_at  DateTime  @updatedAt
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @updatedAt
   admin_comment_block Boolean   @default(false)
 
   @@map("comments")
