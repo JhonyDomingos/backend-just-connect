@@ -20,7 +20,7 @@ model User {
   email               String    @unique
   password            String
   bio_description     String?   @db.VarChar(140)
-  role                String    @default("user")
+  role                Role      @default(USER)
   admin_user_block    Boolean   @default(false)
   linkedin            String?
   instagram           String?
