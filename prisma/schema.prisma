@@ -14,65 +14,65 @@ datasource db {
 }
 
 model User {
-  id               String  @id @default(uuid())
-  name             String?
-  username         String  @unique @db.VarChar(20)
-  email            String  @unique
-  password         String
-  bio_description  String? @db.VarChar(140)
-  role             String  @default("user")
-  admin_user_block Boolean @default(false)
-  linkedin         String?
-  instagram        String?
-  github           String?
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  posts            Post[]   //lista de postagens
-  comments         Comment[]//lista de comentários
+  id                  String    @id @default(uuid())
+  name                String?   @db.VarChar(100)
+  username            String    @unique @db.VarChar(20)
+  email               String    @unique
+  password            String
+  bio_description     String?   @db.VarChar(140)
+  role                String    @default("user")
+  admin_user_block    Boolean   @default(false)
+  linkedin            String?
+  instagram           String?
+  github              String?
+  user_created_at     DateTime  @default(now())
+  user_updated_at     DateTime  @updatedAt
+  posts               Post[]
+  comments            Comment[]
 
   @@map("users")
 }
 
 model Post {
-  id               String   @id @default(uuid())
-  user             User     @relation(fields: [userId], references: [id])
-  userId           String   // Uma postagem tem um autor/usuário
-  title            String   @db.VarChar(50)
-  description      String   @db.Text
-  statusOpen       Boolean  @default(true)
-  postCreatedAt    DateTime @default(now())
-  postUpdatedAt    DateTime @updatedAt
-  adminPostBlock   Boolean  @default(false)
-  comment          Comment[] //lista de comentários
-  tags             Tag[]    //lista de tags
+  id                  String    @id @default(uuid())
+  user                User      @relation(fields: [user_id], references: [id])
+  user_id             String
+  title               String    @db.VarChar(50)
+  description         String    @db.Text
+  statusOpen          Boolean   @default(true)
+  post_created_at     DateTime  @default(now())
+  post_updated_at     DateTime  @updatedAt
+  admin_post_block    Boolean   @default(false)
+  comment             Comment[]
+  tags                Tag[]
 
   @@map("posts")
 }
 
 model Comment {
-  id               String   @id @default(uuid())
-  user             User     @relation(fields: [userId], references: [id])
-  userId           String   // Um comentário tem um autor/usuário
-  post             Post     @relation(fields: [postId], references: [id])
-  postId           String   // Um comentário pertence a uma postagem
-  comment          String   @db.Text
-  score            Int      @default(0)
-  commentCreatedAt DateTime @default(now())
-  commentUpdatedAt DateTime @updatedAt
-  adminCommentBlock Boolean @default(false)
+  id                  String    @id @default(uuid())
+  user                User      @relation(fields: [user_id], references: [id])
+  user_id             String   
+  post                Post      @relation(fields: [post_id], references: [id])
+  post_id             String
+  comment             String    @db.Text
+  score               Int       @default(0)
+  comment_created_at  DateTime  @default(now())
+  comment_updated_at  DateTime  @updatedAt
+  admin_comment_block Boolean   @default(false)
 
   @@map("comments")
 }
 
 model Tag {
-  id               String   @id @default(uuid())
-  tag              String   @db.VarChar(15)
-  posts            Post[]   //lista de postagens
+  id                  String   @id @default(uuid())
+  tag                 String   @db.VarChar(15)
+  posts               Post[]   
 
   @@map("tags")
 }
 
-enum Role { //Regra (role) do usuário
+enum Role {
   USER
   ADMIN
 }
