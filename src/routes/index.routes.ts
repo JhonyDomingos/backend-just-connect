@@ -12,9 +12,10 @@ router.get('/', (_: Request, res: Response) => {
 });
 
 router.use('/public/users', userPublicRoutes);
-router.use('/users', userPrivateRoutes);
 router.use('/public/auth', sessionPublicRoutes);
 router.use('/public/posts', postsPublicRoutes);
+
+router.use('/users', userPrivateRoutes);
 router.use('/posts', postsPrivateRoutes);
 
 export { router };
