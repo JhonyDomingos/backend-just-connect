@@ -1,3 +1,5 @@
+import { Role } from '@prisma/client'
+
 export interface UserRequest {
   id: string;
   name: string;
@@ -5,7 +7,7 @@ export interface UserRequest {
   email: string;
   password: string;
   bio_description: string;
-  role: string;
+  role: Role;
   admin_user_block: boolean;
   linkedin: string;
   instagram: string;
