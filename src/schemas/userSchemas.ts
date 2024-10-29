@@ -50,15 +50,18 @@ const userRegisterSchema = userSchema
 const userRegisteredSchema = userSchema.pick({
   id: true,
   name: true,
-  username: true,
-  email: true,
-  created_at: true,
-  updated_at: true,
+  role: true
 });
 
-const userReturnSchema = userSchema.omit({ password: true, role: true }); // retirar o role daqui quando o fix no model for feito
+const userReturnSchema = userSchema.omit({
+  password: true,
+  id: true,
+  comments: true,
+});
 
-const userListSchema = z.array(userReturnSchema);
+const userListSchema = z.array(
+  userSchema.pick({ name: true, username: true, id: true, posts: true })
+);
 
 export {
   userSchema,
