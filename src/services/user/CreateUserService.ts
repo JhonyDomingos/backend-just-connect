@@ -13,6 +13,7 @@ class CreateUserService {
     username,
     email,
     password,
+    role = "USER"
   }: CreateUserData): Promise<NewUserData> {
     if (!username) {
       throw new AppError("Username incorrect", 400);
@@ -46,6 +47,7 @@ class CreateUserService {
         username,
         email,
         password: passwordHash,
+        role
       },
     });
 

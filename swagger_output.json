@@ -14,7 +14,7 @@
   "paths": {
     "/public/users/register": {
       "post": {
-        "tags": ["Public user routes"], 
+        "tags": ["Public user routes"],
         "description": "Register user",
         "requestBody": {
           "content": {
@@ -28,7 +28,13 @@
                   "password": { "type": "string" },
                   "confirmPassword": { "type": "string" }
                 },
-                "required": ["name", "username", "email", "password", "confirmPassword"]
+                "required": [
+                  "name",
+                  "username",
+                  "email",
+                  "password",
+                  "confirmPassword"
+                ]
               }
             }
           },
@@ -42,7 +48,7 @@
     },
     "/public/auth": {
       "post": {
-        "tags": ["Public user routes"], 
+        "tags": ["Public user routes"],
         "description": "Login with email or username",
         "requestBody": {
           "content": {
@@ -68,8 +74,39 @@
     },
     "/public/users": {
       "get": {
-        "tags": ["Public user routes"], 
+        "tags": ["Public user routes"],
         "description": "List all users",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Optional name to filter users by",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number to retrieve",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of users per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 16
+            }
+          }
+        ],
         "responses": {
           "200": { "description": "OK" }
         }
@@ -77,7 +114,7 @@
     },
     "/public/users/{id}": {
       "get": {
-        "tags": ["Public user routes"], 
+        "tags": ["Public user routes"],
         "description": "Get one user",
         "parameters": [
           {
@@ -97,7 +134,7 @@
     },
     "/users/my-profile": {
       "get": {
-        "tags": ["Authenticated user routes"], 
+        "tags": ["Authenticated user routes"],
         "description": "Returns the logged user's profile",
         "responses": {
           "200": {
@@ -116,7 +153,7 @@
     },
     "/users/{id}": {
       "put": {
-        "tags": ["Authenticated user routes"], 
+        "tags": ["Authenticated user routes"],
         "description": "Edit user",
         "parameters": [
           {
@@ -161,7 +198,7 @@
         ]
       },
       "delete": {
-        "tags": ["Authenticated user routes"], 
+        "tags": ["Authenticated user routes"],
         "description": "Delete user",
         "parameters": [
           {
