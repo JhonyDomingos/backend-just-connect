@@ -5,15 +5,17 @@ import { FindUserByNameService } from "../../services/user/FindUserByNameService
 
 class FindAllUserController {
   async handle(request: Request, response: Response): Promise<Response> {
-    if (!request.query.name) {
+    const { name, page, limit = 16 } = request.query;
+
+    if (!name) {
       const findAllUserService = new FindAllUserService();
-      const users: ReturnUsersData = await findAllUserService.execute();
-      return response.json(users);
+      const { users, totalPages } = await findAllUserService.execute(Number(page), Number(limit));
+      return response.json({ users, totalPages, page, limit });
     } else {
-      const name: string = request.query.name as string;
+      const userName: string = name as string;
       const findUsersByNameService = new FindUserByNameService();
-      const users: ReturnUsersData = await findUsersByNameService.execute(name);
-      return response.json(users);
+      const { users, totalPages } = await findUsersByNameService.execute(userName, Number(page), Number(limit));
+      return response.json({ users, totalPages, page, limit });
     }
   }
 }
