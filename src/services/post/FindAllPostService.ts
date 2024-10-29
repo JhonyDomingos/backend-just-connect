@@ -14,7 +14,7 @@ class FindAllPostsService {
         tags: true
       },
       where: {
-        adminPostBlock: false
+        admin_post_block: false
       }
     });
     return posts;

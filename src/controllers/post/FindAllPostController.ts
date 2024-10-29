@@ -13,14 +13,10 @@ class FindAllPostController {
  * @returns {Promise<Response>} The HTTP response containing the list of posts or an error message.
  */
   async findAll(req: Request, res: Response) {
-    try {
       const postsService = new FindAllPostsService();
       const posts = await postsService.findAll();
-
+      
       return res.json(posts);
-    } catch (error) {
-      return res.status(500).json({ error: 'Internal server error' });
-    }
   }
 }
 
