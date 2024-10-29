@@ -17,13 +17,7 @@ class PostCreateService {
       data: {
         title: data.title,
         description: data.description,
-        user_id: userId,
-        tags: {
-          connect: data.tags?.map(tagId => ({ id: tagId })) || []
-        }
-      },
-      include: {
-        tags: true
+        user_id: userId
       }
     });
     return post;

@@ -15,23 +15,14 @@ class CreatePostController {
  * @param {Response} res - The response object used to send back the created post or an error message.
  * @returns {Promise<Response>} The HTTP response containing the created post or an error message.
  */
-  async create(req: Request, res: Response) {
-    try {
-      const data = req.body;
-      const userId = req.user_id;
+  async create(req: Request, res: Response): Promise<Response> {
+    const data = req.body;
+    const userId = req.user_id;
+    
+    const postsService = new PostCreateService();
+    const post = await postsService.create(data, userId);
 
-      console.log('User ID:', userId);
-
-      const postsService = new PostCreateService();
-      const post = await postsService.create(data, userId);
-
-      return res.status(201).json(post);
-    } catch (error) {
-      if (error instanceof Error) {
-        return res.status(400).json({ error: error.message });
-      }
-      return res.status(500).json({ error: 'Internal server error' });
-    }
+    return res.status(201).json(post);
   }
 };
 

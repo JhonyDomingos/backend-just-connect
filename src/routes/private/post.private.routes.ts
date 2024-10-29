@@ -23,8 +23,7 @@ const postsPrivateRoutes: Router = Router();
 const createPostController = new CreatePostController();
 const updatePostController = new UpdatePostController();
 const deletePostController = new DeletePostController();
-
-// postsPrivateRoutes.use(isAuthenticated);
+postsPrivateRoutes.use(isAuthenticated);
 
 postsPrivateRoutes.post('/', validateSchema(createPostSchema), createPostController.create);
 postsPrivateRoutes.put('/:id', validateSchema(updatePostSchema), updatePostController.update);
