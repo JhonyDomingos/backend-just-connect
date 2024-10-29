@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { FindAllPostController } from '../../controllers/post/FindAllPostController';
 import { FindOnePostController } from '../../controllers/post/FindOnePostController';
+import { FindAllPostUserController } from '../../controllers/post/FindAllPostUserController';
 
 /**
  * @module postsPublicRoutes
@@ -16,8 +17,10 @@ import { FindOnePostController } from '../../controllers/post/FindOnePostControl
 const postsPublicRoutes: Router = Router();
 const findAllPostController = new FindAllPostController();
 const findOnePostController = new FindOnePostController();
+const findAllPostUserController = new FindAllPostUserController();
 
 postsPublicRoutes.get('/', findAllPostController.findAll);
 postsPublicRoutes.get('/:id', findOnePostController.findOne);
+postsPublicRoutes.get('/user/:userId', findAllPostUserController.findAll);
 
 export { postsPublicRoutes };

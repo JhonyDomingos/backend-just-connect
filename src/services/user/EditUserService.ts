@@ -47,7 +47,7 @@ class EditUserService {
         email,
         password: passwordHash,
         bio_description,
-        role,
+        // role,
         admin_user_block,
         linkedin,
         instagram,

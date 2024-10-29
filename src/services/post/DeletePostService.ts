@@ -19,7 +19,7 @@ class DeletePostService {
       throw new Error("Postagem não encontrado.");
     }
 
-    if (post.userId !== userId) {
+    if (post.user_id !== userId) {
       throw new Error("Sem permissão para deletar esse post.");
     }
 

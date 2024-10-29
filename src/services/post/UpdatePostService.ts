@@ -22,7 +22,7 @@ class UpdatePostService {
       throw new Error("Postagem não encontrada.");
     }
 
-    if (post.userId !== userId) {
+    if (post.user_id !== userId) {
       throw new Error("Sem permissão para deletar esse post.");
     }
 
@@ -33,11 +33,11 @@ class UpdatePostService {
         description: data.description,
         statusOpen: data.statusOpen,
         tags: data.tags ? {
-          set: data.tags.map(tagId => ({ id: tagId }))
+          set: data.tags.map(tagId => ({ id: tagId.id }))
         } : undefined
       },
       include: {
-        tags: true
+        tags: false
       }
     });
 
