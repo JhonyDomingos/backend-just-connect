@@ -2,6 +2,7 @@ import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import prismaClient from '../../prisma/index';
 import { AuthRequest } from '../../interfaces/auth/authRequest';
+import { AppError } from "../../Error/AppError.error";
 
 class AuthService {
     async execute({email, username, password}: AuthRequest) {
@@ -20,22 +21,23 @@ class AuthService {
         });
 
         if (!user) {
-            throw new Error('Incorrect user (email or username)');
+            throw new AppError('Incorrect user (email or username)');
         }
 
         const passwordMatch = await compare(password, user?.password);
 
         if (!passwordMatch) {
-            throw new Error('Incorrect password');
+            throw new AppError('Incorrect password');
         }
 
-        if (!process.env.JWT_SECRET) {
-            throw new Error('JWT_SECRET is not defined');
+        if (!process.env.JWT_SECRET!) {
+            throw new AppError('JWT_SECRET is not defined');
         }
         const token = sign(
           {
             email: user?.email,
-            username: user?.username
+            username: user?.username,
+            role: user?.role
           }, 
           process.env.JWT_SECRET as string, {
             subject: user?.id,
@@ -43,11 +45,8 @@ class AuthService {
         });
 
         return {
-          id: user?.id,
-          email: user?.email,
-          username: user?.username,
-          role: user?.role,
-          token: token
+          token: token,
+          id: user.id
         };
     }
 }

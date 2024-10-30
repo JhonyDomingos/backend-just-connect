@@ -1,27 +1,42 @@
-import prismaClient from '../../prisma';
+import prismaClient from "../../prisma";
 import { hash } from "bcryptjs";
-import { UserRequest } from "../../interfaces/user/UserRequest"
+import {
+  CreateUserData,
+  NewUserData,
+} from "../../interfaces/user/UserTypes";
+import { userRegisteredSchema } from "../../schemas/userSchemas";
+import { AppError } from "../../Error/AppError.error";
 
 class CreateUserService {
-
-  async execute({ name, username, email, password }: UserRequest) {
+  async execute({
+    name,
+    username,
+    email,
+    password,
+    role = "USER"
+  }: CreateUserData): Promise<NewUserData> {
     if (!username) {
-      throw new Error("Username incorrect");
+      throw new AppError("Username incorrect", 400);
     }
 
     if (!email) {
-      throw new Error("Email incorrect");
+      throw new AppError("Email incorrect", 400);
     }
 
-    const userAlreadyExists = await prismaClient.user.findFirst({
-      where: {
-        email: email,
-        username: username
-      }
+    const usernameAlreadyExists = await prismaClient.user.findFirst({
+      where: { username },
     });
 
-    if (userAlreadyExists) {
-      throw new Error("Email or Username already exists");
+    if (usernameAlreadyExists) {
+      throw new AppError("Username already exists", 400);
+    }
+
+    const emailAlreadyRegistered = await prismaClient.user.findFirst({
+      where: { email },
+    });
+
+    if (emailAlreadyRegistered) {
+      throw new AppError("Email is already registered", 400);
     }
 
     const passwordHash = await hash(password, 10);
@@ -32,15 +47,11 @@ class CreateUserService {
         username,
         email,
         password: passwordHash,
+        role
       },
-      select: {
-        id: true,
-        name: true,
-        username: true,
-        email: true
-      }
     });
-    return user;
+
+    return userRegisteredSchema.parse(user);
   }
 }
 
