@@ -1,6 +1,6 @@
 import prismaClient from '../../prisma';
 import { ReturnPostData } from "../../interfaces/post/PostType";
-import { UsernameRequest } from "../../interfaces/user/usernameRequest";
+import { UsernameRequest } from "../../interfaces/user/UsernameRequest";
 
 class FindAllPostUsernameService {
   async findAll({ username }: UsernameRequest): Promise<ReturnPostData[]> {
