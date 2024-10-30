@@ -1,4 +1,4 @@
-import { array, z } from "zod";
+import { z } from "zod";
 
 const userSchema = z.object({
   id: z.string().uuid().optional(),
@@ -28,8 +28,8 @@ const userSchema = z.object({
   linkedin: z.string().url().optional().nullable(),
   instagram: z.string().url().optional().nullable(),
   github: z.string().url().optional().nullable(),
-  createdAt: z.date().optional(),
-  updatedAt: z.date().optional(),
+  created_at: z.date().optional(),
+  updated_at: z.date().optional(),
   posts: z.array(z.unknown()).optional(),
   comments: z.array(z.unknown()).optional(),
 });
@@ -50,14 +50,23 @@ const userRegisterSchema = userSchema
 const userRegisteredSchema = userSchema.pick({
   id: true,
   name: true,
-  username: true,
-  email: true,
-  createdAt: true,
-  updatedAt: true,
+  role: true
 });
 
-const userReturnSchema = userSchema.omit({ password: true, role: true }); // retirar o role daqui quando o fix no model for feito
+const userReturnSchema = userSchema.omit({
+  password: true,
+  id: true,
+  comments: true,
+});
 
-const userListSchema = z.array(userReturnSchema)
+const userListSchema = z.array(
+  userSchema.pick({ name: true, username: true, id: true, posts: true })
+);
 
-export { userRegisterSchema, userRegisteredSchema, userReturnSchema, userListSchema };
+export {
+  userSchema,
+  userRegisterSchema,
+  userRegisteredSchema,
+  userReturnSchema,
+  userListSchema,
+};

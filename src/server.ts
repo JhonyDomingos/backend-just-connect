@@ -5,6 +5,9 @@ import swaggerUi from "swagger-ui-express";
 import swaggerOutput from "../swagger_output.json";
 import { HandleErrors } from "./middlewares/handleErrors/HandleErrors.middleware";
 import cors from "cors";
+import { postsPublicRoutes } from "./routes/public/post.public.routes";
+import { postsPrivateRoutes } from "./routes/private/post.private.routes";
+
 const app = express();
 const port = 3000;
 

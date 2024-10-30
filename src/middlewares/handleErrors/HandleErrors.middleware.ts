@@ -28,7 +28,7 @@ class HandleErrors {
       return response.status(404).json({ message: "User not found" });
     }
 
-    return response.status(500).json({ message: "Internal Server Error" });
+    return response.status(500).json({ message: "Internal Server Error", error: error });
   };
 }
 
