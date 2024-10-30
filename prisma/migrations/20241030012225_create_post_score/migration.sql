@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "posts" ADD COLUMN     "score" INTEGER NOT NULL DEFAULT 0;

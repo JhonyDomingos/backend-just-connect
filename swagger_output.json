@@ -330,6 +330,25 @@
         }
       }
     },
+    "/public/posts/user/{id}": {
+      "get": {
+        "tags": ["Public post routes"],
+        "description": "List all posts by one user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
     "/public/posts/{id}": {
       "get": {
         "tags": ["Public post routes"],

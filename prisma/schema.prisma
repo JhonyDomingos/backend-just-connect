@@ -39,6 +39,7 @@ model Post {
   user_id             String
   title               String    @db.VarChar(50)
   description         String    @db.Text
+  score               Int       @default(0)
   statusOpen          Boolean   @default(true)
   created_at          DateTime  @default(now())
   updated_at          DateTime  @updatedAt
@@ -66,7 +67,7 @@ model Comment {
 
 model Tag {
   id                  String   @id @default(uuid())
-  tag                 String   @db.VarChar(15)
+  tag                 String   @unique @db.VarChar(15)
   posts               Post[]   
 
   @@map("tags")
