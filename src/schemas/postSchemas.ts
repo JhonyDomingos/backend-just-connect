@@ -40,12 +40,14 @@ const updatePostSchema = postSchema.omit({
   user: true,
   created_at: true,
   updated_at: true,
+  tags: true
 });
 
 const postOnUserSchema = postSchema.omit({
   user: true,
   user_id: true,
   updated_at: true,
+  tags: true
 });
 
 export { postSchema, createPostSchema, updatePostSchema, postOnUserSchema };
