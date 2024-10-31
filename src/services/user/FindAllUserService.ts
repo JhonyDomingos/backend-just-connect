@@ -23,14 +23,26 @@ class FindAllUserService {
         where: searchByName || {},
         skip: (page - 1) * limit,
         take: limit,
+        include: {
+          posts: {
+            select: {
+              id: true
+            },
+          },
+        },
       }),
       prismaClient.user.count({
         where: searchByName,
-      }),
+      })
     ]);
 
+    const usersWithPostCount = users.map(user => ({
+      ...user,
+      postCount: user.posts.length,
+    }));
+
     return {
-      users: userListSchema.parse(users),
+      users: userListSchema.parse(usersWithPostCount),
       totalPages: Math.ceil(total / limit),
     };
   }

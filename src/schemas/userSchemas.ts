@@ -59,7 +59,7 @@ const userProfileReturnSchema = userSchema.omit({
   id: true,
   comments: true,
   created_at: true,
-  updated_at: true
+  updated_at: true,
 });
 
 const userReturnSchema = userProfileReturnSchema.omit({
@@ -68,7 +68,9 @@ const userReturnSchema = userProfileReturnSchema.omit({
 });
 
 const userListSchema = z.array(
-  userSchema.pick({ name: true, username: true, id: true, posts: true })
+  userSchema
+    .pick({ name: true, username: true, id: true })
+    .extend({ postCount: z.number() })
 );
 
 const userPostSchema = z.object({

@@ -45,17 +45,3 @@ const postOnUserSchema = postSchema.omit({ user: true, user_id: true, updated_at
 
 export { postSchema, createPostSchema, updatePostSchema, postOnUserSchema };
 
-// export const postReturnSchema = z.object({
-//   id: z.string(),
-//   title: z.string(),
-//   description: z.string(),
-//   statusOpen: z.boolean(),
-//   postCreatedAt: z.date(),
-//   postUpdatedAt: z.date(),
-//   adminPostBlock: z.boolean(),
-//   userId: z.string(),
-// tags: z.array(z.object({
-//   id: z.string(),
-//   tag: z.string()
-// }))
-// });
