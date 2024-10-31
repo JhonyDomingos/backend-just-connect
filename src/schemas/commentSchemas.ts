@@ -20,4 +20,9 @@ const createCommentSchema = commentSchema.pick({
   comment: true,
 });
 
-export { commentSchema, createCommentSchema };
+const deleteCommentSchema = commentSchema.pick({
+  user_id: true,
+  comment: true,
+});
+
+export { commentSchema, createCommentSchema, deleteCommentSchema };
