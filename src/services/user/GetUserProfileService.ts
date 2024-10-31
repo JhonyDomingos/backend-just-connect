@@ -1,11 +1,11 @@
 import { AppError } from "../../Error/AppError.error";
-import { ReturnUserData } from "../../interfaces/user/UserTypes";
+import { ReturnProfileUserData, ReturnUserData } from "../../interfaces/user/UserTypes";
 import prismaClient from "../../prisma";
 import { postOnUserSchema, postSchema } from "../../schemas/postSchemas";
-import { userReturnSchema } from "../../schemas/userSchemas";
+import { userProfileReturnSchema, userReturnSchema } from "../../schemas/userSchemas";
 
-class FindUserService {
-  async execute(id: string): Promise<ReturnUserData> {
+class GetUserProfileService {
+  async execute(id: string): Promise<ReturnProfileUserData> {
     const user = await prismaClient.user.findUnique({
       where: {
         id
@@ -17,8 +17,8 @@ class FindUserService {
       throw new AppError("User not found", 404);
     }
 
-    return userReturnSchema.parse(user);
+    return userProfileReturnSchema.parse(user);
   }
 }
 
-export { FindUserService };
+export { GetUserProfileService };

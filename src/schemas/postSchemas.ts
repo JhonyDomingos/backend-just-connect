@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { userSchema } from "./userSchemas";
+import { userPostSchema } from "./userSchemas";
 
 /**
  * Schema for validating the structure of a post object returned from the database.
@@ -18,21 +18,15 @@ import { userSchema } from "./userSchemas";
  */
 const postSchema = z.object({
   id: z.string().uuid(),
+  user: userPostSchema,
+  user_id: z.string().uuid(),
   title: z.string().min(5).max(50),
-  user: userSchema.pick({ id: true }),
   description: z.string().min(10).optional(),
+  score: z.number().optional(),
   statusOpen: z.boolean().optional(),
-  admin_post_block: z.boolean().optional(),
   created_at: z.date().optional(),
   updated_at: z.date().optional(),
-  tags: z.array(
-    z
-      .object({
-        id: z.string(),
-        tag: z.string(),
-      })
-      .optional()
-  ),
+  admin_post_block: z.boolean().optional(),
 });
 
 const createPostSchema = postSchema.pick({
@@ -47,7 +41,9 @@ const updatePostSchema = postSchema.omit({
   updated_at: true,
 });
 
-export { postSchema, createPostSchema, updatePostSchema };
+const postOnUserSchema = postSchema.omit({ user: true, user_id: true, updated_at: true });
+
+export { postSchema, createPostSchema, updatePostSchema, postOnUserSchema };
 
 // export const postReturnSchema = z.object({
 //   id: z.string(),
