@@ -75,13 +75,7 @@ const userListSchema = z.array(
 
 const userPostSchema = z.object({
   id: z.string().uuid(),
-  username: z
-    .string()
-    .max(20)
-    .min(3)
-    .regex(/^[a-zA-Z0-9]+$/, {
-      message: "Username must contain only letters and numbers.",
-    }),
+  username: z.string(),
 });
 
 export {

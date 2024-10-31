@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { unknown, z } from "zod";
 import { userPostSchema } from "./userSchemas";
 
 /**
@@ -21,17 +21,18 @@ const postSchema = z.object({
   user: userPostSchema,
   user_id: z.string().uuid(),
   title: z.string().min(5).max(50),
-  description: z.string().min(10).optional(),
+  description: z.string().min(10),
   score: z.number().optional(),
   statusOpen: z.boolean().optional(),
   created_at: z.date().optional(),
   updated_at: z.date().optional(),
   admin_post_block: z.boolean().optional(),
+  tags: z.array(unknown()),
 });
 
 const createPostSchema = postSchema.pick({
   title: true,
-  description: true
+  description: true,
 });
 
 const updatePostSchema = postSchema.omit({
@@ -41,7 +42,10 @@ const updatePostSchema = postSchema.omit({
   updated_at: true,
 });
 
-const postOnUserSchema = postSchema.omit({ user: true, user_id: true, updated_at: true });
+const postOnUserSchema = postSchema.omit({
+  user: true,
+  user_id: true,
+  updated_at: true,
+});
 
 export { postSchema, createPostSchema, updatePostSchema, postOnUserSchema };
-

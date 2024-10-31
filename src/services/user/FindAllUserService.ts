@@ -13,7 +13,7 @@ class FindAllUserService {
       ? {
           name: {
             contains: name,
-            mode: Prisma.QueryMode.insensitive,
+            mode: "insensitive",
           },
         }
       : undefined;
@@ -24,11 +24,7 @@ class FindAllUserService {
         skip: (page - 1) * limit,
         take: limit,
         include: {
-          posts: {
-            select: {
-              id: true
-            },
-          },
+          posts: true
         },
       }),
       prismaClient.user.count({
