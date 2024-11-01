@@ -5,6 +5,7 @@ import { userPrivateRoutes } from './private/user.private.routes';
 import { postsPublicRoutes } from './public/post.public.routes';
 import { postsPrivateRoutes } from './private/post.private.routes';
 import { commentPrivateRoutes } from './private/comment.private.routes';
+import { tagPrivateRoutes } from './private/tag.private.routes';
 
 const router = Router();
 
@@ -19,5 +20,6 @@ router.use('/public/posts', postsPublicRoutes);
 router.use('/users', userPrivateRoutes);
 router.use('/posts', postsPrivateRoutes);
 router.use('/comments', commentPrivateRoutes);
+router.use('/tags', tagPrivateRoutes);
 
 export { router };
