@@ -18,7 +18,6 @@ class CommentCreateService {
 
     const comment = await prismaClient.comment.create({
       data: {
-
         user_id: userId,
         post_id: postId,
         comment: data.comment,
