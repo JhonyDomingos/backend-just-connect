@@ -11,6 +11,18 @@ const commentSchema = z.object({
   created_at: z.date().optional(),
   updated_at: z.date().optional(),
   admin_comment_block: z.boolean().optional(),
+
 });
 
-export { commentSchema };
+const createCommentSchema = commentSchema.pick({
+  user_id: true,
+  post_id: true,
+  comment: true,
+});
+
+const deleteCommentSchema = commentSchema.pick({
+  user_id: true,
+  comment: true,
+});
+
+export { commentSchema, createCommentSchema, deleteCommentSchema };
