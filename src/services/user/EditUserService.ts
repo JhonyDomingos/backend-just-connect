@@ -4,7 +4,7 @@ import { UserRequest } from '../../interfaces/user/UserRequest';
 
 class EditUserService {
   
-  async execute({ id, name, username, email, password, bio_description, role, admin_user_block, linkedin, instagram, github }: UserRequest) {
+  async execute({ id, name, username, email, bio_description, role, admin_user_block, linkedin, instagram, github }) {
     if (!id) {
       throw new Error('ID incorrect');
     }
@@ -34,9 +34,6 @@ class EditUserService {
       }
     });
 
-
-    const passwordHash = await hash(password, 10);
-
     const userUpdated = await prismaClient.user.update({
       where: {
         id: id
@@ -45,7 +42,6 @@ class EditUserService {
         name,
         username,
         email,
-        password: passwordHash,
         bio_description,
         role,
         admin_user_block,

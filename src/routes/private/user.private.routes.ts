@@ -16,7 +16,6 @@ userPrivateRoutes.put('/change-password', new ChangeUserPasswordController().han
 // edit user
 userPrivateRoutes.put('/:id', new EditUserController().handle);
 
-
 // delete user
 userPrivateRoutes.delete('/:id', new DeleteUserController().handle);
 
