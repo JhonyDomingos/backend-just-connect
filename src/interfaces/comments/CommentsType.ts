@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createCommentSchema, commentSchema} from "../../schemas/commentSchemas";
+import { createCommentSchema, commentSchema, updateCommentSchema} from "../../schemas/commentSchemas";
 
 /**
  * @type CreateCommentData
@@ -7,6 +7,11 @@ import { createCommentSchema, commentSchema} from "../../schemas/commentSchemas"
  */
 type CreateCommentData = z.infer<typeof createCommentSchema>;
 
+/**
+ * @type UpdateCommentData
+ * @description Represents the data structure for updating a comment, inferred from the updateCommentSchema.
+ */
+type UpdateCommentData = z.infer<typeof updateCommentSchema>;
 
 /**
  * @type ReturnCommentData
@@ -14,4 +19,4 @@ type CreateCommentData = z.infer<typeof createCommentSchema>;
  */
 type ReturnCommentData = z.infer<typeof commentSchema>;
 
-export { CreateCommentData, ReturnCommentData};
+export { CreateCommentData, ReturnCommentData, UpdateCommentData};
