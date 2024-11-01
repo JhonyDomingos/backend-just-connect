@@ -6,7 +6,7 @@
  * @property {string} tag
  */
 
-export interface ICreateTag {
-    tagId: string;
+export interface ITag {
+    id: string;
     tag: string;
 }
