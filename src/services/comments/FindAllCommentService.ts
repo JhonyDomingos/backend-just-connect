@@ -8,7 +8,7 @@ class FindAllCommentService {
    * 
    * @returns {Promise<ReturnCommentData[]>} - A list of all comments.
    */
-  async findAll(userId?: string): Promise<ReturnCommentData[]> {
+  async findAll(userId: string): Promise<ReturnCommentData[]> {
     const comments = await prismaClient.comment.findMany({
       where:{
         user_id: userId,

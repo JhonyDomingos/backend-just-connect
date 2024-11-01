@@ -16,6 +16,6 @@ commentPrivateRoutes.post('/:id', isAuthenticated, (req, res) => createCommentCo
 
 commentPrivateRoutes.delete('/:id', isAuthenticated, (req, res) => deleteCommentController.delete(req, res));
 
-commentPrivateRoutes.get('/comments', findAllCommentController.handle.bind(findAllCommentController));
+commentPrivateRoutes.get('/', findAllCommentController.handle.bind(findAllCommentController));
 
 export { commentPrivateRoutes };

@@ -3,7 +3,7 @@ import { FindAllCommentService } from '../../services/comments/FindAllCommentSer
 
 class FindAllCommentController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const userId = req.user_id; // Supondo que o `userId` esteja disponível no request, possivelmente vindo do middleware de autenticação.
+    const userId = req.user_id; // o `userId` deve estar disponível no request, possivelmente vindo do middleware de autenticação.
 
     const findAllCommentService = new FindAllCommentService();
 
