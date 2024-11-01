@@ -15,60 +15,52 @@
     "/public/users/register": {
       "post": {
         "tags": ["Public user routes"],
-        "description": "Register user",
+        "description": "Register user. The password must be at least 8 characters long and contain letters and numbers.",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": { "type": "string" },
-                  "username": { "type": "string" },
-                  "email": { "type": "string" },
-                  "password": { "type": "string" },
-                  "confirmPassword": { "type": "string" }
-                },
-                "required": [
-                  "name",
-                  "username",
-                  "email",
-                  "password",
-                  "confirmPassword"
-                ]
+                "$ref": "#/components/schemas/RegisterRequest"
               }
             }
           },
           "required": true
         },
         "responses": {
-          "201": { "description": "Created" },
-          "400": { "description": "Bad Request" }
+          "201": { "description": "User created" },
+          "400": { "description": "Bad Request" },
+          "500": { "description": "Internal server error" }
         }
       }
     },
     "/public/auth": {
       "post": {
         "tags": ["Public user routes"],
-        "description": "Login with email or username",
+        "description": "User can login with email or username.",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "email": { "type": "string" },
-                  "username": { "type": "string" },
-                  "password": { "type": "string" }
-                },
-                "required": ["email", "password"]
+                "$ref": "#/components/schemas/LoginRequest"
               }
             }
           },
           "required": true
         },
         "responses": {
-          "200": { "description": "OK" },
-          "400": { "description": "Bad Request" }
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": { "description": "Bad Request" },
+          "401": { "description": "Unauthorized" },
+          "500": { "description": "Internal server error" }
         }
       }
     },
@@ -108,7 +100,16 @@
           }
         ],
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserListResponse"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -127,7 +128,16 @@
           }
         ],
         "responses": {
-          "200": { "description": "OK" },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
           "400": { "description": "Bad Request" }
         }
       }
@@ -138,11 +148,42 @@
         "description": "Returns the logged user's profile",
         "responses": {
           "200": {
-            "description": "User profile retrieved successfully"
+            "description": "User profile retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
           },
-          "401": {
-            "description": "Unauthorized"
+          "401": { "description": "Unauthorized" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
           }
+        ]
+      }
+    },
+    "/users/change-password": {
+      "put": {
+        "tags": ["Authenticated user routes"],
+        "description": "Change user password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": { "description": "Password changed successfully" },
+          "400": { "description": "Bad Request" },
+          "401": { "description": "Unauthorized" }
         },
         "security": [
           {
@@ -169,17 +210,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": { "type": "string" },
-                  "username": { "type": "string" },
-                  "email": { "type": "string" },
-                  "password": { "type": "string" },
-                  "bio_description": { "type": "string" },
-                  "linkedin": { "type": "string" },
-                  "instagram": { "type": "string" },
-                  "github": { "type": "string" }
-                }
+                "$ref": "#/components/schemas/EditUserRequest"
               }
             }
           },
@@ -231,12 +262,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "title": { "type": "string" },
-                  "description": { "type": "string" }
-                },
-                "required": ["title", "description"]
+                "$ref": "#/components/schemas/PostRequest"
               }
             }
           },
@@ -296,13 +322,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "title": { "type": "string" },
-                  "description": { "type": "string" },
-                  "statusOpen": { "type": "boolean" }
-                },
-                "required": ["title", "description", "statusOpen"]
+                "$ref": "#/components/schemas/PostUpdateRequest"
               }
             }
           },
@@ -395,6 +415,129 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "RegisterRequest": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "username": { "type": "string" },
+          "email": { "type": "string" },
+          "password": {
+            "type": "string",
+            "minLength": 8,
+            "description": "Password must be at least 8 characters long and contain letters and numbers."
+          },
+          "confirmPassword": { "type": "string" }
+        },
+        "required": ["name", "username", "email", "password", "confirmPassword"]
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "username": { "type": "string" },
+          "password": {
+            "type": "string",
+            "minLength": 8,
+            "description": "Password must be at least 8 characters long and contain letters and numbers."
+          }
+        },
+        "required": ["email", "password"]
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string" },
+          "id": { "type": "string", "format": "uuid" }
+        }
+      },
+      "UserListResponse": {
+        "type": "object",
+        "properties": {
+          "users": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string", "format": "uuid" },
+                "name": { "type": "string" },
+                "username": { "type": "string" },
+                "postcount": { "type": "integer" }
+              }
+            }
+          },
+          "totalPages": { "type": "integer" },
+          "page": { "type": "integer" }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "username": { "type": "string" },
+          "bio": { "type": "string", "nullable": true },
+          "insta": { "type": "string", "nullable": true },
+          "linkedin": { "type": "string", "nullable": true },
+          "github": { "type": "string", "nullable": true },
+          "admin_user_block": { "type": "boolean" },
+          "posts": {
+            "type": "array",
+            "items": { "type": "object" }
+          }
+        }
+      },
+      "EditUserRequest": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "username": { "type": "string" },
+          "email": { "type": "string" },
+          "bio_description": { "type": "string" },
+          "linkedin": { "type": "string" },
+          "instagram": { "type": "string" },
+          "github": { "type": "string" }
+        },
+        "required": false
+      },
+      "ChangePasswordRequest": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "minLength": 8,
+            "description": "Current password must be at least 8 characters long and contain letters and numbers."
+          },
+          "newPassword": {
+            "type": "string",
+            "minLength": 8,
+            "description": "New password must be at least 8 characters long and contain letters and numbers."
+          },
+          "confirmPassword": {
+            "type": "string",
+            "minLength": 8,
+            "description": "Confirm new password must match new password."
+          }
+        },
+        "required": ["password", "newPassword", "confirmPassword"]
+      },
+      "PostRequest": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "required": ["title", "description"]
+      },
+      "PostUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "statusOpen": { "type": "boolean" }
+        },
+        "required": ["title", "description", "statusOpen"]
       }
     }
   }
