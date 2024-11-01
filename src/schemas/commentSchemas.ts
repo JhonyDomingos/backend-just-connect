@@ -25,4 +25,10 @@ const deleteCommentSchema = commentSchema.pick({
   comment: true,
 });
 
-export { commentSchema, createCommentSchema, deleteCommentSchema };
+const updateCommentSchema = commentSchema.pick({
+  user_id: true,
+  comment: true,
+  updated_at: true,
+});
+
+export { commentSchema, createCommentSchema, deleteCommentSchema, updateCommentSchema };
