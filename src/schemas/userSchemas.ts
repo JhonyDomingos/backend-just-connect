@@ -69,7 +69,7 @@ const userReturnSchema = userProfileReturnSchema.omit({
 
 const userListSchema = z.array(
   userSchema
-    .pick({ name: true, username: true, id: true })
+    .pick({ id: true, name: true, username: true })
     .extend({ postCount: z.number() })
 );
 
@@ -77,6 +77,22 @@ const userPostSchema = z.object({
   id: z.string().uuid(),
   username: z.string(),
 });
+
+const userChangePasswordSchema = userSchema
+  .pick({ password: true })
+  .extend({
+    newPassword: z
+      .string()
+      .min(8, { message: "Password must have at least 8 characters." })
+      .regex(/(?=.*[a-zA-Z])(?=.*\d)/, {
+        message: "Password must contain at least one number and one letter.",
+      }),
+    confirmNewPassword: z.string().min(8),
+  })
+  .refine(
+    ({ newPassword, confirmNewPassword }) => newPassword === confirmNewPassword,
+    { message: "Passwords doesn't match." }
+  );
 
 export {
   userSchema,
@@ -86,4 +102,5 @@ export {
   userReturnSchema,
   userListSchema,
   userPostSchema,
+  userChangePasswordSchema,
 };

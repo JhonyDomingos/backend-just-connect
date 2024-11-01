@@ -1,10 +1,25 @@
 import { z } from "zod";
-import { userListSchema, userProfileReturnSchema, userRegisterSchema, userRegisteredSchema, userReturnSchema } from "../../schemas/userSchemas"
+import {
+  userChangePasswordSchema,
+  userListSchema,
+  userProfileReturnSchema,
+  userRegisterSchema,
+  userRegisteredSchema,
+  userReturnSchema,
+} from "../../schemas/userSchemas";
 
-type CreateUserData = z.infer<typeof userRegisterSchema>
-type NewUserData = z.infer<typeof userRegisteredSchema>
-type ReturnUserData = z.infer<typeof userReturnSchema>
-type ReturnProfileUserData = z.infer<typeof userProfileReturnSchema>
-type ReturnUsersData = z.infer<typeof userListSchema>
+type CreateUserData = z.infer<typeof userRegisterSchema>;
+type NewUserData = z.infer<typeof userRegisteredSchema>;
+type ReturnUserData = z.infer<typeof userReturnSchema>;
+type ReturnProfileUserData = z.infer<typeof userProfileReturnSchema>;
+type ReturnUsersData = z.infer<typeof userListSchema>;
+type ChangeUserPasswordData = z.infer<typeof userChangePasswordSchema>;
 
-export { CreateUserData, NewUserData, ReturnUserData, ReturnProfileUserData, ReturnUsersData }
+export {
+  CreateUserData,
+  NewUserData,
+  ReturnUserData,
+  ReturnProfileUserData,
+  ReturnUsersData,
+  ChangeUserPasswordData,
+};
