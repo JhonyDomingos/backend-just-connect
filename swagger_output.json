@@ -152,7 +152,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
+                  "$ref": "#/components/schemas/UserProfileResponse"
                 }
               }
             }
@@ -441,10 +441,10 @@
           "password": {
             "type": "string",
             "minLength": 8,
-            "description": "Password must be at least 8 characters long and contain letters and numbers."
+            "description": "Password must contain letters and numbers."
           }
         },
-        "required": ["email", "password"]
+        "required": ["password"]
       },
       "LoginResponse": {
         "type": "object",
@@ -464,12 +464,13 @@
                 "id": { "type": "string", "format": "uuid" },
                 "name": { "type": "string" },
                 "username": { "type": "string" },
-                "postcount": { "type": "integer" }
+                "postCount": { "type": "integer" }
               }
             }
           },
           "totalPages": { "type": "integer" },
-          "page": { "type": "integer" }
+          "page": { "type": "integer" },
+          "limit": { "type": "integer" }
         }
       },
       "UserResponse": {
@@ -478,6 +479,24 @@
           "name": { "type": "string" },
           "username": { "type": "string" },
           "bio": { "type": "string", "nullable": true },
+          "admin_user_block": { "type": "boolean" },
+          "insta": { "type": "string", "nullable": true },
+          "linkedin": { "type": "string", "nullable": true },
+          "github": { "type": "string", "nullable": true },
+          "posts": {
+            "type": "array",
+            "items": { "type": "object" }
+          }
+        }
+      },
+      "UserProfileResponse": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "username": { "type": "string" },
+          "email": { "type": "string" },
+          "bio": { "type": "string", "nullable": true },
+          "role": { "type": "string" },
           "insta": { "type": "string", "nullable": true },
           "linkedin": { "type": "string", "nullable": true },
           "github": { "type": "string", "nullable": true },
@@ -487,7 +506,7 @@
             "items": { "type": "object" }
           }
         }
-      },
+      },      
       "EditUserRequest": {
         "type": "object",
         "properties": {
@@ -507,12 +526,12 @@
           "password": {
             "type": "string",
             "minLength": 8,
-            "description": "Current password must be at least 8 characters long and contain letters and numbers."
+            "description": "Current password must contain letters and numbers."
           },
           "newPassword": {
             "type": "string",
             "minLength": 8,
-            "description": "New password must be at least 8 characters long and contain letters and numbers."
+            "description": "New password must and contain letters and numbers."
           },
           "confirmPassword": {
             "type": "string",
@@ -522,7 +541,7 @@
         },
         "required": ["password", "newPassword", "confirmPassword"]
       },
-      "PostRequest": {
+      "CreatePostRequest": {
         "type": "object",
         "properties": {
           "title": { "type": "string" },
