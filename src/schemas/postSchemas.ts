@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { userSchema } from "./userSchemas";
+import { unknown, z } from "zod";
+import { userPostSchema } from "./userSchemas";
 
 /**
  * Schema for validating the structure of a post object returned from the database.
@@ -18,26 +18,21 @@ import { userSchema } from "./userSchemas";
  */
 const postSchema = z.object({
   id: z.string().uuid(),
+  user: userPostSchema,
+  user_id: z.string().uuid(),
   title: z.string().min(5).max(50),
-  user: userSchema.pick({ id: true }),
-  description: z.string().min(10).optional(),
+  description: z.string().min(10),
+  score: z.number().optional(),
   statusOpen: z.boolean().optional(),
-  admin_post_block: z.boolean().optional(),
   created_at: z.date().optional(),
   updated_at: z.date().optional(),
-  tags: z.array(
-    z
-      .object({
-        id: z.string(),
-        tag: z.string(),
-      })
-      .optional()
-  ),
+  admin_post_block: z.boolean().optional(),
+  tags: z.array(unknown()),
 });
 
 const createPostSchema = postSchema.pick({
   title: true,
-  description: true
+  description: true,
 });
 
 const updatePostSchema = postSchema.omit({
@@ -47,19 +42,10 @@ const updatePostSchema = postSchema.omit({
   updated_at: true,
 });
 
-export { postSchema, createPostSchema, updatePostSchema };
+const postOnUserSchema = postSchema.omit({
+  user: true,
+  user_id: true,
+  updated_at: true,
+});
 
-// export const postReturnSchema = z.object({
-//   id: z.string(),
-//   title: z.string(),
-//   description: z.string(),
-//   statusOpen: z.boolean(),
-//   postCreatedAt: z.date(),
-//   postUpdatedAt: z.date(),
-//   adminPostBlock: z.boolean(),
-//   userId: z.string(),
-// tags: z.array(z.object({
-//   id: z.string(),
-//   tag: z.string()
-// }))
-// });
+export { postSchema, createPostSchema, updatePostSchema, postOnUserSchema };

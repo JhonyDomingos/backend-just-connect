@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import { FindUserService } from "../../services/user/FindUserService";
-import { ReturnUserData } from "../../interfaces/user/UserTypes";
+import { ReturnProfileUserData } from "../../interfaces/user/UserTypes";
+import { GetUserProfileService } from "../../services/user/GetUserProfileService";
 
 class GetUserProfileController {
   async handle(request: Request, response: Response): Promise<Response> {
     const userId = request.user_id;
 
-    const findUserService = new FindUserService();
+    const getUserProfile = new GetUserProfileService();
 
-    const user: ReturnUserData = await findUserService.execute(userId);
+    const user: ReturnProfileUserData = await getUserProfile.execute(userId);
 
     return response.json(user);
   }
