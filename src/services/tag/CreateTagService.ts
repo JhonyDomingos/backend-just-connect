@@ -8,8 +8,7 @@ class TagCreateService {
  * Creates a new tag in the database.
  *
  * @param {CreateTagData} data - The data for the tag being created.
- * @param {string} userId - The Id for the tag being created.
- * @returns {Promise<ReturnTagData>} - A promise that resolves to the created post data, including tags
+ * @returns {Promise<ITag>} - A promise that resolves to the created post data, including tags
  * 
  * @throws {Error} - Throws an error if the tag creation fails.
  */
@@ -24,4 +23,4 @@ class TagCreateService {
 
 }
 
-export { TagCreateService };
+export { ITag };
