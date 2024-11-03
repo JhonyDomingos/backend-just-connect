@@ -1,8 +1,8 @@
 /**
  * @interface ICreateTag
- * @description 
+ * @description
  * 
- * @property {string} tagId
+ * @property {string} id
  * @property {string} tag
  */
 

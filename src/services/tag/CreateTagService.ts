@@ -1,5 +1,5 @@
 import prismaClient from '../../prisma';
-//import { CreateTagData, ReturnTagData } from "../../interfaces/tag/TagType";
+
 import { ITag } from '../../interfaces/tag/ITag';
 
 class TagCreateService {
@@ -7,7 +7,7 @@ class TagCreateService {
      /**
  * Creates a new tag in the database.
  *
- * @param {CreateTagData} data - The data for the tag being created.
+ * @param {ITag} data - The data for the tag being created.
  * @returns {Promise<ITag>} - A promise that resolves to the created post data, including tags
  * 
  * @throws {Error} - Throws an error if the tag creation fails.
@@ -15,6 +15,7 @@ class TagCreateService {
     async create(data: ITag): Promise<ITag> {
         const tag = await prismaClient.tag.create({
             data: {
+                id: data.id,
                 tag: data.tag,
             }
         });
@@ -23,4 +24,4 @@ class TagCreateService {
 
 }
 
-export { ITag };
+export { TagCreateService };
