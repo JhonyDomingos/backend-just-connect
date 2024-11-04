@@ -12,12 +12,11 @@ const deleteCommentController = new DeleteCommentController();
 const findAllCommentController = new FindAllCommentController();
 const updateCommentController = new UpdateCommentController();
 
-commentPrivateRoutes.post('/:id', isAuthenticated, (req, res) => createCommentController.create(req, res));
+commentPrivateRoutes.use(isAuthenticated)
 
-commentPrivateRoutes.put('/:id', isAuthenticated, (req, res) => updateCommentController.update(req, res));
-
-commentPrivateRoutes.delete('/:id', isAuthenticated, (req, res) => deleteCommentController.delete(req, res));
-
-commentPrivateRoutes.get('/', findAllCommentController.handle.bind(findAllCommentController));
+commentPrivateRoutes.post('/post/:postId', createCommentController.create);
+commentPrivateRoutes.put('/:id', updateCommentController.update);
+commentPrivateRoutes.delete('/:id', deleteCommentController.delete);
+commentPrivateRoutes.get('/', findAllCommentController.handle);
 
 export { commentPrivateRoutes };
