@@ -19,9 +19,10 @@ export function isAuthenticated(
     throw new AppError("Token is missing", 401);
   }
 
-  const { sub } = verify(token, process.env.JWT_SECRET) as Payload;
+  const { sub, role } = verify(token, process.env.JWT_SECRET) as Payload;
 
   request.user_id = sub;
+  request.role = role;
 
   return next();
 }
