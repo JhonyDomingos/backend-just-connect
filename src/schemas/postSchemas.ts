@@ -38,6 +38,7 @@ const createPostSchema = postSchema.pick({
 const updatePostSchema = postSchema.omit({
   id: true,
   user: true,
+  user_id: true,
   created_at: true,
   updated_at: true,
   tags: true
