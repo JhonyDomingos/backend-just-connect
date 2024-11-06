@@ -15,10 +15,10 @@ class DeleteCommentController {
    */
   async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    const userId = req.user_id;
+    const { sub } = res.locals.decodedToken;
 
     const deleteCommentService = new DeleteCommentService();
-    await deleteCommentService.delete(id, userId);
+    await deleteCommentService.delete(id, sub);
     return res.status(204).send();
   }
 }

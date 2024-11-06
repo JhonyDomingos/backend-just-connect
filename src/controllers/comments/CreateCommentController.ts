@@ -15,11 +15,11 @@ class CreateCommentController {
    */
   async create(req: Request, res: Response): Promise<Response> {
     const data = req.body;
-    const userId = req.user_id;
+    const { sub } = res.locals.decodedToken;
     const { postId } = req.params;
 
     const commentService = new CommentCreateService();
-    const comment = await commentService.create(data, userId, postId);
+    const comment = await commentService.create(data, sub, postId);
 
     return res.status(201).json(comment);
   }

@@ -15,13 +15,13 @@ class UpdateCommentController {
    */
   async update(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    const userId = req.user_id;
+    const { sub } = res.locals.decodedToken;
     const { comment } = req.body;
 
     const updateCommentService = new UpdateCommentService();
     const updatedComment = await updateCommentService.update(
       id,
-      userId,
+      sub,
       comment
     );
 
