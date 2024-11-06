@@ -9,7 +9,7 @@ class CreateUserController {
 
     const createUserService = new CreateUserService();
     const user = await createUserService.execute(userData);
-
+    
     return response.status(201).json(user);
   }
 }

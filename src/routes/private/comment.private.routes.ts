@@ -4,6 +4,7 @@ import { isAuthenticated } from '../../middlewares/auth/isAuthenticated';
 import { DeleteCommentController } from '../../controllers/comments/DeleteCommentController';
 import { FindAllCommentController } from '../../controllers/comments/FindAllCommentController';
 import { UpdateCommentController } from '../../controllers/comments/UpdateCommentController';
+import { authMiddleware } from '../../middlewares/auth/Auth.middleware';
 
 const commentPrivateRoutes = Router();
 
@@ -12,7 +13,7 @@ const deleteCommentController = new DeleteCommentController();
 const findAllCommentController = new FindAllCommentController();
 const updateCommentController = new UpdateCommentController();
 
-commentPrivateRoutes.use(isAuthenticated)
+commentPrivateRoutes.use(authMiddleware)
 
 commentPrivateRoutes.post('/post/:postId', createCommentController.create);
 commentPrivateRoutes.put('/:id', updateCommentController.update);

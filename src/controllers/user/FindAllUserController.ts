@@ -13,6 +13,7 @@ class FindAllUserController {
       Number(limit)
     );
 
+
     return response.json({ users, totalPages, page, limit });
   }
 }

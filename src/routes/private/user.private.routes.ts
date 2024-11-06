@@ -4,11 +4,12 @@ import { EditUserController } from '../../controllers/user/EditUserController';
 import { DeleteUserController } from '../../controllers/user/DeleteUserController';
 import { GetUserProfileController } from '../../controllers/user/GetUserProfileController';
 import { ChangeUserPasswordController } from '../../controllers/user/ChangeUserPasswordController';
+import { authMiddleware } from '../../middlewares/auth/Auth.middleware';
 
 const userPrivateRoutes: Router = Router();
 
 // use isAuthenticated on routes
-userPrivateRoutes.use(isAuthenticated)
+userPrivateRoutes.use(authMiddleware)
 
 // change user password
 userPrivateRoutes.put('/change-password', new ChangeUserPasswordController().handle)
