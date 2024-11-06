@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { postOnUserSchema } from "./postSchemas";
 
 const userSchema = z.object({
   id: z.string().uuid().optional(),
@@ -30,7 +31,7 @@ const userSchema = z.object({
   github: z.string().url().optional().nullable(),
   created_at: z.date().optional(),
   updated_at: z.date().optional(),
-  posts: z.array(z.unknown()).optional(),
+  posts: z.array(postOnUserSchema).optional(),
   comments: z.array(z.unknown()).optional(),
 });
 
@@ -50,23 +51,56 @@ const userRegisterSchema = userSchema
 const userRegisteredSchema = userSchema.pick({
   id: true,
   name: true,
-  role: true
+  role: true,
 });
 
-const userReturnSchema = userSchema.omit({
+const userProfileReturnSchema = userSchema.omit({
   password: true,
   id: true,
   comments: true,
+  created_at: true,
+  updated_at: true,
+});
+
+const userReturnSchema = userProfileReturnSchema.omit({
+  email: true,
+  role: true,
 });
 
 const userListSchema = z.array(
-  userSchema.pick({ name: true, username: true, id: true, posts: true })
+  userSchema
+    .pick({ id: true, name: true, username: true })
+    .extend({ postCount: z.number() })
 );
+
+const userPostSchema = z.object({
+  id: z.string().uuid(),
+  username: z.string(),
+});
+
+const userChangePasswordSchema = userSchema
+  .pick({ password: true })
+  .extend({
+    newPassword: z
+      .string()
+      .min(8, { message: "Password must have at least 8 characters." })
+      .regex(/(?=.*[a-zA-Z])(?=.*\d)/, {
+        message: "Password must contain at least one number and one letter.",
+      }),
+    confirmNewPassword: z.string().min(8),
+  })
+  .refine(
+    ({ newPassword, confirmNewPassword }) => newPassword === confirmNewPassword,
+    { message: "Passwords doesn't match." }
+  );
 
 export {
   userSchema,
   userRegisterSchema,
   userRegisteredSchema,
+  userProfileReturnSchema,
   userReturnSchema,
   userListSchema,
+  userPostSchema,
+  userChangePasswordSchema,
 };

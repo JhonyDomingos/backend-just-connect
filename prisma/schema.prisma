@@ -35,7 +35,7 @@ model User {
 
 model Post {
   id                  String    @id @default(uuid())
-  user                User      @relation(fields: [user_id], references: [id])
+  user                User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id             String
   title               String    @db.VarChar(50)
   description         String    @db.Text
@@ -52,9 +52,9 @@ model Post {
 
 model Comment {
   id                  String    @id @default(uuid())
-  user                User      @relation(fields: [user_id], references: [id])
+  user                User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id             String   
-  post                Post      @relation(fields: [post_id], references: [id])
+  post                Post      @relation(fields: [post_id], references: [id], onDelete: Cascade)
   post_id             String
   comment             String    @db.Text
   score               Int       @default(0)
