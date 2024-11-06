@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { CreateCommentController } from '../../controllers/comments/CreateCommentController';
-import { isAuthenticated } from '../../middlewares/auth/isAuthenticated'; 
 import { DeleteCommentController } from '../../controllers/comments/DeleteCommentController';
 import { FindAllCommentController } from '../../controllers/comments/FindAllCommentController';
 import { UpdateCommentController } from '../../controllers/comments/UpdateCommentController';
