@@ -20,5 +20,9 @@ class EnsureMiddleware {
         response.locals = { ...response.locals, resource };
         return next();
     };
+
+
 }
-export { EnsureMiddleware };
+
+const ensureMiddleware  = new EnsureMiddleware();
+export { ensureMiddleware };
