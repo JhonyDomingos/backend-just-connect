@@ -5,7 +5,6 @@ import { DeletePostController } from "../../controllers/post/DeletePostControlle
 import { validateSchema } from "../../middlewares/schema/validateSchema";
 import { createPostSchema } from "../../schemas/postSchemas";
 import { updatePostSchema } from "../../schemas/postSchemas";
-import { isAuthenticated } from "../../middlewares/auth/isAuthenticated";
 import { authMiddleware } from "../../middlewares/auth/Auth.middleware";
 
 /**

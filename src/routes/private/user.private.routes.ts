@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { isAuthenticated } from '../../middlewares/auth/isAuthenticated';
 import { EditUserController } from '../../controllers/user/EditUserController';
 import { DeleteUserController } from '../../controllers/user/DeleteUserController';
 import { GetUserProfileController } from '../../controllers/user/GetUserProfileController';
