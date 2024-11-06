@@ -17,10 +17,10 @@ class UpdatePostController {
     try {
       const { id } = req.params;
       const data = req.body;
-      const userId = req.user_id;
+      const { sub } = res.locals.decodedToken;
 
       const postsService = new UpdatePostService();
-      const post = await postsService.update(id, data, userId);
+      const post = await postsService.update(id, data, sub);
 
       return res.json(post);
     } catch (error) {
