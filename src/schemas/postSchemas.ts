@@ -1,5 +1,6 @@
 import { unknown, z } from "zod";
 import { userPostSchema } from "./userSchemas";
+import { tagSchema } from "./tagSchemas";
 
 /**
  * Schema for validating the structure of a post object returned from the database.
@@ -27,12 +28,13 @@ const postSchema = z.object({
   created_at: z.date().optional(),
   updated_at: z.date().optional(),
   admin_post_block: z.boolean().optional(),
-  tags: z.array(unknown()),
+  tags: z.array(z.string()).optional(),
 });
 
 const createPostSchema = postSchema.pick({
   title: true,
   description: true,
+  tags: true
 });
 
 const updatePostSchema = postSchema.omit({
@@ -49,6 +51,6 @@ const postOnUserSchema = postSchema.omit({
   user_id: true,
   updated_at: true,
   tags: true
-});
+}).extend({ tags: z.array(tagSchema).optional() });
 
 export { postSchema, createPostSchema, updatePostSchema, postOnUserSchema };

@@ -7,9 +7,18 @@ class GetUserProfileService {
   async execute(id: string): Promise<ReturnProfileUserData> {
     const user = await prismaClient.user.findUnique({
       where: {
-        id
+        id,
       },
-      include: { posts: true },
+      include: {
+        posts: {
+          include: {
+            tags: true,
+          },
+          where: {
+            admin_post_block: false,
+          },
+        },
+      },
     });
 
     if (!user) {

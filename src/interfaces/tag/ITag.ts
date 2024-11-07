@@ -1,12 +1,12 @@
 /**
  * @interface ICreateTag
- * @description
+ * @description 
  * 
- * @property {string} id
+ * @property {string} tagId
  * @property {string} tag
  */
 
 export interface ITag {
-    id: string;
-    tag: string;
+    id?: string;
+    tag?: string;
 }
