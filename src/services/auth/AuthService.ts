@@ -1,5 +1,5 @@
-import { compare } from "bcryptjs";
-import { sign } from "jsonwebtoken";
+import { compare, hash } from "bcryptjs";
+import { sign, verify } from "jsonwebtoken";
 import prismaClient from '../../prisma/index';
 import { AuthRequest } from '../../interfaces/auth/authRequest';
 import { AppError } from "../../Error/AppError.error";
@@ -33,6 +33,7 @@ class AuthService {
         if (!process.env.JWT_SECRET!) {
             throw new AppError('JWT_SECRET is not defined');
         }
+
         const token = sign(
           {
             email: user?.email,
@@ -49,6 +50,63 @@ class AuthService {
           id: user.id
         };
     }
+    
+    async generateResetToken(email: string) {
+        const user = await prismaClient.user.findUnique({
+            where: {
+                email
+            }
+        });
+
+        if (!user) {
+            throw new AppError('User not found');
+        }
+
+        const resetToken = sign({ userId: user.id }, process.env.JWT_SECRET as string, {
+            subject: user.id,
+            expiresIn: '1h'
+        });
+
+        await prismaClient.user.update({
+            where: {
+                id: user.id
+            },
+            data: {
+                resetToken,
+                resetTokenExpiry: new Date(Date.now() + 3600000) }
+        });
+
+        return resetToken;
+    }
+
+    async resetPassword(token: string, password: string) {
+        const { userId } = verify(token, process.env.JWT_SECRET as string) as { userId: string };
+
+        const user = await prismaClient.user.findUnique({
+            where: {
+                id: userId
+            }
+        });
+
+        if (!user || user.resetToken !== token || user.resetTokenExpiry! < new Date()){ 
+                throw new AppError('Invalid or expired token');
+            }
+
+        const newPasswordHash = await hash(password, 10);
+
+        await prismaClient.user.update({
+            where: {
+                id: userId
+            },
+            data: {
+                password: newPasswordHash,
+                resetToken: null,
+                resetTokenExpiry: null
+            }
+        });
+
+    }
+    
 }
 
 export { AuthService };

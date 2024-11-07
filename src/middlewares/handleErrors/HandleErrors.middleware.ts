@@ -23,11 +23,7 @@ class HandleErrors {
     if (error instanceof JsonWebTokenError) {
       return response.status(400).json({ message: error.message });
     }
-
-    if (error instanceof Error && (error as PrismaError).code === "P2025") {
-      return response.status(404).json({ message: "User not found" });
-    }
-
+    
     return response.status(500).json({ message: "Internal Server Error", error: error });
   };
 }
