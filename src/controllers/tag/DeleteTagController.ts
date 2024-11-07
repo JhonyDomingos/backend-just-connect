@@ -10,7 +10,7 @@ class DeleteTagController {
      * the request parameters and the authenticated user's ID, then calls the DeleteTagService 
      * to perform the deletion operation.
      * 
-     * @param {Request} req - The request object containing the comment ID in the parameters.
+     * @param {Request} req - The request object containing the tag ID in the parameters.
      * @param {Response} res - The response object used to send back a success message or an error message.
      * @returns {Promise<Response>} The HTTP response indicating the result of the deletion operation.
      */
@@ -19,8 +19,8 @@ class DeleteTagController {
 
         const deleteTagService = new DeleteTagService(); //instancia o serviço de seleção de tags
         try {
-            const deletedTag = await DeleteTagService.delete(id) //Chama o serviço para deletar a tag
-            return res.status(200).json({ message: 'Comentário deletado com sucesso' , deletedTag }); //Retorna uma mensagem de sucesso e a tag deletada
+            const deletedTag = await deleteTagService.delete(id) //Chama o serviço para deletar a tag
+            return res.status(200).json({ message: 'Tag deletada com sucesso' , deletedTag }); //Retorna uma mensagem de sucesso e a tag deletada
         } catch (error) {
             return res.status(400).json({ error: error.message }); // Retorna um erro caso a deleção falhe
 

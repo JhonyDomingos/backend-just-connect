@@ -13,12 +13,16 @@ class TagCreateService {
  * @throws {Error} - Throws an error if the tag creation fails.
  */
     async create(data: ITag): Promise<ITag> {
-        const tag = await prismaClient.tag.create({
-            data: {
-                id: data.id,
-                tag: data.tag,
-            }
-        });
+        const tag = await prismaClient.tag.findUnique({where:{tag:data.tag}})
+
+        if (!tag) {
+            const newTag = await prismaClient.tag.create({
+                data: {
+                    tag: data.tag,
+                }
+            });
+            return newTag;
+        }
         return tag;
     }
 
