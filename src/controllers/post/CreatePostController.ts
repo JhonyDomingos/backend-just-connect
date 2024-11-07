@@ -17,10 +17,10 @@ class CreatePostController {
  */
   async create(req: Request, res: Response): Promise<Response> {
     const data = req.body;
-    const userId = req.user_id;
+    const { sub } = res.locals.decodedToken;
     
     const postsService = new PostCreateService();
-    const post = await postsService.create(data, userId);
+    const post = await postsService.create(data, sub);
 
     return res.status(201).json(post);
   }
