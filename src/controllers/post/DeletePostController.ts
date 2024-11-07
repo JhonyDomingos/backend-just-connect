@@ -16,10 +16,10 @@ class DeletePostController {
   async delete(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const userId = req.user_id;
+      const { sub } = res.locals.decodedToken;
 
       const postsService = new DeletePostService();
-      await postsService.delete(id, userId);
+      await postsService.delete(id, sub);
 
       return res.status(204).send();
     } catch (error) {

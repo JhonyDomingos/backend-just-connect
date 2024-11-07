@@ -13,6 +13,7 @@ class PostCreateService {
  * @throws {Error} - Throws an error if the post creation fails.
  */
   async create(data: CreatePostData, userId: string): Promise<ReturnPostData> {
+    
     const post = await prismaClient.post.create({
       data: {
         title: data.title,
