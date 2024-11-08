@@ -47,7 +47,7 @@ export const sendPasswordResetEmail = async (to: string, token: string) => {
     </style>
       <h1>Reset your password.</h1>
       <p>To reset your password, please click on the button bellow \n\nIf you did not request this, please ignore this email.</p>
-      p><button><a href="${resetUrl}">Click Here</a></button></p>
+      <p><button><a href="${resetUrl}">Click Here</a></button></p>
       <p>if the button do not work please copy the following URL:</p>
       <a>${resetUrl}</a>
       
