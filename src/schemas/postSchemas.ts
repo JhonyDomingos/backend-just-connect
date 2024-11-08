@@ -34,8 +34,19 @@ const postSchema = z.object({
 const createPostSchema = postSchema.pick({
   title: true,
   description: true,
-  tags: true
+  tags: true,
 });
+
+const listPostSchema = z.array(
+  postSchema
+    .omit({
+      user: true,
+      tags: true,
+    })
+    .extend({
+      tags: z.array(tagSchema).transform((tags) => tags.map((tag) => tag.tag)),
+    })
+);
 
 const updatePostSchema = postSchema.omit({
   id: true,
@@ -43,14 +54,22 @@ const updatePostSchema = postSchema.omit({
   user_id: true,
   created_at: true,
   updated_at: true,
-  tags: true
+  tags: true,
 });
 
-const postOnUserSchema = postSchema.omit({
-  user: true,
-  user_id: true,
-  updated_at: true,
-  tags: true
-}).extend({ tags: z.array(tagSchema).optional() });
+const postOnUserSchema = postSchema
+  .omit({
+    user: true,
+    user_id: true,
+    updated_at: true,
+    tags: true,
+  })
+  .extend({ tags: z.array(tagSchema).optional() });
 
-export { postSchema, createPostSchema, updatePostSchema, postOnUserSchema };
+export {
+  postSchema,
+  createPostSchema,
+  updatePostSchema,
+  postOnUserSchema,
+  listPostSchema,
+};

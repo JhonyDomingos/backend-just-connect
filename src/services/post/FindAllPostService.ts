@@ -1,14 +1,15 @@
 import prismaClient from '../../prisma';
-import { ReturnPostData } from "../../interfaces/post/PostType";
+import { ListPostData } from "../../interfaces/post/PostType";
+import { listPostSchema } from '../../schemas/postSchemas';
 
 class FindAllPostsService {
 
   /**
  * Retrieves all posts.
  * 
- * @returns {Promise<ReturnPostData[]>} - A list of all posts.
+ * @returns {Promise<ListPostData>} - A list of all posts.
  */
-  async findAll(): Promise<ReturnPostData[]> {
+  async findAll(): Promise<ListPostData> {
     const posts = await prismaClient.post.findMany({
       include: {
         tags: true
@@ -17,7 +18,7 @@ class FindAllPostsService {
         admin_post_block: false
       }
     });
-    return posts;
+    return listPostSchema.parse(posts);
   }
 }
 
