@@ -14,68 +14,138 @@ datasource db {
 }
 
 model User {
-  id               String    @id @default(uuid())
-  name             String?   @db.VarChar(100)
-  username         String    @unique @db.VarChar(20)
-  email            String    @unique
-  password         String
-  bio_description  String?   @db.VarChar(140)
-  role             Role      @default(USER)
-  admin_user_block Boolean   @default(false)
-  linkedin         String?
-  instagram        String?
-  github           String?
-  resetToken       String?   @unique
-  resetTokenExpiry DateTime?
-  created_at       DateTime  @default(now())
-  updated_at       DateTime  @updatedAt
-  posts            Post[]
-  comments         Comment[]
+  id                  String    @id @default(uuid())
+  name                String?   @db.VarChar(100)
+  username            String    @unique @db.VarChar(20)
+  email               String    @unique
+  password            String    @db.VarChar(10) //adicionada condição VARCHAR(10)
+  bio_description     String?   @db.VarChar(140)
+  role                Role      @default(USER)
+  admin_user_block    Boolean   @default(false)
+  linkedin            String?   @unique //adicionada condição UNIQUE
+  instagram           String?   @unique //adicionada condição UNIQUE
+  github              String?   @unique //adicionada condição UNIQUE
+  reset_token         String?   @unique //snake_case
+  reset_token_expiry  DateTime? //snake_case
+  created_at          DateTime  @default(now())
+  updated_at          DateTime? @updatedAt //Retirada da condição NOT NULL
+  posts               Post[]
+  comments            Comment[]
+  post_reports        PostReport[]
+  post_like           PostLike[]
+  comment_reports     CommentReport[]
+  comment_like        CommentLike[]
 
   @@map("users")
 }
 
 model Post {
-  id               String    @id @default(uuid())
-  user             User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id          String
-  title            String    @db.VarChar(50)
-  description      String    @db.Text
-  score            Int       @default(0)
-  statusOpen       Boolean   @default(true)
-  created_at       DateTime  @default(now())
-  updated_at       DateTime  @updatedAt
-  admin_post_block Boolean   @default(false)
-  comment          Comment[]
-  tags             Tag[]
+  id                  String    @id @default(uuid())
+  user                User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id             String
+  title               String    @db.VarChar(50)
+  description         String    @db.Text
+  score               Int       @default(0)
+  status_open         Boolean   @default(true) //snake_case
+  created_at          DateTime  @default(now())
+  updated_at          DateTime? @updatedAt //Retirada da condição NOT NULL
+  admin_post_block    Boolean   @default(false)
+  comment             Comment[]
+  tags                Tag[]
+  post_reports        PostReport[]
+  post_like           PostLike[]
 
   @@map("posts")
 }
 
 model Comment {
-  id                  String   @id @default(uuid())
-  user                User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  id                  String    @id @default(uuid())
+  user                User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id             String
-  post                Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  post                Post      @relation(fields: [post_id], references: [id], onDelete: Cascade)
   post_id             String
-  comment             String   @db.Text
-  score               Int      @default(0)
-  created_at          DateTime @default(now())
-  updated_at          DateTime @updatedAt
-  admin_comment_block Boolean  @default(false)
+  comment             String    @db.Text
+  score               Int       @default(0)
+  created_at          DateTime  @default(now())
+  updated_at          DateTime? @updatedAt //Retirada da condição NOT NULL
+  admin_comment_block Boolean   @default(false)
+  comment_reports     CommentReport[]
+  comment_like        CommentLike[]
 
   @@map("comments")
 }
 
 model Tag {
-  id    String @id @default(uuid())
-  tag   String @unique @db.VarChar(15)
-  posts Post[]
+  id                  String    @id @default(uuid())
+  tag                 String    @unique @db.VarChar(15)
+  posts               Post[]
 
   @@map("tags")
+}
+
+model PostReport {
+  id                  String    @id @default(uuid())
+  user                User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id             String
+  post                Post      @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  post_id             String
+  type_report         TypeReport
+  post_report         String    @db.VarChar(140)
+  created_at          DateTime  @default(now())
+  updated_at          DateTime? @updatedAt
+  admin_validation    Boolean   @default(false)
+
+  @@map("postreport")
+}
+
+model PostLike {
+  id                  String    @id @default(uuid())
+  user                User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id             String
+  post                Post      @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  post_id             String
+  created_at          DateTime  @default(now())
+
+  @@map("postlike")
+}
+
+model CommentReport {
+  id                  String    @id @default(uuid())
+  user                User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id             String
+  comment             Comment   @relation(fields: [comment_id], references: [id], onDelete: Cascade)
+  comment_id          String
+  type_report         TypeReport
+  post_report         String    @db.VarChar(140)
+  created_at          DateTime  @default(now())
+  updated_at          DateTime? @updatedAt
+  admin_validation    Boolean   @default(false)
+
+  @@map("commentreport")
+}
+
+model CommentLike {
+  id                  String    @id @default(uuid())
+  user                User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id             String
+  comment             Comment   @relation(fields: [comment_id], references: [id], onDelete: Cascade)
+  comment_id          String
+  created_at          DateTime  @default(now())
+
+  @@map("commentlike")
 }
 
 enum Role {
   USER
   ADMIN
+}
+
+enum TypeReport {
+  Spam
+  FraudeGolpe
+  ExposicaoDeViolencia
+  Assedio
+  NudezPornografia
+  DiscursoDeOdio
+  VendaDeProdutosIlicitos
 }
