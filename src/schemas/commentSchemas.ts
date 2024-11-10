@@ -10,9 +10,13 @@ const commentSchema = z.object({
   score: z.number(),
   created_at: z.date().optional(),
   updated_at: z.date().optional(),
-  admin_comment_block: z.boolean().optional(),
-
+  admin_comment_block: z.boolean().optional()
 });
+
+const commentOnPostSchema = commentSchema.omit({
+  post: true,
+  user: true
+})
 
 const createCommentSchema = commentSchema.pick({
   user_id: true,
@@ -31,4 +35,4 @@ const updateCommentSchema = commentSchema.pick({
   updated_at: true,
 });
 
-export { commentSchema, createCommentSchema, deleteCommentSchema, updateCommentSchema };
+export { commentSchema, createCommentSchema, deleteCommentSchema, updateCommentSchema, commentOnPostSchema };

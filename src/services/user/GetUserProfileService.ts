@@ -1,4 +1,3 @@
-import { AppError } from "../../Error/AppError.error";
 import { ReturnProfileUserData } from "../../interfaces/user/UserTypes";
 import prismaClient from "../../prisma";
 import { userProfileReturnSchema } from "../../schemas/userSchemas";
@@ -6,26 +5,37 @@ import { userProfileReturnSchema } from "../../schemas/userSchemas";
 class GetUserProfileService {
   async execute(id: string): Promise<ReturnProfileUserData> {
     const user = await prismaClient.user.findUnique({
-      where: {
-        id,
-      },
+      where: { id },
       include: {
         posts: {
-          include: {
+          where: { admin_post_block: false },
+          select: {
+            id: true,
+            title: true,
+            description: true,
+            score: true,
+            statusOpen: true,
+            created_at: true,
+            updated_at: true,
             tags: true,
-          },
-          where: {
-            admin_post_block: false,
+            comment: {
+              select: { id: true },
+            },
           },
         },
       },
     });
 
-    if (!user) {
-      throw new AppError("User not found", 404);
-    }
+    const postsWithCommentCount = user.posts.map((post) => ({
+      ...post,
+      username: user.username,
+      commentCount: post.comment.length,
+    }));
 
-    return userProfileReturnSchema.parse(user);
+    return userProfileReturnSchema.parse({
+      ...user,
+      posts: postsWithCommentCount,
+    });
   }
 }
 
