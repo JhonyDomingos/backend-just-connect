@@ -37,12 +37,11 @@ const returnPostSchema = postSchema
   .omit({
     user: true,
     tags: true,
-    comment: true,
   })
   .extend({
     tags: z.array(tagSchema).transform((tags) => tags.map((tag) => tag.tag)),
-    username: z.string(),
-    commentCount: z.number(),
+    username: z.string().optional(),
+    commentCount: z.number().optional(),
   });
 
 const createPostSchema = postSchema.pick({
@@ -60,9 +59,12 @@ const updatePostSchema = postSchema.omit({
   tags: true,
 });
 
-const listPostSchema = z.array(returnPostSchema);
+const postOnUserSchema = returnPostSchema.omit({
+  user_id: true,
+  comment: true,
+});
 
-const postOnUserSchema = returnPostSchema.omit({ user_id: true });
+const listPostSchema = z.array(postOnUserSchema);
 
 export {
   postSchema,
