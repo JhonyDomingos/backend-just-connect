@@ -1,9 +1,10 @@
+import { ListPostData } from "../../interfaces/post/PostType";
 import prismaClient from "../../prisma";
 import { listPostSchema } from "../../schemas/postSchemas";
 
 class FindPostsByTagService {
-  async tagged(tag: string) {
-    const posts = await prismaClient.post.findMany({
+  async tagged(tag: string): Promise<ListPostData> {
+    const findPosts = await prismaClient.post.findMany({
       where: {
         tags: {
           some: { tag },
@@ -15,6 +16,13 @@ class FindPostsByTagService {
         comment: { select: { id: true } },
       },
     });
+
+    const posts = findPosts.map((post) => ({
+      ...post,
+      user_id: post.user.id,
+      username: post.user.username,
+      commentCount: post.comment.length,
+    }));
 
     return listPostSchema.parse(posts);
   }
