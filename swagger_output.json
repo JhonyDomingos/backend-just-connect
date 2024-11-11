@@ -377,6 +377,33 @@
         }
       }
     },
+    "/public/posts/tagged-with/{tag}": {
+      "get": {
+        "tags": ["Public post routes"],
+        "description": "List all posts tagged with Tag",
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "path",
+            "description": "Tag name",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPostResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/public/posts/user/{id}": {
       "get": {
         "tags": ["Public post routes"],
