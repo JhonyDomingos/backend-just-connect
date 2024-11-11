@@ -15,7 +15,16 @@ class FindOnePostService {
       where: { id },
       include: {
         tags: true,
-        comment: true,
+        comment: {
+          select: {
+            id: true,
+            user: true,
+            comment: true,
+            score: true,
+            created_at: true,
+            updated_at: true
+          }
+        },
         user: true,
       },
     });
@@ -24,10 +33,16 @@ class FindOnePostService {
       throw new Error("Post não encontrado.");
     }
 
+    const formatComments = post.comment.map((comment) => ({
+      ...comment,
+      username: comment.user.username,
+    }));
+
     const formatPost = {
       ...post,
       user_id: post.user.id,
       username: post.user.username,
+      comment: formatComments,
     };
 
     return returnPostSchema.parse(formatPost);

@@ -14,7 +14,7 @@ class GetUserProfileService {
             title: true,
             description: true,
             score: true,
-            statusOpen: true,
+            status_open: true,
             created_at: true,
             updated_at: true,
             tags: true,
