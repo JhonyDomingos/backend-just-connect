@@ -1,7 +1,8 @@
 // src/services/CommentCreateService.ts
 
 import prismaClient from '../../prisma';
-import { CreateCommentData, ReturnCommentData } from "../../interfaces/comments/CommentsType";
+import { CreateCommentData, ReturnCommentData } from "../../interfaces/comments/CommentTypes";
+import { commentOnPostSchema, commentSchema } from '../../schemas/commentSchemas';
 
 class CommentCreateService {
   /**
@@ -14,8 +15,6 @@ class CommentCreateService {
    * @throws {Error} - Throws an error if the comment creation fails.
    */
   async create(data: CreateCommentData, userId: string, postId: string ): Promise<ReturnCommentData> {
-    
-
     const comment = await prismaClient.comment.create({
       data: {
         user_id: userId,
@@ -23,7 +22,7 @@ class CommentCreateService {
         comment: data.comment,
       }
     });
-    return comment;
+    return commentSchema.parse(comment);
   }
 }
 

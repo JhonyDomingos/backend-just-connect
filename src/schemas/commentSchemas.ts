@@ -2,9 +2,9 @@ import { z } from "zod";
 
 const commentSchema = z.object({
   id: z.string().uuid(),
-  user: z.string(),
+  user: z.string().optional(),
   user_id: z.string().uuid(),
-  post: z.string(),
+  post: z.string().optional(),
   post_id: z.string().uuid(),
   comment: z.string(),
   score: z.number(),
@@ -29,13 +29,7 @@ const createCommentSchema = commentSchema.pick({
   comment: true,
 });
 
-const deleteCommentSchema = commentSchema.pick({
-  user_id: true,
-  comment: true,
-});
-
 const updateCommentSchema = commentSchema.pick({
-  user_id: true,
   comment: true,
   updated_at: true,
 });
@@ -43,7 +37,6 @@ const updateCommentSchema = commentSchema.pick({
 export {
   commentSchema,
   createCommentSchema,
-  deleteCommentSchema,
   updateCommentSchema,
   commentOnPostSchema,
 };
