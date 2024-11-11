@@ -72,7 +72,7 @@
           {
             "name": "name",
             "in": "query",
-            "description": "Optional name to filter users by",
+            "description": "Optional filter to get users by name or username",
             "required": false,
             "schema": {
               "type": "string"
