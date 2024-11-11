@@ -25,7 +25,7 @@ const postSchema = z.object({
   title: z.string().min(5).max(50),
   description: z.string().min(10),
   score: z.number().optional(),
-  statusOpen: z.boolean().optional(),
+  status_open: z.boolean().optional(),
   created_at: z.date().optional(),
   updated_at: z.date().optional(),
   admin_post_block: z.boolean().optional(),
@@ -50,14 +50,7 @@ const createPostSchema = postSchema.pick({
   tags: true,
 });
 
-const updatePostSchema = postSchema.omit({
-  id: true,
-  user: true,
-  user_id: true,
-  created_at: true,
-  updated_at: true,
-  tags: true,
-});
+const updatePostSchema = createPostSchema;
 
 const postOnUserSchema = returnPostSchema.omit({
   user_id: true,

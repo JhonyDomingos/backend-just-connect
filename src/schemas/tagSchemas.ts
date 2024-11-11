@@ -7,6 +7,8 @@ const tagSchema = z.object({
   posts: z.array(postSchema).optional(),
 });
 
+const createTagSchema = tagSchema.pick({ tag: true });
+
 const postsTaggedSchema = tagSchema.omit({ id: true });
 
-export { tagSchema, postsTaggedSchema };
+export { tagSchema, postsTaggedSchema, createTagSchema };

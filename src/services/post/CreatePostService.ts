@@ -19,7 +19,7 @@ class PostCreateService {
 
     const tags = await Promise.all(
       data.tags.map(async (tagName) => {
-        return tagService.create({tag: tagName});
+        return tagService.findOrCreate({tag: tagName});
       })
     );
     
