@@ -1,9 +1,10 @@
-import { unknown, z } from "zod";
+import { z } from "zod";
 
 const tagSchema = z.object({
-  id: z.string(),
+  id: z.string().optional(),
   tag: z.string(),
-  posts: z.array(unknown()),
 });
 
-export { tagSchema };
+const createTagSchema = tagSchema.pick({ tag: true });
+
+export { tagSchema, createTagSchema };

@@ -1,5 +1,7 @@
 import prismaClient from '../../prisma';
 import { CreatePostData, ReturnPostData } from "../../interfaces/post/PostType";
+import { TagCreateService } from '../tag/CreateTagService';
+import { returnPostSchema } from '../../schemas/postSchemas';
 
 class PostCreateService {
 
@@ -13,15 +15,29 @@ class PostCreateService {
  * @throws {Error} - Throws an error if the post creation fails.
  */
   async create(data: CreatePostData, userId: string): Promise<ReturnPostData> {
+    const tagService = new TagCreateService();
+
+    const tags = await Promise.all(
+      data.tags.map(async (tagName) => {
+        return tagService.findOrCreate({tag: tagName});
+      })
+    );
     
     const post = await prismaClient.post.create({
       data: {
         title: data.title,
         description: data.description,
-        user_id: userId
+        user_id: userId,
+        tags: {
+          connect: tags.map((tag) => ({ id: tag.id }))
+        }
+      },
+      include: {
+        tags: true
       }
     });
-    return post;
+
+    return returnPostSchema.parse(post);
   }
 }
 

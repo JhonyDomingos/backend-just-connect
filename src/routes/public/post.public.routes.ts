@@ -3,6 +3,7 @@ import { FindAllPostController } from '../../controllers/post/FindAllPostControl
 import { FindOnePostController } from '../../controllers/post/FindOnePostController';
 import { FindAllPostUserController } from '../../controllers/post/FindAllPostUserController';
 import { FindAllPostUsernameController } from '../../controllers/post/FindAllPostUsernameController';
+import { FindPostsByTagController } from '../../controllers/post/FindPostsByTagController';
 
 /**
  * @module postsPublicRoutes
@@ -16,14 +17,11 @@ import { FindAllPostUsernameController } from '../../controllers/post/FindAllPos
  * - FindOnePostController: Handles the retrieval of a specific post.
  */
 const postsPublicRoutes: Router = Router();
-const findAllPostController = new FindAllPostController();
-const findOnePostController = new FindOnePostController();
-const findAllPostUserController = new FindAllPostUserController();
-const findAllPostUsernameController = new FindAllPostUsernameController();
 
-postsPublicRoutes.get('/', findAllPostController.findAll);
-postsPublicRoutes.get('/:id', findOnePostController.findOne);
-postsPublicRoutes.get('/user/:userId', findAllPostUserController.findAll);
-postsPublicRoutes.get('/profile/:username', findAllPostUsernameController.findAll);
+postsPublicRoutes.get('/',  new FindAllPostController().findAll);
+postsPublicRoutes.get('/:id', new FindOnePostController().findOne);
+postsPublicRoutes.get('/user/:userId', new FindAllPostUserController().findAll);
+postsPublicRoutes.get('/profile/:username',  new FindAllPostUsernameController().findAll);
+postsPublicRoutes.get('/tagged-with/:tag', new FindPostsByTagController().tagged)
 
 export { postsPublicRoutes };

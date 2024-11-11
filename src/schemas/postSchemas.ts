@@ -1,5 +1,7 @@
-import { unknown, z } from "zod";
+import { z } from "zod";
 import { userPostSchema } from "./userSchemas";
+import { tagSchema } from "./tagSchemas";
+import { commentOnPostSchema, commentSchema } from "./commentSchemas";
 
 /**
  * Schema for validating the structure of a post object returned from the database.
@@ -23,32 +25,45 @@ const postSchema = z.object({
   title: z.string().min(5).max(50),
   description: z.string().min(10),
   score: z.number().optional(),
-  statusOpen: z.boolean().optional(),
+  status_open: z.boolean().optional(),
   created_at: z.date().optional(),
   updated_at: z.date().optional(),
   admin_post_block: z.boolean().optional(),
-  tags: z.array(unknown()),
+  tags: z.array(z.string()).optional(),
+  comment: z.array(commentOnPostSchema).optional(),
 });
+
+const returnPostSchema = postSchema
+  .omit({
+    user: true,
+    tags: true,
+  })
+  .extend({
+    tags: z.array(tagSchema).transform((tags) => tags.map((tag) => tag.tag)),
+    username: z.string().optional(),
+    commentCount: z.number().optional(),
+  });
 
 const createPostSchema = postSchema.pick({
   title: true,
   description: true,
+  tags: true,
 });
 
-const updatePostSchema = postSchema.omit({
-  id: true,
-  user: true,
+const updatePostSchema = createPostSchema;
+
+const postOnUserSchema = returnPostSchema.omit({
   user_id: true,
-  created_at: true,
-  updated_at: true,
-  tags: true
+  comment: true,
 });
 
-const postOnUserSchema = postSchema.omit({
-  user: true,
-  user_id: true,
-  updated_at: true,
-  tags: true
-});
+const listPostSchema = z.array(postOnUserSchema);
 
-export { postSchema, createPostSchema, updatePostSchema, postOnUserSchema };
+export {
+  postSchema,
+  createPostSchema,
+  updatePostSchema,
+  postOnUserSchema,
+  listPostSchema,
+  returnPostSchema,
+};

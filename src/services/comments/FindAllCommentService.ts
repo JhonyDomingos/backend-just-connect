@@ -1,5 +1,5 @@
 import prismaClient from '../../prisma';
-import { ReturnCommentData } from "../../interfaces/comments/CommentsType"; // Certifique-se de que esse tipo exista
+import { ReturnCommentData } from "../../interfaces/comments/CommentTypes"; // Certifique-se de que esse tipo exista
 
 class FindAllCommentService {
 

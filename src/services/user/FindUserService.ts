@@ -7,16 +7,39 @@ class FindUserService {
   async execute(id: string): Promise<ReturnUserData> {
     const user = await prismaClient.user.findUnique({
       where: {
-        id
+        id,
       },
-      include: { posts: true },
+      include: {
+        posts: {
+          where: { admin_post_block: false },
+          select: {
+            id: true,
+            title: true,
+            description: true,
+            score: true,
+            status_open: true,
+            created_at: true,
+            updated_at: true,
+            tags: true,
+            comment: {
+              select: { id: true },
+            },
+          },
+        },
+      },
     });
 
     if (!user) {
       throw new AppError("User not found", 404);
     }
 
-    return userReturnSchema.parse(user);
+    const postsWithCommentCount = user.posts.map((post) => ({
+      ...post,
+      username: user.username,
+      commentCount: post.comment.length,
+    }));
+
+    return userReturnSchema.parse({ ...user, posts: postsWithCommentCount });
   }
 }
 

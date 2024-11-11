@@ -9,30 +9,40 @@ class FindAllUserService {
     page: number = 1,
     limit: number = 16
   ): Promise<{ users: ReturnUsersData; totalPages: number }> {
-    const searchByName: Prisma.UserWhereInput | undefined = name
+    const searchByNameOrUsername: Prisma.UserWhereInput | undefined = name
       ? {
-          name: {
-            contains: name,
-            mode: "insensitive",
-          },
+          OR: [
+            {
+              name: {
+                contains: name,
+                mode: "insensitive",
+              },
+            },
+            {
+              username: {
+                contains: name,
+                mode: "insensitive",
+              },
+            },
+          ],
         }
       : undefined;
 
     const [users, total] = await Promise.all([
       prismaClient.user.findMany({
-        where: searchByName || {},
+        where: searchByNameOrUsername || {},
         skip: (page - 1) * limit,
         take: limit,
         include: {
-          posts: true
+          posts: true,
         },
       }),
       prismaClient.user.count({
-        where: searchByName,
-      })
+        where: searchByNameOrUsername,
+      }),
     ]);
 
-    const usersWithPostCount = users.map(user => ({
+    const usersWithPostCount = users.map((user) => ({
       ...user,
       postCount: user.posts.length,
     }));

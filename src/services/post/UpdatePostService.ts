@@ -1,21 +1,26 @@
-import prismaClient from '../../prisma';
+import prismaClient from "../../prisma";
 import { ReturnPostData, UpdatePostData } from "../../interfaces/post/PostType";
-
+import { TagCreateService } from "../tag/CreateTagService";
+import { returnPostSchema } from "../../schemas/postSchemas";
 
 class UpdatePostService {
-
   /**
- * Updates an existing post.
- * 
- * @param {string} id - The ID of the post to update.
- * @param {UpdatePostData} data - The data to update the post with.
- * @param {string} userId - The ID of the user updating the post.
- * @returns {Promise<ReturnPostData>} - The updated post.
- * @throws {AppError} - If the post is not found or the user lacks permission.
- */
-  async update(id: string, data: UpdatePostData, userId: string): Promise<ReturnPostData> {
+   * Updates an existing post.
+   *
+   * @param {string} id - The ID of the post to update.
+   * @param {UpdatePostData} data - The data to update the post with.
+   * @param {string} userId - The ID of the user updating the post.
+   * @returns {Promise<ReturnPostData>} - The updated post.
+   * @throws {AppError} - If the post is not found or the user lacks permission.
+   */
+  async update(
+    id: string,
+    data: UpdatePostData,
+    userId: string
+  ): Promise<ReturnPostData> {
     const post = await prismaClient.post.findUnique({
-      where: { id }
+      where: { id },
+      include: { tags: true },
     });
 
     if (!post) {
@@ -23,27 +28,36 @@ class UpdatePostService {
     }
 
     if (post.user_id !== userId) {
-      throw new Error("Sem permissão para deletar esse post.");
+      throw new Error("Sem permissão para editar esse post.");
     }
+
+    const tagService = new TagCreateService();
+
+    const currentTags = post.tags.map((tag) => tag.id);
+
+    const tags = await Promise.all(
+      data.tags.map(async (tagName) => {
+        return tagService.findOrCreate({ tag: tagName });
+      })
+    );
 
     const updatedPost = await prismaClient.post.update({
       where: { id },
       data: {
         title: data.title,
         description: data.description,
-        statusOpen: data.statusOpen,
-        tags: data.tags ? {
-          set: data.tags.map(tagId => ({ id: tagId.id }))
-        } : undefined
+        tags: {
+          disconnect: currentTags.map((id) => ({ id })),
+          connect: tags.map((tag) => ({ id: tag.id })),
+        },
       },
       include: {
-        tags: false
-      }
+        tags: true,
+      },
     });
 
-    return updatedPost;
+    return returnPostSchema.parse(updatedPost);
   }
-
 }
 
 export { UpdatePostService };
