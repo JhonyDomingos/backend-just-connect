@@ -829,7 +829,7 @@
           "instagram": { "type": "string" },
           "github": { "type": "string" }
         },
-        "required": false
+        "required": ["name", "email", "username"]
       },
       "ChangePasswordRequest": {
         "type": "object",
