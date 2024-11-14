@@ -1,6 +1,6 @@
 import prismaClient from '../../prisma';
 
-class CommentLikeService {
+class CommentScoreService {
   async likeComment(userId: string, commentId: string): Promise<boolean> {
 
     const comment = await prismaClient.comment.findUnique({
@@ -77,4 +77,4 @@ class CommentLikeService {
   }
 }
 
-export { CommentLikeService };
+export { CommentScoreService };
