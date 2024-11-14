@@ -1,21 +1,17 @@
 import { compare, hash } from "bcryptjs";
 import { sign, verify } from "jsonwebtoken";
 import prismaClient from "../../prisma/index";
-import { AuthRequest } from "../../interfaces/auth/authRequest";
 import { AppError } from "../../Error/AppError.error";
+import { LoginData } from "../../interfaces/auth/AuthTypes";
 
 class AuthService {
-  async execute({ email, username, password }: AuthRequest) {
+  async execute(data: LoginData) {
     const user = await prismaClient.user.findFirst({
       where: {
         OR: [
-          {
-            email,
-          },
-          {
-            username,
-          },
-        ],
+          data.email ? { email: data.email } : undefined,
+          data.username ? { username: data.username } : undefined,
+        ].filter(Boolean),
       },
     });
 
@@ -23,7 +19,7 @@ class AuthService {
       throw new AppError("Incorrect user (email or username)");
     }
 
-    const passwordMatch = await compare(password, user?.password);
+    const passwordMatch = await compare(data.password, user?.password);
 
     if (!passwordMatch) {
       throw new AppError("Incorrect password");
