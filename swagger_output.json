@@ -64,6 +64,68 @@
         }
       }
     },
+    "/public/auth/forgot-password": {
+      "post": {
+        "tags": ["Password recovery routes"],
+        "description": "An e-mail is sent to the user with a token so they'll be able to change their password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForgotPasswordResponse"
+                }
+              }
+            }
+          },
+          "400": { "description": "Bad Request" },
+          "401": { "description": "Unauthorized" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/public/auth/reset-password": {
+      "post": {
+        "tags": ["Password recovery routes"],
+        "description": "User informs their new password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResetPasswordResponse"
+                }
+              }
+            }
+          },
+          "400": { "description": "Bad Request" },
+          "401": { "description": "Unauthorized" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
     "/public/users": {
       "get": {
         "tags": ["Public user routes"],
@@ -359,6 +421,42 @@
         ]
       }
     },
+    "/posts/{id}/status": {
+      "put": {
+        "tags": ["Authenticated post routes"],
+        "description": "Change a post status (Lock/Unlock)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post status updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              }
+            }
+          },
+          "404": { "description": "Not Found" },
+          "401": { "description": "Unauthorized" },
+          "400": { "description": "Bad Request" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/public/posts": {
       "get": {
         "tags": ["Public post routes"],
@@ -613,11 +711,53 @@
         },
         "required": ["password"]
       },
+      "ForgotPasswordRequest": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" }
+        },
+        "required": ["email"]
+      },
+      "ResetPasswordRequest": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string" },
+          "newPassword": {
+            "type": "string",
+            "minLength": 8,
+            "description": "Password must contain letters and numbers."
+          },
+          "confirmNewPassword": {
+            "type": "string",
+            "minLength": 8,
+            "description": "Password must contain letters and numbers."
+          }
+        },
+        "required": ["token", "newPassword", "confirmNewPassword"]
+      },
       "LoginResponse": {
         "type": "object",
         "properties": {
           "token": { "type": "string" },
           "id": { "type": "string", "format": "uuid" }
+        }
+      },
+      "ForgotPasswordResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Password reset e-mail has been sent"
+          }
+        }
+      },
+      "ResetPasswordResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Password has been reset"
+          }
         }
       },
       "UserListResponse": {
