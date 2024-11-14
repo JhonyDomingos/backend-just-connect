@@ -1,21 +1,17 @@
 import { compare, hash } from "bcryptjs";
 import { sign, verify } from "jsonwebtoken";
 import prismaClient from "../../prisma/index";
-import { AuthRequest } from "../../interfaces/auth/authRequest";
 import { AppError } from "../../Error/AppError.error";
+import { LoginData, ResetPasswordData } from "../../interfaces/auth/AuthTypes";
 
 class AuthService {
-  async execute({ email, username, password }: AuthRequest) {
+  async execute(data: LoginData) {
     const user = await prismaClient.user.findFirst({
       where: {
         OR: [
-          {
-            email,
-          },
-          {
-            username,
-          },
-        ],
+          data.email ? { email: data.email } : undefined,
+          data.username ? { username: data.username } : undefined,
+        ].filter(Boolean),
       },
     });
 
@@ -23,7 +19,7 @@ class AuthService {
       throw new AppError("Incorrect user (email or username)");
     }
 
-    const passwordMatch = await compare(password, user?.password);
+    const passwordMatch = await compare(data.password, user?.password);
 
     if (!passwordMatch) {
       throw new AppError("Incorrect password");
@@ -85,8 +81,8 @@ class AuthService {
     return resetToken;
   }
 
-  async resetPassword(token: string, password: string) {
-    const { userId } = verify(token, process.env.JWT_SECRET as string) as {
+  async resetPassword(data: ResetPasswordData) {
+    const { userId } = verify(data.token, process.env.JWT_SECRET as string) as {
       userId: string;
     };
 
@@ -98,13 +94,13 @@ class AuthService {
 
     if (
       !user ||
-      user.reset_token !== token ||
+      user.reset_token !== data.token ||
       user.reset_token_expiry! < new Date()
     ) {
       throw new AppError("Invalid or expired token");
     }
 
-    const newPasswordHash = await hash(password, 10);
+    const newPasswordHash = await hash(data.newPassword, 10);
 
     await prismaClient.user.update({
       where: {

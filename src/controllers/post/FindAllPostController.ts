@@ -12,7 +12,7 @@ class FindAllPostController {
  * @param {Response} res - The response object used to send back the list of posts or an error message.
  * @returns {Promise<Response>} The HTTP response containing the list of posts or an error message.
  */
-  async findAll(req: Request, res: Response) {
+  async findAll(_: Request, res: Response) {
       const postsService = new FindAllPostsService();
       const posts = await postsService.findAll();
       

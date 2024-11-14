@@ -1,54 +1,54 @@
-import prismaClient from '../../prisma';
-import { hash } from 'bcryptjs';
-import { UserRequest } from '../../interfaces/user/UserRequest';
+import prismaClient from "../../prisma";
+import { UpdateUserData } from "../../interfaces/user/UserTypes";
+import { AppError } from "../../Error/AppError.error";
 
 class EditUserService {
-  
-  async execute({ id, name, username, email, bio_description, role, admin_user_block, linkedin, instagram, github }) {
+  async execute(id: string, data: UpdateUserData) {
     if (!id) {
-      throw new Error('ID incorrect');
-    }
-
-    if (!username) {
-      throw new Error('Username incorrect');
-    }
-
-    if (!email) {
-      throw new Error('Email incorrect');
+      throw new Error("Id is missing");
     }
 
     const user = await prismaClient.user.findFirst({
-      where: {
-        id: id
-      }
+      where: { id },
     });
 
     if (!user) {
-      throw new Error('User does not exists');
+      throw new Error("User does not exists");
     }
 
-    const userAlreadyExists = await prismaClient.user.findFirst({
+    const usernameAlreadyExists = await prismaClient.user.findFirst({
       where: {
-        email: email,
-        username: username
-      }
+        username: data.username,
+      },
     });
+
+    if (usernameAlreadyExists && usernameAlreadyExists.username !== user.username) {
+      throw new AppError("Username is not available.");
+    }
+
+    const emailAlreadyExists = await prismaClient.user.findFirst({
+      where: {
+        email: data.email,
+      },
+    });
+
+    if (emailAlreadyExists && emailAlreadyExists.email !== user.email) {
+      throw new AppError("E-mail is already registered.");
+    }
 
     const userUpdated = await prismaClient.user.update({
       where: {
-        id: id
+        id: id,
       },
       data: {
-        name,
-        username,
-        email,
-        bio_description,
-        role,
-        admin_user_block,
-        linkedin,
-        instagram,
-        github
-      }
+        name: data.name,
+        username: data.username,
+        email: data.email,
+        bio_description: data.bio_description,
+        linkedin: data.linkedin,
+        instagram: data.instagram,
+        github: data.github,
+      },
     });
 
     return userUpdated;

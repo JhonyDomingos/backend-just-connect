@@ -54,6 +54,16 @@ const userRegisteredSchema = userSchema.pick({
   role: true,
 });
 
+const userUpdateSchema = userSchema.pick({
+  name: true,
+  username: true,
+  email: true,
+  bio_description: true,
+  linkedin: true,
+  instagram: true,
+  github: true,
+});
+
 const userProfileReturnSchema = userSchema.omit({
   password: true,
   id: true,
@@ -98,6 +108,7 @@ export {
   userSchema,
   userRegisterSchema,
   userRegisteredSchema,
+  userUpdateSchema,
   userProfileReturnSchema,
   userReturnSchema,
   userListSchema,

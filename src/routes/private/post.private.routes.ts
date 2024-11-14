@@ -2,6 +2,7 @@ import { Router } from "express";
 import { CreatePostController } from "../../controllers/post/CreatePostController";
 import { UpdatePostController } from "../../controllers/post/UpdatePostController";
 import { DeletePostController } from "../../controllers/post/DeletePostController";
+import { StatusPostController } from "../../controllers/post/StatusPostController";
 import { validateSchema } from "../../middlewares/schema/validateSchema";
 import { createPostSchema } from "../../schemas/postSchemas";
 import { updatePostSchema } from "../../schemas/postSchemas";
@@ -20,14 +21,12 @@ import { authMiddleware } from "../../middlewares/auth/Auth.middleware";
  * - validateSchema: Validates request bodies against defined schemas for creation and update.
  */
 const postsPrivateRoutes: Router = Router();
-const createPostController = new CreatePostController();
-const updatePostController = new UpdatePostController();
-const deletePostController = new DeletePostController();
 
 postsPrivateRoutes.use(authMiddleware);
 
-postsPrivateRoutes.post('/', validateSchema(createPostSchema), createPostController.create);
-postsPrivateRoutes.put('/:id', validateSchema(updatePostSchema), updatePostController.update);
-postsPrivateRoutes.delete('/:id', deletePostController.delete);
+postsPrivateRoutes.post('/', validateSchema(createPostSchema), new CreatePostController().create);
+postsPrivateRoutes.put('/:id/status', new StatusPostController().change);
+postsPrivateRoutes.put('/:id', validateSchema(updatePostSchema), new UpdatePostController().update);
+postsPrivateRoutes.delete('/:id', new DeletePostController().delete);
 
 export { postsPrivateRoutes };

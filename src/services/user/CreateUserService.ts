@@ -1,30 +1,21 @@
 import prismaClient from "../../prisma";
 import { hash } from "bcryptjs";
-import {
-  CreateUserData,
-  NewUserData,
-} from "../../interfaces/user/UserTypes";
+import { CreateUserData, NewUserData } from "../../interfaces/user/UserTypes";
 import { userRegisteredSchema } from "../../schemas/userSchemas";
 import { AppError } from "../../Error/AppError.error";
 
 class CreateUserService {
-  async execute({
-    name,
-    username,
-    email,
-    password,
-    role = "USER"
-  }: CreateUserData): Promise<NewUserData> {
-    if (!username) {
+  async execute(data: CreateUserData): Promise<NewUserData> {
+    if (!data.username) {
       throw new AppError("Username incorrect", 400);
     }
 
-    if (!email) {
+    if (!data.email) {
       throw new AppError("Email incorrect", 400);
     }
 
     const usernameAlreadyExists = await prismaClient.user.findFirst({
-      where: { username },
+      where: { username: data.username },
     });
 
     if (usernameAlreadyExists) {
@@ -32,22 +23,22 @@ class CreateUserService {
     }
 
     const emailAlreadyRegistered = await prismaClient.user.findFirst({
-      where: { email },
+      where: { email: data.email },
     });
 
     if (emailAlreadyRegistered) {
       throw new AppError("Email is already registered", 400);
     }
 
-    const passwordHash = await hash(password, 10);
+    const passwordHash = await hash(data.password, 10);
 
     const user = await prismaClient.user.create({
       data: {
-        name,
-        username,
-        email,
+        name: data.name,
+        username: data.username,
+        email: data.email,
         password: passwordHash,
-        role
+        role: data.role,
       },
     });
 
