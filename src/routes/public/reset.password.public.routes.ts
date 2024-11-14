@@ -5,8 +5,7 @@ const resetPasswordRoutes: Router = Router();
 const authService = new AuthService();
 
 resetPasswordRoutes.post("/reset-password", async (req, res, next) => {
-  const { newPassword } = req.body;
-  const token = req.query.token as string;
+  const { token, newPassword } = req.body;
 
   try {
     await authService.resetPassword(token, newPassword);
