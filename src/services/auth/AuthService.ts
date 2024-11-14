@@ -2,7 +2,7 @@ import { compare, hash } from "bcryptjs";
 import { sign, verify } from "jsonwebtoken";
 import prismaClient from "../../prisma/index";
 import { AppError } from "../../Error/AppError.error";
-import { LoginData } from "../../interfaces/auth/AuthTypes";
+import { LoginData, ResetPasswordData } from "../../interfaces/auth/AuthTypes";
 
 class AuthService {
   async execute(data: LoginData) {
@@ -81,8 +81,8 @@ class AuthService {
     return resetToken;
   }
 
-  async resetPassword(token: string, password: string) {
-    const { userId } = verify(token, process.env.JWT_SECRET as string) as {
+  async resetPassword(data: ResetPasswordData) {
+    const { userId } = verify(data.token, process.env.JWT_SECRET as string) as {
       userId: string;
     };
 
@@ -94,13 +94,13 @@ class AuthService {
 
     if (
       !user ||
-      user.reset_token !== token ||
+      user.reset_token !== data.token ||
       user.reset_token_expiry! < new Date()
     ) {
       throw new AppError("Invalid or expired token");
     }
 
-    const newPasswordHash = await hash(password, 10);
+    const newPasswordHash = await hash(data.newPassword, 10);
 
     await prismaClient.user.update({
       where: {

@@ -3,7 +3,8 @@ import { userSchema } from "./userSchemas";
 
 const loginSchema = userSchema
   .pick({
-    password: true
+    password: true,
+    role: true
   })
   .extend({
     email: z.string().optional(),

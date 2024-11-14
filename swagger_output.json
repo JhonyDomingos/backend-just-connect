@@ -747,7 +747,7 @@
         "properties": {
           "message": {
             "type": "string",
-            "example": "Password reset e-mail has been sent"
+            "example": "Password reset email sent. Please check your inbox."
           }
         }
       },
@@ -756,7 +756,7 @@
         "properties": {
           "message": {
             "type": "string",
-            "example": "Password has been reset"
+            "example": "Password has been reset."
           }
         }
       },
