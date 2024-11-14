@@ -35,7 +35,7 @@ model User {
   post_like           PostLike[]
   comment_reports     CommentReport[]
   comment_like        CommentLike[]
-  tag_like            TagLike[]
+  tag_follow          TagFollow[]
 
   @@map("users")
 }
@@ -80,7 +80,7 @@ model Tag {
   id                  String    @id @default(uuid())
   tag                 String    @unique @db.VarChar(15)
   posts               Post[]
-  tag_like            TagLike[]
+  tag_follow          TagFollow[]
 
   @@map("tags")
 }
@@ -137,7 +137,7 @@ model CommentLike {
   @@map("commentlike")
 }
 
-model TagLike {
+model TagFollow {
   id                  String    @id @default(uuid())
   user                User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id             String
@@ -145,7 +145,7 @@ model TagLike {
   tag_id              String
   created_at          DateTime  @default(now())
 
-  @@map("taglike")
+  @@map("tagFollow")
 }
 
 enum Role {
