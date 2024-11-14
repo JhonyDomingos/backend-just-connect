@@ -178,10 +178,39 @@
     "/public/users/{id}": {
       "get": {
         "tags": ["Public user routes"],
-        "description": "Get one user",
+        "description": "Find user by ID",
         "parameters": [
           {
             "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/public/users/user/{username}": {
+      "get": {
+        "tags": ["Public user routes"],
+        "description": "Gets user by username",
+        "parameters": [
+          {
+            "name": "username",
             "in": "path",
             "required": true,
             "schema": {
