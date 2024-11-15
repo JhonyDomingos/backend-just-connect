@@ -1,7 +1,7 @@
 import { z } from "zod";
 import {
   userChangePasswordSchema,
-  userListSchema,
+  ListUserSchema,
   userProfileReturnSchema,
   userRegisterSchema,
   userRegisteredSchema,
@@ -14,8 +14,9 @@ type NewUserData = z.infer<typeof userRegisteredSchema>;
 type ReturnUserData = z.infer<typeof userReturnSchema>;
 type UpdateUserData = z.infer<typeof userUpdateSchema>;
 type ReturnProfileUserData = z.infer<typeof userProfileReturnSchema>;
-type ReturnUsersData = z.infer<typeof userListSchema>;
+type ReturnUsersData = z.infer<typeof ListUserSchema>;
 type ChangeUserPasswordData = z.infer<typeof userChangePasswordSchema>;
+type ListUserData = z.infer<typeof ListUserSchema>;
 
 export {
   CreateUserData,
@@ -24,5 +25,6 @@ export {
   UpdateUserData,
   ReturnProfileUserData,
   ReturnUsersData,
+  ListUserData,
   ChangeUserPasswordData,
 };

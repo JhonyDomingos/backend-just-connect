@@ -77,7 +77,7 @@ const userReturnSchema = userProfileReturnSchema.omit({
   role: true,
 });
 
-const userListSchema = z.array(
+const ListUserSchema = z.array(
   userSchema
     .pick({ id: true, name: true, username: true })
     .extend({ postCount: z.number() })
@@ -111,7 +111,7 @@ export {
   userUpdateSchema,
   userProfileReturnSchema,
   userReturnSchema,
-  userListSchema,
+  ListUserSchema,
   userPostSchema,
   userChangePasswordSchema,
 };
