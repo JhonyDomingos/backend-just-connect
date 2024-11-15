@@ -3,10 +3,11 @@ import { CreatePostController } from "../../controllers/post/CreatePostControlle
 import { UpdatePostController } from "../../controllers/post/UpdatePostController";
 import { DeletePostController } from "../../controllers/post/DeletePostController";
 import { StatusPostController } from "../../controllers/post/StatusPostController";
-import { validateSchema } from "../../middlewares/schema/validateSchema";
+
 import { createPostSchema } from "../../schemas/postSchemas";
 import { updatePostSchema } from "../../schemas/postSchemas";
 import { authMiddleware } from "../../middlewares/auth/Auth.middleware";
+import { ensureMiddleware } from "../../middlewares/ensure/ensure.middleware";
 
 /**
  * @module postsPrivateRoutes
@@ -24,9 +25,9 @@ const postsPrivateRoutes: Router = Router();
 
 postsPrivateRoutes.use(authMiddleware);
 
-postsPrivateRoutes.post('/', validateSchema(createPostSchema), new CreatePostController().create);
+postsPrivateRoutes.post('/', ensureMiddleware.validateBody(createPostSchema), new CreatePostController().create);
 postsPrivateRoutes.put('/:id/status', new StatusPostController().change);
-postsPrivateRoutes.put('/:id', validateSchema(updatePostSchema), new UpdatePostController().update);
+postsPrivateRoutes.put('/:id', ensureMiddleware.validateBody(updatePostSchema), new UpdatePostController().update);
 postsPrivateRoutes.delete('/:id', new DeletePostController().delete);
 
 export { postsPrivateRoutes };
