@@ -3,6 +3,7 @@ import { sign, verify } from "jsonwebtoken";
 import prismaClient from "../../prisma/index";
 import { AppError } from "../../Error/AppError.error";
 import { LoginData, ResetPasswordData } from "../../interfaces/auth/AuthTypes";
+import { UserMessagesEnum } from "../../Error/Enums/UserMessage.enum";
 
 class AuthService {
   async execute(data: LoginData) {
@@ -16,17 +17,13 @@ class AuthService {
     });
 
     if (!user) {
-      throw new AppError("Incorrect user (email or username)");
+      throw new AppError(UserMessagesEnum.INCORRECT_CREDENTIALS, 401);
     }
 
     const passwordMatch = await compare(data.password, user?.password);
 
     if (!passwordMatch) {
-      throw new AppError("Incorrect password");
-    }
-
-    if (!process.env.JWT_SECRET!) {
-      throw new AppError("JWT_SECRET is not defined");
+      throw new AppError(UserMessagesEnum.INCORRECT_CREDENTIALS, 401);
     }
 
     const token = sign(
