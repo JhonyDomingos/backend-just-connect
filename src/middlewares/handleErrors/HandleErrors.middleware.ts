@@ -11,7 +11,9 @@ class HandleErrors {
     __: NextFunction
   ) => {
     if (error instanceof AppError) {
-      return response.status(error.statusCode).json({ message: error.message });
+      return response.status(error.statusCode).json({
+        message: error.errors || { general: [error.message] },
+      });
     }
 
     if (error instanceof ZodError) {
@@ -23,8 +25,10 @@ class HandleErrors {
     if (error instanceof JsonWebTokenError) {
       return response.status(400).json({ message: error.message });
     }
-    
-    return response.status(500).json({ message: "Internal Server Error", error: error });
+
+    return response
+      .status(500)
+      .json({ message: "Internal Server Error", error: error });
   };
 }
 

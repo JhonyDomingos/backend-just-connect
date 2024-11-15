@@ -8,6 +8,7 @@ enum FieldMessagesEnum {
   PASSWORD_MUST_CONTAIN_ALPHANUMERIC = "Password must only contain alphanumeric characters",
   USERNAME_INVALID = "invalid username",
   PASSWORD_DONT_MATCH = "Password does not match",
+  PASSWORD_WRONG = "Wrong password",
 }
 
 export { FieldMessagesEnum };
