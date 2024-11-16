@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createCommentSchema, commentSchema, updateCommentSchema} from "../../schemas/commentSchemas";
+import { createCommentSchema, commentSchema, updateCommentSchema, ListCommentSchema } from "../../schemas/commentSchemas";
 
 /**
  * @type CreateCommentData
@@ -19,4 +19,10 @@ type UpdateCommentData = z.infer<typeof updateCommentSchema>;
  */
 type ReturnCommentData = z.infer<typeof commentSchema>;
 
-export { CreateCommentData, ReturnCommentData, UpdateCommentData};
+/**
+ * @type ListCommentData
+ * @description Represents the data structure for returning a list of comments, inferred from the ListCommentSchema.
+ */
+type ListCommentData = z.infer<typeof ListCommentSchema>;
+
+export { CreateCommentData, ReturnCommentData, UpdateCommentData, ListCommentData };
