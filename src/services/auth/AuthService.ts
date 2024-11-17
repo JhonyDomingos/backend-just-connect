@@ -4,6 +4,8 @@ import prismaClient from "../../prisma/index";
 import { AppError } from "../../Error/AppError.error";
 import { LoginData, ResetPasswordData } from "../../interfaces/auth/AuthTypes";
 import { UserMessagesEnum } from "../../Error/Enums/UserMessage.enum";
+import { FieldMessagesEnum } from "../../Error/Enums/FieldErrors.enum";
+import { AuthMessagesEnum } from "../../Error/Enums/AuthMessage.enum";
 
 class AuthService {
   async execute(data: LoginData) {
@@ -25,12 +27,13 @@ class AuthService {
     if (!passwordMatch) {
       throw new AppError(UserMessagesEnum.INCORRECT_CREDENTIALS, 401);
     }
-
+    
     const token = sign(
       {
         email: user?.email,
         username: user?.username,
         role: user?.role,
+        
       },
       process.env.JWT_SECRET as string,
       {
@@ -53,7 +56,7 @@ class AuthService {
     });
 
     if (!user) {
-      throw new AppError("User not found");
+      throw new AppError({email: [FieldMessagesEnum.INVALID_EMAIL]}, 404);
     }
 
     const resetToken = sign(
@@ -94,7 +97,7 @@ class AuthService {
       user.reset_token !== data.token ||
       user.reset_token_expiry! < new Date()
     ) {
-      throw new AppError("Invalid or expired token");
+        throw new AppError({ token: [AuthMessagesEnum.INVALID_OR_EXIPRED_TOKEN] }, 401);
     }
 
     const newPasswordHash = await hash(data.newPassword, 10);
