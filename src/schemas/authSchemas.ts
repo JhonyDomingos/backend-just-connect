@@ -4,7 +4,7 @@ import { userSchema } from "./userSchemas";
 const loginSchema = userSchema
   .pick({
     password: true,
-    role: true
+    role: true,
   })
   .extend({
     email: z.string().optional(),
@@ -15,9 +15,13 @@ const loginSchema = userSchema
     path: ["email", "username"],
   });
 
+
+
+
 const forgotPasswordSchema = userSchema.pick({ email: true });
 
-const resetPasswordSchema = z.object({
+const resetPasswordSchema = z
+  .object({
     token: z.string(),
     newPassword: z
       .string()
