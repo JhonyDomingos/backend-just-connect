@@ -1,6 +1,5 @@
 import prismaClient from "../../prisma";
 import { UpdateUserData } from "../../interfaces/user/UserTypes";
-import { AppError } from "../../Error/AppError.error";
 import { userUpdateSchema } from "../../schemas/userSchemas";
 
 class EditUserService {
