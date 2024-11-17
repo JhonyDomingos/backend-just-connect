@@ -39,7 +39,7 @@ class EnsureMiddleware {
     nextFunction: NextFunction
   ): Promise<void> => {
     const { email } = request.body;
-
+    if (!email) return nextFunction();
     const foundedUserEmail = await prismaClient.user.findFirst({
       where: { email },
     });
@@ -61,7 +61,7 @@ class EnsureMiddleware {
     nextFunction: NextFunction
   ): Promise<void> => {
     const { username } = request.body;
-
+    if (!username) return nextFunction();
     const foundedUsername = await prismaClient.user.findFirst({
       where: { username },
     });
