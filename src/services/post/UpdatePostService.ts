@@ -13,19 +13,11 @@ class UpdatePostService {
    * @returns {Promise<ReturnPostData>} - The updated post.
    * @throws {AppError} - If the post is not found or the user lacks permission.
    */
-  async update(
-    id: string,
-    data: UpdatePostData,
-    userId: string
-  ): Promise<ReturnPostData> {
+  async update(id: string, data: UpdatePostData): Promise<ReturnPostData> {
     const post = await prismaClient.post.findUnique({
       where: { id },
       include: { tags: true },
     });
-
-    if (post.user_id !== userId) {
-      throw new Error("Sem permissão para editar esse post.");
-    }
 
     const tagService = new TagCreateService();
 
