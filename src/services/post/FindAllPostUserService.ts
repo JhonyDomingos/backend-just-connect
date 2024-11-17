@@ -11,9 +11,7 @@ class FindAllPostsUserService {
       },
     });
 
-    if (!user) {
-      throw new AppError("User not found");
-    }
+
 
     const posts = await prismaClient.post.findMany({
       where: {

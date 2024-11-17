@@ -23,10 +23,6 @@ class UpdatePostService {
       include: { tags: true },
     });
 
-    if (!post) {
-      throw new Error("Postagem não encontrada.");
-    }
-
     if (post.user_id !== userId) {
       throw new Error("Sem permissão para editar esse post.");
     }
