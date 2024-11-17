@@ -5,19 +5,18 @@ import { CreateUserController } from "../../controllers/user/CreateUserControlle
 import { GetUserByUsernameController } from "../../controllers/user/GetUserByUsernameController";
 import { ensureMiddleware } from "../../middlewares/ensure/ensure.middleware";
 import { UserMessagesEnum } from "../../Error/Enums/UserMessage.enum";
-import { createUserSchema } from "../../schemas/userSchemas";
-
+import { userRegisterSchema } from "../../schemas/userSchemas";
 
 
 const userPublicRoutes: Router = Router();
 
 userPublicRoutes.post(
   "/register",
-  ensureMiddleware.validateBody(createUserSchema),
-  ensureMiddleware.uniqueEmail,
+  ensureMiddleware.validateBody(userRegisterSchema),
   ensureMiddleware.uniqueUsername,
+  ensureMiddleware.uniqueEmail,
   new CreateUserController().handle
-); 
+);
 // register new user
 userPublicRoutes.get(
   "/:id",
@@ -27,7 +26,7 @@ userPublicRoutes.get(
     searchKey: "id",
   }),
   new FindUserController().handle
-); 
+);
 // find user by id
 userPublicRoutes.get(
   "/user/:username",
@@ -37,7 +36,7 @@ userPublicRoutes.get(
     searchKey: "username",
   }),
   new GetUserByUsernameController().handle
-); 
+);
 // find user by username
 userPublicRoutes.get("/", new FindAllUserController().handle); // lists all users
 
