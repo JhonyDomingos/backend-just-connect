@@ -9,6 +9,7 @@ import { updatePostSchema } from "../../schemas/postSchemas";
 import { authMiddleware } from "../../middlewares/auth/Auth.middleware";
 import { ensureMiddleware } from "../../middlewares/ensure/ensure.middleware";
 import { CommonMessagesEnum } from "../../Error/Enums/CommonMesages.enum";
+import { permissionsMiddleware } from "../../middlewares/Permissions/Permission.middleware";
 
 /**
  * @module postsPrivateRoutes
@@ -41,12 +42,21 @@ postsPrivateRoutes.use(
   })
 );
 
-postsPrivateRoutes.put("/:id/status", new StatusPostController().change);
+postsPrivateRoutes.put(
+  "/:id/status",
+  permissionsMiddleware.canAdministerPost,
+  new StatusPostController().change
+);
 postsPrivateRoutes.put(
   "/:id",
   ensureMiddleware.validateBody(updatePostSchema),
+  permissionsMiddleware.canEditPost,
   new UpdatePostController().update
 );
-postsPrivateRoutes.delete("/:id", new DeletePostController().delete);
+postsPrivateRoutes.delete(
+  "/:id",
+  permissionsMiddleware.canAdministerPost,
+  new DeletePostController().delete
+);
 
 export { postsPrivateRoutes };
