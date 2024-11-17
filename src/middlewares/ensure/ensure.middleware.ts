@@ -5,12 +5,12 @@ import type {
 } from "../../interfaces/utils.interface";
 import prismaClient from "../../prisma";
 import { AppError } from "../../Error/AppError.error";
-import type { AnyZodObject } from "zod";
+import type { AnyZodObject, ZodEffects } from "zod";
 import { UserMessagesEnum } from "../../Error/Enums/UserMessage.enum";
 
 class EnsureMiddleware {
   public validateBody =
-    (schema: AnyZodObject) =>
+    (schema: AnyZodObject | ZodEffects<AnyZodObject>) =>
     (req: Request, _: Response, nextFunction: NextFunction): void => {
       req.body = schema.parse(req.body);
       return nextFunction();
@@ -39,11 +39,10 @@ class EnsureMiddleware {
     nextFunction: NextFunction
   ): Promise<void> => {
     const { email } = request.body;
+
     const foundedUserEmail = await prismaClient.user.findFirst({
       where: { email },
     });
-
-    if (!foundedUserEmail) nextFunction();
 
     if (foundedUserEmail) {
       throw new AppError(
@@ -62,11 +61,10 @@ class EnsureMiddleware {
     nextFunction: NextFunction
   ): Promise<void> => {
     const { username } = request.body;
+
     const foundedUsername = await prismaClient.user.findFirst({
       where: { username },
     });
-
-    if (!foundedUsername) nextFunction();
 
     if (foundedUsername) {
       throw new AppError(
