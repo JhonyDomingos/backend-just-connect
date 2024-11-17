@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { verify } from "jsonwebtoken";
+import { TokenExpiredError, verify } from "jsonwebtoken";
 import { AppError } from "../../Error/AppError.error";
 import { AuthMessagesEnum } from "../../Error/Enums/AuthMessage.enum";
 
@@ -27,7 +27,11 @@ class AuthMiddleware {
     }
 
     const secretKey = process.env.JWT_SECRET!;
-    const decodedToken = verify(token, secretKey);
+    const decodedToken = verify(token, secretKey, { ignoreExpiration: false });
+
+    if (decodedToken instanceof TokenExpiredError) {
+      throw new AppError({ error: [AuthMessagesEnum.TOKEN_EXPIRED] }, 401);
+    }
 
     response.locals = { ...response.locals, decodedToken }; // armazena o token decodificado no response.locals para ser acessado em outros middlewares
 
