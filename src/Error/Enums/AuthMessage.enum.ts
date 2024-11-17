@@ -7,5 +7,6 @@ export enum AuthMessagesEnum {
     LOGOUT_SUCCESS = 'Logout successful',
     INVALID_OR_EXIPRED_TOKEN = 'Invalid or expired token',
     TOKEN_EXPIRED = 'Token expired',
+    INSSUFFICIENT_PERMISSION = 'Insufficient permission',
   }
   
