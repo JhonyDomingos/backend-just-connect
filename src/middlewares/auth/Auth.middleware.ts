@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { verify } from "jsonwebtoken";
+import { TokenExpiredError, verify } from "jsonwebtoken";
 import { AppError } from "../../Error/AppError.error";
+import { AuthMessagesEnum } from "../../Error/Enums/AuthMessage.enum";
 
 class AuthMiddleware {
   public static execute = (
@@ -11,22 +12,30 @@ class AuthMiddleware {
     const { authorization } = request.headers;
 
     if (!authorization) {
-      throw new AppError("Token is missing", 401);
+      throw new AppError(
+        { error: [AuthMessagesEnum.MISSING_AUTHORIZATION_TOKEN] },
+        401
+      );
     }
 
     const [_bearer, token] = authorization.split(" ");
     if (!token) {
-      throw new AppError("Token is invalid", 401);
+      throw new AppError(
+        { error: [AuthMessagesEnum.INVALID_AUTHORIZATION_TOKEN] },
+        401
+      );
     }
 
     const secretKey = process.env.JWT_SECRET!;
-    const decodedToken = verify(token, secretKey);
+    const decodedToken = verify(token, secretKey, { ignoreExpiration: false });
+
+    if (decodedToken instanceof TokenExpiredError) {
+      throw new AppError({ error: [AuthMessagesEnum.TOKEN_EXPIRED] }, 401);
+    }
 
     response.locals = { ...response.locals, decodedToken }; // armazena o token decodificado no response.locals para ser acessado em outros middlewares
-   
 
     return next();
-
   };
 }
 export const authMiddleware = AuthMiddleware.execute;

@@ -62,7 +62,9 @@ const userUpdateSchema = userSchema.pick({
   linkedin: true,
   instagram: true,
   github: true,
-});
+}).partial();
+
+
 
 const userProfileReturnSchema = userSchema.omit({
   password: true,
