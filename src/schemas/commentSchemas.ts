@@ -34,9 +34,18 @@ const updateCommentSchema = commentSchema.pick({
   updated_at: true,
 });
 
+const ListCommentSchema = z.array(
+  commentSchema.pick({
+    id: true,
+    comment: true,
+    score: true,
+  })
+);
+
 export {
   commentSchema,
   createCommentSchema,
   updateCommentSchema,
   commentOnPostSchema,
+  ListCommentSchema,
 };

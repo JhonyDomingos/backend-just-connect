@@ -18,7 +18,7 @@ async create(req: Request, res: Response): Promise<Response> {
     const data = req.body; // Obtém os dados do comentário do corpo da requisição
 
     const tagService = new TagCreateService(); // Instancia o serviço de criação de tags
-    const tag = await tagService.create(data); // Chama o serviço para criar a tag
+    const tag = await tagService.findOrCreate(data); // Chama o serviço para criar a tag
 
     return res.status(201).json(tag); // Retorna a tag criada com status 201
   }

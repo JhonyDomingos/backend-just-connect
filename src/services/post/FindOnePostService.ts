@@ -22,16 +22,12 @@ class FindOnePostService {
             comment: true,
             score: true,
             created_at: true,
-            updated_at: true
-          }
+            updated_at: true,
+          },
         },
         user: true,
       },
     });
-
-    if (!post) {
-      throw new Error("Post não encontrado.");
-    }
 
     const formatComments = post.comment.map((comment) => ({
       ...comment,

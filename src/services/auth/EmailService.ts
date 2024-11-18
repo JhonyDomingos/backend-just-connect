@@ -10,7 +10,7 @@ const transport = nodemailer.createTransport({
 });
 
 export const sendPasswordResetEmail = async (to: string, token: string) => {
-  const resetUrl = `${process.env.FRONTEND_URL}/public/auth/reset-password?token=${token}`;
+  const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
   const mailOptions = {
     from: process.env.EMAIL_FROM,
     to,

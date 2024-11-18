@@ -1,6 +1,6 @@
 import { ReturnUsersData } from "../../interfaces/user/UserTypes";
 import prismaClient from "../../prisma";
-import { userListSchema } from "../../schemas/userSchemas";
+import { ListUserSchema } from "../../schemas/userSchemas";
 import { Prisma } from "@prisma/client";
 
 class FindAllUserService {
@@ -48,7 +48,7 @@ class FindAllUserService {
     }));
 
     return {
-      users: userListSchema.parse(usersWithPostCount),
+      users: ListUserSchema.parse(usersWithPostCount),
       totalPages: Math.ceil(total / limit),
     };
   }

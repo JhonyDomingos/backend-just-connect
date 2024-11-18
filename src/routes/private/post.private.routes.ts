@@ -2,10 +2,14 @@ import { Router } from "express";
 import { CreatePostController } from "../../controllers/post/CreatePostController";
 import { UpdatePostController } from "../../controllers/post/UpdatePostController";
 import { DeletePostController } from "../../controllers/post/DeletePostController";
-import { validateSchema } from "../../middlewares/schema/validateSchema";
+import { StatusPostController } from "../../controllers/post/StatusPostController";
+
 import { createPostSchema } from "../../schemas/postSchemas";
 import { updatePostSchema } from "../../schemas/postSchemas";
 import { authMiddleware } from "../../middlewares/auth/Auth.middleware";
+import { ensureMiddleware } from "../../middlewares/ensure/ensure.middleware";
+import { CommonMessagesEnum } from "../../Error/Enums/CommonMesages.enum";
+import { permissionsMiddleware } from "../../middlewares/Permissions/Permission.middleware";
 
 /**
  * @module postsPrivateRoutes
@@ -14,20 +18,45 @@ import { authMiddleware } from "../../middlewares/auth/Auth.middleware";
  * - POST /: Create a new post with validation.
  * - PUT /:id: Update an existing post with validation.
  * - DELETE /:id: Delete a specified post.
- * 
+ *
  * Middleware:
  * - isAuthenticated: Ensures user is authenticated before accessing the routes.
  * - validateSchema: Validates request bodies against defined schemas for creation and update.
  */
 const postsPrivateRoutes: Router = Router();
-const createPostController = new CreatePostController();
-const updatePostController = new UpdatePostController();
-const deletePostController = new DeletePostController();
 
 postsPrivateRoutes.use(authMiddleware);
 
-postsPrivateRoutes.post('/', validateSchema(createPostSchema), createPostController.create);
-postsPrivateRoutes.put('/:id', validateSchema(updatePostSchema), updatePostController.update);
-postsPrivateRoutes.delete('/:id', deletePostController.delete);
+postsPrivateRoutes.post(
+  "/",
+  ensureMiddleware.validateBody(createPostSchema),
+  new CreatePostController().create
+);
+
+postsPrivateRoutes.use(
+  "/:id",
+  ensureMiddleware.existingParams({
+    error: CommonMessagesEnum.NOT_FOUND,
+    model: "post",
+    searchKey: "id",
+  })
+);
+
+postsPrivateRoutes.put(
+  "/:id/status",
+  permissionsMiddleware.canAdministerPost,
+  new StatusPostController().change
+);
+postsPrivateRoutes.put(
+  "/:id",
+  ensureMiddleware.validateBody(updatePostSchema),
+  permissionsMiddleware.canEditPost,
+  new UpdatePostController().update
+);
+postsPrivateRoutes.delete(
+  "/:id",
+  permissionsMiddleware.canAdministerPost,
+  new DeletePostController().delete
+);
 
 export { postsPrivateRoutes };

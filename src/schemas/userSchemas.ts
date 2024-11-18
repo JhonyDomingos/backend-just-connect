@@ -54,6 +54,18 @@ const userRegisteredSchema = userSchema.pick({
   role: true,
 });
 
+const userUpdateSchema = userSchema.pick({
+  name: true,
+  username: true,
+  email: true,
+  bio_description: true,
+  linkedin: true,
+  instagram: true,
+  github: true,
+}).partial();
+
+
+
 const userProfileReturnSchema = userSchema.omit({
   password: true,
   id: true,
@@ -67,7 +79,7 @@ const userReturnSchema = userProfileReturnSchema.omit({
   role: true,
 });
 
-const userListSchema = z.array(
+const ListUserSchema = z.array(
   userSchema
     .pick({ id: true, name: true, username: true })
     .extend({ postCount: z.number() })
@@ -98,9 +110,10 @@ export {
   userSchema,
   userRegisterSchema,
   userRegisteredSchema,
+  userUpdateSchema,
   userProfileReturnSchema,
   userReturnSchema,
-  userListSchema,
+  ListUserSchema,
   userPostSchema,
   userChangePasswordSchema,
 };

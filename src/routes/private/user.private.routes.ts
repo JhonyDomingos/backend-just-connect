@@ -5,6 +5,8 @@ import { GetUserProfileController } from "../../controllers/user/GetUserProfileC
 import { ChangeUserPasswordController } from "../../controllers/user/ChangeUserPasswordController";
 import { authMiddleware } from "../../middlewares/auth/Auth.middleware";
 import { ensureMiddleware } from "../../middlewares/ensure/ensure.middleware";
+import { UserMessagesEnum } from "../../Error/Enums/UserMessage.enum";
+import { userUpdateSchema } from "../../schemas/userSchemas";
 
 const userPrivateRoutes: Router = Router();
 
@@ -21,15 +23,22 @@ userPrivateRoutes.put(
 userPrivateRoutes.get("/my-profile", new GetUserProfileController().handle);
 
 userPrivateRoutes.use(
-    "/:id",
+  "/:id",
   ensureMiddleware.existingParams({
-    error: "User not found",
+    error: UserMessagesEnum.USER_NOT_FOUND,
     model: "user",
     searchKey: "id",
   })
 );
+
 // edit user
-userPrivateRoutes.put("/:id", new EditUserController().handle);
+userPrivateRoutes.patch(
+  "/:id",
+  ensureMiddleware.validateBody(userUpdateSchema),
+  ensureMiddleware.uniqueUsername,
+  ensureMiddleware.uniqueEmail,
+  new EditUserController().handle
+);
 
 // delete user
 userPrivateRoutes.delete("/:id", new DeleteUserController().handle);
