@@ -1,6 +1,5 @@
-// src/controllers/score/LikeCommentController.ts
 import { Request, Response } from 'express';
-import { CommentScoreService } from '../../services/comments/CommentScoreService';
+import { CommentScoreService } from '../../services/score/CommentScoreService';
 
 class LikeCommentController {
   async like(req: Request, res: Response): Promise<Response> {
