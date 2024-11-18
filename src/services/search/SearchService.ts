@@ -5,6 +5,8 @@ import { ListUserData } from "../../interfaces/user/UserTypes";
 import { ListUserSchema } from "../../schemas/userSchemas";
 import { ListCommentData } from "../../interfaces/comments/CommentTypes";
 import { ListCommentSchema } from "../../schemas/commentSchemas";
+import { ListTagData } from "../../interfaces/tag/TagTypes";
+import { ListTagSchema } from "../../schemas/tagSchemas";
 
 class SearchService {
   async searchUsers(query: string): Promise<ListUserData> {
@@ -114,6 +116,33 @@ class SearchService {
     }));
 
     return ListCommentSchema.parse(commentWithScore);
+  }
+
+  async searchTags(query: string): Promise<ListTagData> {
+    const tag = await prismaClient.tag.findMany({
+      where: {
+        tag: {
+          contains: query,
+          mode: "insensitive",
+        },
+      },
+      select: {
+        id: true,
+        tag: true,
+        posts: {
+          select: {
+            id: true,
+          },
+        },
+      }
+    });
+
+    const tagWithPostCount = tag.map((tag) => ({
+      ...tag,
+      postCount: tag.posts.length,
+    }));
+
+    return ListTagSchema.parse(tagWithPostCount);
   }
 }
 
