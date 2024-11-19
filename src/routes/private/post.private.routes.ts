@@ -3,9 +3,11 @@ import { CreatePostController } from "../../controllers/post/CreatePostControlle
 import { UpdatePostController } from "../../controllers/post/UpdatePostController";
 import { DeletePostController } from "../../controllers/post/DeletePostController";
 import { StatusPostController } from "../../controllers/post/StatusPostController";
+import { LikePostController } from "../../controllers/post/LikePostController";
 
 import { createPostSchema } from "../../schemas/postSchemas";
 import { updatePostSchema } from "../../schemas/postSchemas";
+import { likePostSchema } from "../../schemas/postSchemas";
 import { authMiddleware } from "../../middlewares/auth/Auth.middleware";
 import { ensureMiddleware } from "../../middlewares/ensure/ensure.middleware";
 import { CommonMessagesEnum } from "../../Error/Enums/CommonMesages.enum";
@@ -58,5 +60,9 @@ postsPrivateRoutes.delete(
   permissionsMiddleware.canAdministerPost,
   new DeletePostController().delete
 );
+
+const likePostController = new LikePostController();
+postsPrivateRoutes.post("/:postId/like", (req, res, next) => likePostController.likePost(req, res, next));
+postsPrivateRoutes.post("/:postId/unlike", (req, res, next) => likePostController.unlikePost(req, res, next));
 
 export { postsPrivateRoutes };

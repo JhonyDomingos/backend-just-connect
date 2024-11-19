@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createPostSchema, updatePostSchema, listPostSchema, returnPostSchema } from "../../schemas/postSchemas"
+import { createPostSchema, updatePostSchema, listPostSchema, returnPostSchema, likePostSchema } from "../../schemas/postSchemas"
 
 /**
  * @type CreatePostData
@@ -21,4 +21,6 @@ type ReturnPostData = z.infer<typeof returnPostSchema>
 
 type ListPostData = z.infer<typeof listPostSchema>
 
-export { CreatePostData, UpdatePostData, ReturnPostData, ListPostData }
+type LikePostData = z.infer<typeof likePostSchema>
+
+export { CreatePostData, UpdatePostData, ReturnPostData, ListPostData, LikePostData }
