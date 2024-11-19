@@ -21,13 +21,13 @@ class LikePostController {
     }
   }
 
-  async unlikePost(req: Request, res: Response, next: NextFunction) {
+  async dislikePost(req: Request, res: Response, next: NextFunction) {
     const { postId } = req.params;
     const { userId } = req.body;
 
     try {
-      const unlikedPost = await this.likePostService.unlikePost(postId, userId);
-      res.status(200).json(unlikedPost);
+      const dislikedPost = await this.likePostService.dislikePost(postId, userId);
+      res.status(200).json(dislikedPost);
       
     } catch (error) {
       next(error);
