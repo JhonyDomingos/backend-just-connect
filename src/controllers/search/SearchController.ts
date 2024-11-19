@@ -32,6 +32,8 @@ class SearchController {
             return this.searchService.searchPosts(query as string);
           case 'comments':
             return this.searchService.searchComments(query as string);
+          case 'tags':
+            return this.searchService.searchTags(query as string);
         }
       }));
 

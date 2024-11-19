@@ -7,4 +7,10 @@ const tagSchema = z.object({
 
 const createTagSchema = tagSchema.pick({ tag: true });
 
-export { tagSchema, createTagSchema };
+const ListTagSchema = z.array(
+  tagSchema
+    .pick({ id: true, tag: true })
+    .extend({ postCount: z.number() })
+);
+
+export { tagSchema, createTagSchema, ListTagSchema };

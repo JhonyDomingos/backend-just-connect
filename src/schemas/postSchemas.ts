@@ -59,6 +59,11 @@ const postOnUserSchema = returnPostSchema.omit({
 
 const listPostSchema = z.array(postOnUserSchema);
 
+const likePostSchema = z.object({
+  post_id: z.string().uuid(),
+  user_id: z.string().uuid(),
+});
+
 export {
   postSchema,
   createPostSchema,
@@ -66,4 +71,5 @@ export {
   postOnUserSchema,
   listPostSchema,
   returnPostSchema,
+  likePostSchema,
 };
