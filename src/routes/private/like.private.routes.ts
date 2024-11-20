@@ -1,27 +1,13 @@
-import { Router } from "express";
-import { LikeCommentController } from "../../controllers/score/LikeCommentController";
-import { RemoveLikeCommentController } from "../../controllers/score/RemoveLikeCommentController ";
-import { authMiddleware } from "../../middlewares/auth/Auth.middleware";
-import { ensureMiddleware } from "../../middlewares/ensure/ensure.middleware";
-import { CommonMessagesEnum } from "../../Error/Enums/CommonMesages.enum";
+import express from 'express';
+import { CommentScoreController } from '../../controllers/score/LikeCommentController';
 
-const likeRoutes = Router();
+const router = express.Router();
+const commentScoreController = new CommentScoreController();
 
-const likeCommentController = new LikeCommentController();
-const removeLikeCommentController = new RemoveLikeCommentController();
+// Rota para curtir um comentário
+router.post('/comments/:commentId/like', commentScoreController.likeComment);
 
-likeRoutes.use(authMiddleware);
+// Rota para descurtir um comentário
+router.delete('/comments/:commentId/like', commentScoreController.removeLike);
 
-likeRoutes.post("/:commentId/like", likeCommentController.like);
-
-likeRoutes.delete("/:commentId/like", removeLikeCommentController.removeLike);
-
-likeRoutes.use(
-  ensureMiddleware.existingParams({
-    error: CommonMessagesEnum.NOT_FOUND,
-    model: "comment",
-    searchKey: "id",
-  })
-);
-
-export { likeRoutes };
+export default router;
