@@ -17,27 +17,27 @@ userPublicRoutes.post(
   ensureMiddleware.uniqueEmail,
   new CreateUserController().handle
 );
-// register new user
+
 userPublicRoutes.get(
   "/:id",
   ensureMiddleware.existingParams({
     error: UserMessagesEnum.USER_NOT_FOUND,
     model: "user",
-    searchKey: "id",
+    searchKey: ":id",
   }),
   new FindUserController().handle
 );
-// find user by id
+
 userPublicRoutes.get(
   "/user/:username",
   ensureMiddleware.existingParams({
     error: UserMessagesEnum.USERNAME_NOT_FOUND,
     model: "user",
-    searchKey: "username",
+    searchKey: ":username",
   }),
   new GetUserByUsernameController().handle
 );
-// find user by username
+
 userPublicRoutes.get("/", new FindAllUserController().handle); // lists all users
 
 export { userPublicRoutes };
