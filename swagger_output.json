@@ -608,6 +608,98 @@
         }
       }
     },
+    "/tags/follow-unfollow/{tag}": {
+      "post": {
+        "tags": ["Authenticated tag routes"],
+        "description": "Follows - unfollows tag",
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "path",
+            "description": "Tag name",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/tags/follow/{tag}": {
+      "post": {
+        "tags": ["Authenticated tag routes"],
+        "description": "Follows tag",
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "path",
+            "description": "Tag name",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/tags/unfollow/{tag}": {
+      "delete": {
+        "tags": ["Authenticated tag routes"],
+        "description": "Follows - unfollows tag",
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "path",
+            "description": "Tag name",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/tags/follow-status/{tag}": {
+      "get": {
+        "tags": ["Authenticated tag routes"],
+        "description": "Shows if user is following tag (true) or not (false)",
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "path",
+            "description": "Tag name",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/comments/post/{postId}": {
       "post": {
         "tags": ["Authenticated comment routes"],
