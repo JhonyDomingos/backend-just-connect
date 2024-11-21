@@ -608,6 +608,24 @@
         }
       }
     },
+    "/public/tags": {
+      "get": {
+        "tags": ["Public tag routes"],
+        "description": "Lists all tags",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListTagsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/tags/follow-unfollow/{tag}": {
       "post": {
         "tags": ["Authenticated tag routes"],
@@ -1076,6 +1094,15 @@
           "created_at": { "type": "string", "format": "date-time" },
           "updated_at": { "type": "string", "format": "date-time" },
           "username": { "type": "string" }
+        }
+      },
+      "ListTagsResponse": {
+        "type": "array",
+        "items": {
+          "properties": {
+            "tag": { "type": "string" },
+            "postCount": { "type": "integer" }
+          }
         }
       }
     }
