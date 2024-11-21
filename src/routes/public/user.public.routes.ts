@@ -33,7 +33,7 @@ userPublicRoutes.get(
   ensureMiddleware.existingParams({
     error: UserMessagesEnum.USERNAME_NOT_FOUND,
     model: "user",
-    searchKey: ":username",
+    searchKey: "username",
   }),
   new GetUserByUsernameController().handle
 );
