@@ -8,6 +8,7 @@ import { commentPrivateRoutes } from './private/comment.private.routes';
 import { tagPrivateRoutes } from './private/tag.private.routes';
 import { passwordRecoveryRoutes } from './public/passwordRecovery.routes';
 import { searchPublicRoutes } from './public/search.public.routes';
+import { tagPublicRoutes } from './public/tag.public.routes';
 
 const router = Router();
 
@@ -20,6 +21,7 @@ router.use('/public/auth', sessionPublicRoutes);
 router.use('/public/auth', passwordRecoveryRoutes);
 router.use('/public/posts', postsPublicRoutes);
 router.use('/public/search', searchPublicRoutes);
+router.use('/public/tags', tagPublicRoutes);
 
 router.use('/users', userPrivateRoutes);
 router.use('/posts', postsPrivateRoutes);

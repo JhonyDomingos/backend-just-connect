@@ -32,6 +32,7 @@ postsPublicRoutes.get(
   }),
   new FindOnePostController().findOne
 );
+
 postsPublicRoutes.get(
   "/user/:userId",
   ensureMiddleware.existingParams({
@@ -41,15 +42,17 @@ postsPublicRoutes.get(
   }),
   new FindAllPostUserController().findAll
 );
+
 postsPublicRoutes.get(
   "/profile/:username",
   ensureMiddleware.existingParams({
     error: UserMessagesEnum.USERNAME_NOT_FOUND,
     model: "user",
-    searchKey: "id",
+    searchKey: ":username",
   }),
   new FindAllPostUsernameController().findAll
 );
+
 postsPublicRoutes.get(
   "/tagged-with/:tag",
   new FindPostsByTagController().tagged

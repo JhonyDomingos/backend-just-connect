@@ -9,8 +9,14 @@ const createTagSchema = tagSchema.pick({ tag: true });
 
 const ListTagSchema = z.array(
   tagSchema
-    .pick({ id: true, tag: true })
+    .pick({ tag: true })
     .extend({ postCount: z.number() })
 );
 
-export { tagSchema, createTagSchema, ListTagSchema };
+const followTagSchema = z.object({
+  id: z.string().uuid(),
+  tag_id: z.string().uuid(),
+  user_id: z.string().uuid(),
+})
+
+export { tagSchema, createTagSchema, ListTagSchema, followTagSchema };
