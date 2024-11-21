@@ -29,10 +29,6 @@ class GetUserByUsernameService {
       },
     });
 
-    if (!user) {
-      throw new AppError("User not found", 404);
-    }
-
     const postsWithCommentCount = user.posts.map((post) => ({
       ...post,
       username: user.username,

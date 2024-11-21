@@ -19,11 +19,11 @@ class EnsureMiddleware {
   public existingParams =
     ({ error, model, searchKey }: DynamicParamsIdFinder) =>
     async (request: Request, response: Response, next: NextFunction) => {
-      const id = request.params[searchKey];
+      const paramsValue = request.params[searchKey];
 
       const client = prismaClient[model] as PrismaClientGeneric;
 
-      const resource = await client.findFirst({ where: { id } });
+      const resource = await client.findFirst({ where: { [searchKey]: paramsValue } });
 
       if (!resource) {
         throw new AppError({ error: [error] }, 404);
