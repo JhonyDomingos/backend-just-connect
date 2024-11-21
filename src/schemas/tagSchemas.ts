@@ -9,7 +9,7 @@ const createTagSchema = tagSchema.pick({ tag: true });
 
 const ListTagSchema = z.array(
   tagSchema
-    .pick({ id: true, tag: true })
+    .pick({ tag: true })
     .extend({ postCount: z.number() })
 );
 
