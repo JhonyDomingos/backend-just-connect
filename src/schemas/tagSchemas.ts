@@ -13,4 +13,10 @@ const ListTagSchema = z.array(
     .extend({ postCount: z.number() })
 );
 
-export { tagSchema, createTagSchema, ListTagSchema };
+const followTagSchema = z.object({
+  id: z.string().uuid(),
+  tag_id: z.string().uuid(),
+  user_id: z.string().uuid(),
+})
+
+export { tagSchema, createTagSchema, ListTagSchema, followTagSchema };
