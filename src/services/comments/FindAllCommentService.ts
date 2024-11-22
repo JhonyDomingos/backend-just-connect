@@ -1,21 +1,17 @@
-import prismaClient from '../../prisma';
+import prismaClient from "../../prisma";
 import { ReturnCommentData } from "../../interfaces/comments/CommentTypes"; // Certifique-se de que esse tipo exista
+import { ListCommentSchema } from "../../schemas/commentSchemas";
 
 class FindAllCommentService {
-
   /**
    * Retrieves all comments.
-   * 
+   *
    * @returns {Promise<ReturnCommentData[]>} - A list of all comments.
    */
-  async findAll(userId: string): Promise<ReturnCommentData[]> {
-    const comments = await prismaClient.comment.findMany({
-      where:{
-        user_id: userId,
-      }
+  async findAll(): Promise<ReturnCommentData[]> {
+    const comments = await prismaClient.comment.findMany();
 
-    });
-    return comments;
+    return ListCommentSchema.parse(comments);
   }
 }
 

@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import { DeleteCommentService } from '../../services/comments/DeleteCommentService';
+import { Request, Response } from "express";
+import { DeleteCommentService } from "../../services/comments/DeleteCommentService";
 
 class DeleteCommentController {
   /**
@@ -15,10 +15,9 @@ class DeleteCommentController {
    */
   async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    const { sub } = res.locals.decodedToken;
 
     const deleteCommentService = new DeleteCommentService();
-    await deleteCommentService.delete(id, sub);
+    await deleteCommentService.delete(id);
     return res.status(204).send();
   }
 }
