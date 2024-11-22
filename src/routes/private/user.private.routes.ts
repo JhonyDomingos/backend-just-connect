@@ -32,11 +32,10 @@ userPrivateRoutes.use(
 );
 
 // edit user
-userPrivateRoutes.patch(
+userPrivateRoutes.put(
   "/:id",
   ensureMiddleware.validateBody(userUpdateSchema),
-  ensureMiddleware.uniqueUsername,
-  ensureMiddleware.uniqueEmail,
+
   new EditUserController().handle
 );
 
