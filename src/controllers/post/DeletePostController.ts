@@ -19,7 +19,7 @@ class DeletePostController {
       const { sub } = res.locals.decodedToken;
 
       const postsService = new DeletePostService();
-      await postsService.delete(id, sub);
+      await postsService.delete(id);
 
       return res.status(204).send();
     } catch (error) {
