@@ -36,7 +36,7 @@ class LikeCommentService {
     return like;
   }
 
-  async dislikePost(commentId: string, userId: string): Promise<LikeCommentData> {
+  async dislikeCommen(commentId: string, userId: string): Promise<LikeCommentData> {
     const existingLike = await prismaClient.commentLike.findFirst({
       where: {
         comment_id: commentId,
