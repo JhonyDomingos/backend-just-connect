@@ -1,5 +1,6 @@
 import prismaClient from "../../prisma";
 import { ReturnCommentData } from "../../interfaces/comments/CommentTypes";
+import { AppError } from "../../Error/AppError.error";
 
 class DeleteCommentService {
   /**
@@ -11,23 +12,11 @@ class DeleteCommentService {
    *
    * @throws {Error} - Throws an error if the comment deletion fails.
    */
-  async delete(id: string, userId: string): Promise<void> {
-    const comment = await prismaClient.post.findUnique({
-      where: { id },
-    });
-
-    if (!comment) {
-      throw new Error("Comentário não encontrado.");
-    }
-
-    if (comment.user_id !== userId) {
-      throw new Error("Sem permissão para deletar esse comentário.");
-    }
+  async delete(id: string): Promise<void> {
 
     await prismaClient.comment.delete({
       where: {
-        id,
-        user_id: userId,
+        id
       },
     });
   }
