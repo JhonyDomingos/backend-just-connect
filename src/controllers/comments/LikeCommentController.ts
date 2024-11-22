@@ -26,8 +26,8 @@ class LikeCommentController {
     const { userId } = req.body;
 
     try {
-      const dislikedComment = await this.likeCommentService.dislikeComment(CommentId, userId);
-      res.status(200).json(dislikedPost);
+      const dislikedComment = await this.likeCommentService.dislikeComment(commentId, userId);
+      res.status(200).json(dislikedComment);
       
     } catch (error) {
       next(error);
@@ -36,4 +36,4 @@ class LikeCommentController {
 
 }
 
-export { LikePostController };
+export { LikeCommentController };
