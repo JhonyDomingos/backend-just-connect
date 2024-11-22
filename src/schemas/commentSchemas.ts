@@ -53,5 +53,5 @@ export {
   updateCommentSchema,
   commentOnPostSchema,
   ListCommentSchema,
-  likeCommentSchema,
+  likeCommentSchema
 };

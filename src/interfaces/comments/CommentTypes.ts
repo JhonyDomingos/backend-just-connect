@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createCommentSchema, commentSchema, updateCommentSchema, ListCommentSchema } from "../../schemas/commentSchemas";
+import { createCommentSchema, commentSchema, updateCommentSchema, ListCommentSchema, likeCommentSchema } from "../../schemas/commentSchemas";
 
 /**
  * @type CreateCommentData
@@ -25,4 +25,9 @@ type ReturnCommentData = z.infer<typeof commentSchema>;
  */
 type ListCommentData = z.infer<typeof ListCommentSchema>;
 
-export { CreateCommentData, ReturnCommentData, UpdateCommentData, ListCommentData };
+type LikeCommentData = z.infer<typeof LikeCommentSchema>
+
+type LikeCommentData = z.infer<typeof LikeCommentSchema>
+
+
+export { CreateCommentData, ReturnCommentData, UpdateCommentData, ListCommentData, LikeCommentData, LikeCommentData };
