@@ -6,6 +6,7 @@ import { UpdateCommentController } from "../../controllers/comments/UpdateCommen
 import { authMiddleware } from "../../middlewares/auth/Auth.middleware";
 import { ensureMiddleware } from "../../middlewares/ensure/ensure.middleware";
 import { CommonMessagesEnum } from "../../Error/Enums/CommonMesages.enum";
+import { permissionsMiddleware } from "../../middlewares/Permissions/Permission.middleware";
 
 const commentPrivateRoutes = Router();
 
@@ -20,13 +21,22 @@ commentPrivateRoutes.get("/", findAllCommentController.handle);
 commentPrivateRoutes.post("/post/:postId", createCommentController.create);
 
 commentPrivateRoutes.use(
+  "/:id",
   ensureMiddleware.existingParams({
     error: CommonMessagesEnum.NOT_FOUND,
     model: "comment",
     searchKey: "id",
   })
 );
-commentPrivateRoutes.put("/:id", updateCommentController.update);
-commentPrivateRoutes.delete("/:id", deleteCommentController.delete);
+commentPrivateRoutes.put(
+  "/:id",
+  permissionsMiddleware.canAdministerComment,
+  updateCommentController.update
+);
+commentPrivateRoutes.delete(
+  "/:id",
+  permissionsMiddleware.canAdministerComment,
+  deleteCommentController.delete
+);
 
 export { commentPrivateRoutes };
