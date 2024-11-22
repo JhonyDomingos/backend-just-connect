@@ -1,32 +1,32 @@
 import { Request, Response, NextFunction } from 'express';
-import { LikePostService } from '../../services/post/LikePostService';
+import { LikeCommentService } from '../../services/comments/LikeCommentService';
 
-class LikePostController {
-  private likePostService: LikePostService;
+class LikeCommentController {
+  private likeCommentService: LikeCommentService;
 
   constructor() {
-    this.likePostService = new LikePostService();
+    this.likeCommentService = new LikeCommentService();
   }
 
-  async likePost(req: Request, res: Response, next: NextFunction) {
-    const { postId } = req.params;
+  async likeComment(req: Request, res: Response, next: NextFunction) {
+    const { commentId } = req.params;
     const { userId } = req.body;
     
     try {
-      const likedPost = await this.likePostService.likePost(postId, userId);
-      res.status(200).json(likedPost);
+      const likedComment = await this.likeCommentService.likeComment(commentId, userId);
+      res.status(200).json(likedComment);
 
     } catch (error) {
       next(error);
     }
   }
 
-  async dislikePost(req: Request, res: Response, next: NextFunction) {
-    const { postId } = req.params;
+  async dislikeComment(req: Request, res: Response, next: NextFunction) {
+    const { commentId } = req.params;
     const { userId } = req.body;
 
     try {
-      const dislikedPost = await this.likePostService.dislikePost(postId, userId);
+      const dislikedComment = await this.likeCommentService.dislikeComment(CommentId, userId);
       res.status(200).json(dislikedPost);
       
     } catch (error) {
