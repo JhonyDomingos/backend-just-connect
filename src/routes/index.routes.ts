@@ -12,9 +12,7 @@ import { tagPublicRoutes } from './public/tag.public.routes';
 
 const router = Router();
 
-router.get('/', (_: Request, res: Response) => {
-  res.send('Hello World');
-});
+zz
 
 router.use('/public/users', userPublicRoutes);
 router.use('/public/auth', sessionPublicRoutes);
