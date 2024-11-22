@@ -18,7 +18,7 @@ class UpdatePostController {
     const { sub } = res.locals.decodedToken;
 
     const postsService = new UpdatePostService();
-    const post = await postsService.update(id, data, sub);
+    const post = await postsService.update(id, data);
 
     return res.status(200).json(post);
   }
