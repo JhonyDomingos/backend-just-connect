@@ -3,7 +3,8 @@
   "builds": [
     {
       "src": "./dist/server.js",
-      "use": "@now/node"
+      "use": "@now/node",
+      "config": { "includeFiles": ["prisma/schema.prisma"] }
     }
   ],
   "routes": [
@@ -12,5 +13,4 @@
       "dest": "dist/server.js"
     }
   ]
-  
 }
