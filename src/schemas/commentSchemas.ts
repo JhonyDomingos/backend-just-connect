@@ -11,6 +11,7 @@ const commentSchema = z.object({
   created_at: z.date().optional(),
   updated_at: z.date().optional(),
   admin_comment_block: z.boolean().optional(),
+  username: z.string().optional(),
 });
 
 const commentOnPostSchema = commentSchema
@@ -39,6 +40,10 @@ const ListCommentSchema = z.array(
     id: true,
     comment: true,
     score: true,
+    post_id: true,
+    user_id: true,
+    username: true,
+    created_at: true,
   })
 );
 

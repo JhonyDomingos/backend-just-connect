@@ -107,11 +107,20 @@ class SearchService {
       select: {
         id: true,
         comment: true,
+        user: {
+          select: { username: true },
+        },
+        post_id: true,
+        created_at: true,
+        updated_at: true,
+        user_id: true
       }
     })
 
     const commentWithScore = comment.map((comment) => ({
       ...comment,
+      post_id: comment.post_id,
+      username: comment.user.username,
       score: comment.comment.length,
     }));
 
