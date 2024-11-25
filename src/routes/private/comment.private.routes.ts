@@ -7,6 +7,8 @@ import { authMiddleware } from "../../middlewares/auth/Auth.middleware";
 import { ensureMiddleware } from "../../middlewares/ensure/ensure.middleware";
 import { CommonMessagesEnum } from "../../Error/Enums/CommonMesages.enum";
 import { permissionsMiddleware } from "../../middlewares/Permissions/Permission.middleware";
+import { LikeCommentController } from "../../controllers/comments/LikeCommentController";
+
 
 const commentPrivateRoutes = Router();
 
@@ -19,6 +21,7 @@ commentPrivateRoutes.use(authMiddleware);
 
 commentPrivateRoutes.get("/", findAllCommentController.handle);
 commentPrivateRoutes.post("/post/:postId", createCommentController.create);
+
 
 commentPrivateRoutes.use(
   "/:id",
@@ -38,5 +41,11 @@ commentPrivateRoutes.delete(
   permissionsMiddleware.canAdministerComment,
   deleteCommentController.delete
 );
+
+
+const likeCommentController = new LikeCommentController();
+commentPrivateRoutes.post("/:commentId/like", (req, res, next) => likeCommentController.likeComment(req, res, next));
+commentPrivateRoutes.post("/:commentId/dislike", (req, res, next) => likeCommentController.dislikeComment(req, res, next));
+
 
 export { commentPrivateRoutes };

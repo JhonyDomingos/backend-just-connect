@@ -42,10 +42,16 @@ const ListCommentSchema = z.array(
   })
 );
 
+const likeCommentSchema = z.object({
+  id: z.string().uuid(),
+  user_id: z.string().uuid(),
+});
+
 export {
   commentSchema,
   createCommentSchema,
   updateCommentSchema,
   commentOnPostSchema,
   ListCommentSchema,
+  likeCommentSchema
 };
