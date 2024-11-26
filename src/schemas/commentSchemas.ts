@@ -17,6 +17,7 @@ const commentSchema = z.object({
 const commentOnPostSchema = commentSchema
   .pick({
     id: true,
+    user_id: true,
     comment: true,
     score: true,
     created_at: true,
