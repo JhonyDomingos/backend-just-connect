@@ -18,7 +18,8 @@ class FindOnePostService {
         comment: {
           select: {
             id: true,
-            user: true,
+            user_id: true,
+            user: { select: { username: true } },
             comment: true,
             score: true,
             created_at: true,
