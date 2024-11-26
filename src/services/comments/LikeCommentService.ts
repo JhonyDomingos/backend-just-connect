@@ -94,6 +94,21 @@ class LikeCommentService {
 
     return existingLike;
   }
+
+  async checkLike(commentId: string, userId: string): Promise<boolean> {
+    const likeStatus = await prismaClient.commentLike.findFirst({
+      where: {
+        user_id: userId,
+        comment_id: commentId,
+      },
+    });
+
+    if (!likeStatus) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
 
 export { LikeCommentService };

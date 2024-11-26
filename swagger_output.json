@@ -768,6 +768,31 @@
         ]
       }
     },
+    "/posts/{postId}/like-status": {
+      "get": {
+        "tags": ["Likes routes"],
+        "description": "Checks if a post is liked by logged user (true) or not (false)",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "OK" },
+          "401": { "description": "Unauthorized" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/comments/{commentId}/like": {
       "post": {
         "tags": ["Likes routes"],
@@ -816,7 +841,33 @@
             "bearerAuth": []
           }
         ]
-      }},
+      }
+    },
+    "/comments/{commentId}/like-status": {
+      "get": {
+        "tags": ["Likes routes"],
+        "description": "Checks if a comment is liked by logged user (true) or not (false)",
+        "parameters": [
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "OK" },
+          "401": { "description": "Unauthorized" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/comments/post/{postId}": {
       "post": {
         "tags": ["Authenticated comment routes"],

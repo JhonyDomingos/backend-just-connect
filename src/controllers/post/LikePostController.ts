@@ -18,6 +18,16 @@ class LikePostController {
     const dislikedPost = await likePostService.dislikePost(postId, sub);
     return res.status(200).json(dislikedPost);
   }
+
+  async likeStatus(req: Request, res: Response): Promise<Response> {
+    const { sub } = res.locals.decodedToken;
+    const { postId } = req.params;
+
+    const likePostService = new LikePostService();
+    const status = await likePostService.checkLike(postId, sub);
+
+    return res.status(200).json(status);
+  }
 }
 
 export { LikePostController };

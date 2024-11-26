@@ -88,6 +88,21 @@ class LikePostService {
 
     return existingLike;
   }
+
+  async checkLike(postId: string, userId: string): Promise<boolean> {
+    const likeStatus = await prismaClient.postLike.findFirst({
+      where: {
+        user_id: userId,
+        post_id: postId,
+      },
+    });
+
+    if (!likeStatus) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
 
 export { LikePostService };

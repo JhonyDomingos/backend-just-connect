@@ -64,5 +64,6 @@ postsPrivateRoutes.delete(
 const likePostController = new LikePostController();
 postsPrivateRoutes.post("/:postId/like", likePostController.likePost);
 postsPrivateRoutes.post("/:postId/dislike", likePostController.dislikePost);
+postsPrivateRoutes.get("/:postId/like-status", likePostController.likeStatus);
 
 export { postsPrivateRoutes };
