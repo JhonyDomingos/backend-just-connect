@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { NotificationService } from "../../services/notifications/NotificationService";
 
 export class NotificationController {
-  async getNotifications(_: Request, res: Response): Promise<Response> {
+  async getNotifications(req: Request, res: Response): Promise<Response> {
     const { sub } = res.locals.decodedToken;
     const notificationService = new NotificationService();
     const notifications = await notificationService.getNotifications(sub);

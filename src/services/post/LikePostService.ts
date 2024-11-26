@@ -1,6 +1,8 @@
 import prismaClient from "../../prisma";
 import { LikePostData } from "../../interfaces/post/PostType";
 import { NotificationService } from "../notifications/NotificationService";
+import { SSEService } from "../notifications/SSEService";
+import { showNotificationSchema } from "../../schemas/notificationSchemas";
 
 class LikePostService {
   async likePost(postId: string, userId: string): Promise<LikePostData> {
@@ -40,13 +42,16 @@ class LikePostService {
 
     if (userId !== post.user_id) {
       const notificationService = new NotificationService();
-      await notificationService.createNotification({
-        userId: post.user_id,
+
+      const notification = await notificationService.createNotification({
+        user_id: post.user_id,
         type: "likePost",
         username: `@${user.username}`,
         message: "curtiu seu post",
-        relatedId: postId,
+        related_id: postId,
       });
+
+      SSEService.sendNotificationToUser(showNotificationSchema.parse(notification));
     }
 
     return like;
