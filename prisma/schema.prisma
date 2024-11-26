@@ -149,6 +149,19 @@ model TagFollow {
   @@map("tagFollow")
 }
 
+model Notification {
+  id          String   @id @default(uuid())
+  user_id     String
+  type        String   @db.VarChar(15)
+  username    String
+  message     String
+  is_read     Boolean  @default(false)
+  related_id  String?
+  created_at  DateTime @default(now())
+
+  @@map("notifications")
+}
+
 enum Role {
   USER
   ADMIN

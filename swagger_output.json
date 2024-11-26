@@ -718,6 +718,105 @@
         ]
       }
     },
+    "/posts/{postId}/like": {
+      "post": {
+        "tags": ["Likes routes"],
+        "description": "Likes a post",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "OK" },
+          "401": { "description": "Unauthorized" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/posts/{postId}/dislike": {
+      "post": {
+        "tags": ["Likes routes"],
+        "description": "Dislikes a post",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "OK" },
+          "401": { "description": "Unauthorized" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/comments/{commentId}/like": {
+      "post": {
+        "tags": ["Likes routes"],
+        "description": "Likes a comment",
+        "parameters": [
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "OK" },
+          "401": { "description": "Unauthorized" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/comments/{commentId}/dislike": {
+      "post": {
+        "tags": ["Likes routes"],
+        "description": "Dislikes a comment",
+        "parameters": [
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "OK" },
+          "401": { "description": "Unauthorized" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }},
     "/comments/post/{postId}": {
       "post": {
         "tags": ["Authenticated comment routes"],

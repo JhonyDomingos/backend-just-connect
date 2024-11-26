@@ -9,6 +9,7 @@ import { tagPrivateRoutes } from './private/tag.private.routes';
 import { passwordRecoveryRoutes } from './public/passwordRecovery.routes';
 import { searchPublicRoutes } from './public/search.public.routes';
 import { tagPublicRoutes } from './public/tag.public.routes';
+import { notificationRoutes } from './private/notification.private.routes';
 
 const router = Router();
 
@@ -27,5 +28,6 @@ router.use('/users', userPrivateRoutes);
 router.use('/posts', postsPrivateRoutes);
 router.use('/comments', commentPrivateRoutes);
 router.use('/tags', tagPrivateRoutes);
+router.use('/notifications', notificationRoutes)
 
 export { router };

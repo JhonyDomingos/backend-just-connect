@@ -1,9 +1,12 @@
 import prismaClient from "../../prisma";
 import { LikeCommentData } from "../../interfaces/comments/CommentTypes";
-import { likeCommentSchema } from "../../schemas/commentSchemas";
+import { NotificationService } from "../notifications/NotificationService";
 
 class LikeCommentService {
-  async likeComment(commentId: string, userId: string): Promise<LikeCommentData> {
+  async likeComment(
+    commentId: string,
+    userId: string
+  ): Promise<LikeCommentData> {
     const existingLike = await prismaClient.commentLike.findFirst({
       where: {
         comment_id: commentId,
@@ -19,10 +22,10 @@ class LikeCommentService {
       data: {
         comment_id: commentId,
         user_id: userId,
-      }
+      },
     });
 
-    await prismaClient.post.update({
+    const comment = await prismaClient.comment.update({
       where: {
         id: commentId,
       },
@@ -33,10 +36,29 @@ class LikeCommentService {
       },
     });
 
+    const user = await prismaClient.user.findUnique({
+      where: { id: userId },
+      select: { username: true },
+    });
+
+    if (userId !== comment.user_id) {
+      const notificationService = new NotificationService();
+      await notificationService.createNotification({
+        userId: comment.user_id,
+        type: "likeComment",
+        username: `@${user.username}`,
+        message: "curtiu seu comentário",
+        relatedId: commentId,
+      });
+    }
+
     return like;
   }
 
-  async dislikeComment(commentId: string, userId: string): Promise<LikeCommentData> {
+  async dislikeComment(
+    commentId: string,
+    userId: string
+  ): Promise<LikeCommentData> {
     const existingLike = await prismaClient.commentLike.findFirst({
       where: {
         comment_id: commentId,

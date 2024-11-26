@@ -1,6 +1,6 @@
 import prismaClient from "../../prisma";
 import { LikePostData } from "../../interfaces/post/PostType";
-import { likePostSchema } from "../../schemas/postSchemas";
+import { NotificationService } from "../notifications/NotificationService";
 
 class LikePostService {
   async likePost(postId: string, userId: string): Promise<LikePostData> {
@@ -19,10 +19,10 @@ class LikePostService {
       data: {
         post_id: postId,
         user_id: userId,
-      }
+      },
     });
 
-    await prismaClient.post.update({
+    const post = await prismaClient.post.update({
       where: {
         id: postId,
       },
@@ -32,6 +32,22 @@ class LikePostService {
         },
       },
     });
+
+    const user = await prismaClient.user.findUnique({
+      where: { id: userId },
+      select: { username: true },
+    });
+
+    if (userId !== post.user_id) {
+      const notificationService = new NotificationService();
+      await notificationService.createNotification({
+        userId: post.user_id,
+        type: "likePost",
+        username: `@${user.username}`,
+        message: "curtiu seu post",
+        relatedId: postId,
+      });
+    }
 
     return like;
   }
