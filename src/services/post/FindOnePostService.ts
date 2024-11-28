@@ -26,6 +26,7 @@ class FindOnePostService {
             updated_at: true,
           },
         },
+        post_like: true,
         user: true,
       },
     });
