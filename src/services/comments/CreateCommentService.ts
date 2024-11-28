@@ -5,6 +5,8 @@ import {
 } from "../../interfaces/comments/CommentTypes";
 import { commentSchema } from "../../schemas/commentSchemas";
 import { NotificationService } from "../notifications/NotificationService";
+import { SSEService } from "../notifications/SSEService";
+import { showNotificationSchema } from "../../schemas/notificationSchemas";
 
 class CommentCreateService {
   /**
@@ -41,13 +43,16 @@ class CommentCreateService {
 
     if (userId !== postOwner.user_id) {
       const notificationService = new NotificationService();
-      await notificationService.createNotification({
-        userId: postOwner.user_id,
+
+      const notification = await notificationService.createNotification({
+        user_id: postOwner.user_id,
         type: "comment",
         username: `@${user.username}`,
         message: "comentou em seu post",
-        relatedId: postId,
+        related_id: postId,
       });
+
+      SSEService.sendNotificationToUser(showNotificationSchema.parse(notification));
     }
 
     return commentSchema.parse(comment);
