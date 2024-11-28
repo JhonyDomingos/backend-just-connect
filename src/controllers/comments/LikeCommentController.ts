@@ -1,39 +1,38 @@
-import { Request, Response, NextFunction } from 'express';
-import { LikeCommentService } from '../../services/comments/LikeCommentService';
+import { Request, Response } from "express";
+import { LikeCommentService } from "../../services/comments/LikeCommentService";
 
 class LikeCommentController {
-  private likeCommentService: LikeCommentService;
-
-  constructor() {
-    this.likeCommentService = new LikeCommentService();
-  }
-
-  async likeComment(req: Request, res: Response, next: NextFunction) {
+  async likeComment(req: Request, res: Response): Promise<Response> {
     const { commentId } = req.params;
-    const { userId } = req.body;
-    
-    try {
-      const likedComment = await this.likeCommentService.likeComment(commentId, userId);
-      res.status(200).json(likedComment);
-
-    } catch (error) {
-      next(error);
-    }
+    const { sub } = res.locals.decodedToken;
+    const likeCommentService = new LikeCommentService();
+    const likedComment = await likeCommentService.likeComment(
+      commentId,
+      sub
+    );
+    return res.status(200).json(likedComment);
   }
 
-  async dislikeComment(req: Request, res: Response, next: NextFunction) {
+  async dislikeComment(req: Request, res: Response): Promise<Response> {
     const { commentId } = req.params;
-    const { userId } = req.body;
-
-    try {
-      const dislikedComment = await this.likeCommentService.dislikeComment(commentId, userId);
-      res.status(200).json(dislikedComment);
-      
-    } catch (error) {
-      next(error);
-    }
+    const { sub } = res.locals.decodedToken;
+    const likeCommentService = new LikeCommentService();
+    const dislikedComment = await likeCommentService.dislikeComment(
+      commentId,
+      sub
+    );
+    return res.status(200).json(dislikedComment);
   }
 
+  async likeStatus(req: Request, res: Response): Promise<Response> {
+    const { sub } = res.locals.decodedToken;
+    const { commentId } = req.params;
+
+    const likeCommentService = new LikeCommentService();
+    const status = await likeCommentService.checkLike(commentId, sub);
+
+    return res.status(200).json(status);
+  }
 }
 
 export { LikeCommentController };

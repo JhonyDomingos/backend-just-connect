@@ -1,39 +1,33 @@
-import { Request, Response, NextFunction } from 'express';
-import { LikePostService } from '../../services/post/LikePostService';
+import { Request, Response } from "express";
+import { LikePostService } from "../../services/post/LikePostService";
 
 class LikePostController {
-  private likePostService: LikePostService;
 
-  constructor() {
-    this.likePostService = new LikePostService();
-  }
-
-  async likePost(req: Request, res: Response, next: NextFunction) {
+  async likePost(req: Request, res: Response): Promise<Response> {
     const { postId } = req.params;
-    const { userId } = req.body;
-    
-    try {
-      const likedPost = await this.likePostService.likePost(postId, userId);
-      res.status(200).json(likedPost);
-
-    } catch (error) {
-      next(error);
-    }
+    const { sub } = res.locals.decodedToken;
+    const likePostService = new LikePostService();
+    const likedPost = await likePostService.likePost(postId, sub);
+    return res.status(200).json(likedPost);
   }
 
-  async dislikePost(req: Request, res: Response, next: NextFunction) {
+  async dislikePost(req: Request, res: Response): Promise<Response> {
     const { postId } = req.params;
-    const { userId } = req.body;
-
-    try {
-      const dislikedPost = await this.likePostService.dislikePost(postId, userId);
-      res.status(200).json(dislikedPost);
-      
-    } catch (error) {
-      next(error);
-    }
+    const { sub } = res.locals.decodedToken;
+    const likePostService = new LikePostService();
+    const dislikedPost = await likePostService.dislikePost(postId, sub);
+    return res.status(200).json(dislikedPost);
   }
 
+  async likeStatus(req: Request, res: Response): Promise<Response> {
+    const { sub } = res.locals.decodedToken;
+    const { postId } = req.params;
+
+    const likePostService = new LikePostService();
+    const status = await likePostService.checkLike(postId, sub);
+
+    return res.status(200).json(status);
+  }
 }
 
 export { LikePostController };

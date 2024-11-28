@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { commentLikeSchema } from "./likeSchemas";
 
 const commentSchema = z.object({
   id: z.string().uuid(),
@@ -11,17 +12,22 @@ const commentSchema = z.object({
   created_at: z.date().optional(),
   updated_at: z.date().optional(),
   admin_comment_block: z.boolean().optional(),
+  username: z.string().optional(),
 });
 
 const commentOnPostSchema = commentSchema
   .pick({
     id: true,
+    user_id: true,
     comment: true,
     score: true,
     created_at: true,
     updated_at: true,
   })
-  .extend({ username: z.string() });
+  .extend({
+    username: z.string(),
+    comment_like: z.array(commentLikeSchema),
+  });
 
 const createCommentSchema = commentSchema.pick({
   user_id: true,
@@ -39,6 +45,10 @@ const ListCommentSchema = z.array(
     id: true,
     comment: true,
     score: true,
+    post_id: true,
+    user_id: true,
+    username: true,
+    created_at: true,
   })
 );
 
@@ -53,5 +63,5 @@ export {
   updateCommentSchema,
   commentOnPostSchema,
   ListCommentSchema,
-  likeCommentSchema
+  likeCommentSchema,
 };

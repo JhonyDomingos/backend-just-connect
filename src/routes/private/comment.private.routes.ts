@@ -44,8 +44,9 @@ commentPrivateRoutes.delete(
 
 
 const likeCommentController = new LikeCommentController();
-commentPrivateRoutes.post("/:commentId/like", (req, res, next) => likeCommentController.likeComment(req, res, next));
-commentPrivateRoutes.post("/:commentId/dislike", (req, res, next) => likeCommentController.dislikeComment(req, res, next));
+commentPrivateRoutes.post("/:commentId/like", likeCommentController.likeComment);
+commentPrivateRoutes.post("/:commentId/dislike", likeCommentController.dislikeComment);
+commentPrivateRoutes.get("/:commentId/like-status", likeCommentController.likeStatus);
 
 
 export { commentPrivateRoutes };

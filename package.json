@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "npx tsc",
     "swagger": "ts-node-dev src/swagger.ts",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "studio": "npx prisma studio",
