@@ -24,8 +24,10 @@ class FindOnePostService {
             score: true,
             created_at: true,
             updated_at: true,
+            comment_like: true
           },
         },
+        post_like: true,
         user: true,
       },
     });

@@ -1,7 +1,8 @@
-import { z } from "zod";
+import { object, z } from "zod";
 import { userPostSchema } from "./userSchemas";
 import { tagSchema } from "./tagSchemas";
 import { commentOnPostSchema, commentSchema } from "./commentSchemas";
+import { postLikeSchema } from "./likeSchemas";
 
 /**
  * Schema for validating the structure of a post object returned from the database.
@@ -42,6 +43,7 @@ const returnPostSchema = postSchema
     tags: z.array(tagSchema).transform((tags) => tags.map((tag) => tag.tag)),
     username: z.string().optional(),
     commentCount: z.number().optional(),
+    post_like: z.array(postLikeSchema).optional(),
   });
 
 const createPostSchema = postSchema.pick({
