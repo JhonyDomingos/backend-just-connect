@@ -913,6 +913,46 @@
         ]
       }
     },
+    "/notifications": {
+      "get": {
+        "tags": ["Notification routes"],
+        "description": "Gets all of logged user's notifications",
+        "responses": {
+          "201": { "description": "OK" },
+          "401": { "description": "Unauthorized" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/notifications/{id}/mark-as-read": {
+      "patch": {
+        "tags": ["Notification routes"],
+        "description": "Mark a notification as read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "OK" },
+          "401": { "description": "Unauthorized" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/comments/{id}": {
       "put": {
         "tags": ["Authenticated comment routes"],
