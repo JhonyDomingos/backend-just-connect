@@ -1206,7 +1206,18 @@
             }
           },
           "tags": { "type": "array", "items": { "type": "string" } },
-          "username": { "type": "string" }
+          "username": { "type": "string" },
+          "post_like": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "id": { "type": "string" },
+                "user_id": { "type": "string" },
+                "created_at": { "type": "string" },
+                "post_id": { "type": "string" }
+              }
+            }
+          }
         }
       },
       "ListPostResponse": {
@@ -1243,7 +1254,18 @@
           "score": { "type": "integer" },
           "created_at": { "type": "string", "format": "date-time" },
           "updated_at": { "type": "string", "format": "date-time" },
-          "username": { "type": "string" }
+          "username": { "type": "string" },
+          "comment_like": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "id": { "type": "string" },
+                "user_id": { "type": "string" },
+                "created_at": { "type": "string" },
+                "comment_id": { "type": "string" }
+              }
+            }
+          }
         }
       },
       "ListTagsResponse": {
