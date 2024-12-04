@@ -284,7 +284,7 @@
       }
     },
     "/users/{id}": {
-      "put": {
+      "patch": {
         "tags": ["Authenticated user routes"],
         "description": "Edit user",
         "parameters": [
@@ -624,6 +624,20 @@
             }
           }
         }
+      }
+    },
+    "/tags/following": {
+      "get": {
+        "tags": ["Authenticated tag routes"],
+        "description": "Lists all posts tagged with tags followed by logged user",
+        "responses": {
+          "200": { "description": "OK" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/tags/follow-unfollow/{tag}": {
