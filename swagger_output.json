@@ -284,7 +284,7 @@
       }
     },
     "/users/{id}": {
-      "put": {
+      "patch": {
         "tags": ["Authenticated user routes"],
         "description": "Edit user",
         "parameters": [
