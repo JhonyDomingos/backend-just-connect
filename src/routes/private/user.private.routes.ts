@@ -32,7 +32,7 @@ userPrivateRoutes.use(
 );
 
 // edit user
-userPrivateRoutes.put(
+userPrivateRoutes.patch(
   "/:id",
   ensureMiddleware.validateBody(userUpdateSchema),
 
