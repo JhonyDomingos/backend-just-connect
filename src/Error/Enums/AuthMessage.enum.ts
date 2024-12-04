@@ -1,12 +1,11 @@
 export enum AuthMessagesEnum {
-    MISSING_AUTHORIZATION_TOKEN = 'Missing authorization token',
-    INVALID_AUTHORIZATION_TOKEN = 'Invalid authorization token',
-    UNAUTHORIZED = 'Unauthorized access',
-    SESSION_EXPIRED = 'Session has expired',
-    LOGIN_SUCCESS = 'Login successful',
-    LOGOUT_SUCCESS = 'Logout successful',
-    INVALID_OR_EXIPRED_TOKEN = 'Invalid or expired token',
-    TOKEN_EXPIRED = 'Token expired',
-    INSSUFFICIENT_PERMISSION = 'Insufficient permission',
-  }
-  
+  MISSING_AUTHORIZATION_TOKEN = "Token de autorização ausente",
+  INVALID_AUTHORIZATION_TOKEN = "Token de autorização inválido",
+  UNAUTHORIZED = "Acesso não autorizado",
+  SESSION_EXPIRED = "A sessão expirou",
+  LOGIN_SUCCESS = "Login realizado com sucesso",
+  LOGOUT_SUCCESS = "Logout realizado com sucesso",
+  INVALID_OR_EXIPRED_TOKEN = "Token inválido ou expirado",
+  TOKEN_EXPIRED = "Token expirado",
+  INSSUFFICIENT_PERMISSION = "Permissão insuficiente",
+}
