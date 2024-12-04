@@ -49,7 +49,7 @@ class LikeCommentService {
       const notification = await notificationService.createNotification({
         user_id: comment.user_id,
         type: "likeComment",
-        username: `@${user.username}`,
+        username: `${user.username}`,
         message: "curtiu seu comentário",
         related_id: comment.post_id,
       });
