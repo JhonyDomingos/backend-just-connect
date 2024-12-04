@@ -626,6 +626,20 @@
         }
       }
     },
+    "/tags/following": {
+      "get": {
+        "tags": ["Authenticated tag routes"],
+        "description": "Lists all posts tagged with tags followed by logged user",
+        "responses": {
+          "200": { "description": "OK" }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/tags/follow-unfollow/{tag}": {
       "post": {
         "tags": ["Authenticated tag routes"],
