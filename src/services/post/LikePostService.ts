@@ -46,7 +46,7 @@ class LikePostService {
       const notification = await notificationService.createNotification({
         user_id: post.user_id,
         type: "likePost",
-        username: `@${user.username}`,
+        username: `${user.username}`,
         message: "curtiu seu post",
         related_id: postId,
       });

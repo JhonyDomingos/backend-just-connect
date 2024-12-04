@@ -47,7 +47,7 @@ class CommentCreateService {
       const notification = await notificationService.createNotification({
         user_id: postOwner.user_id,
         type: "comment",
-        username: `@${user.username}`,
+        username: `${user.username}`,
         message: "comentou em seu post",
         related_id: postId,
       });
