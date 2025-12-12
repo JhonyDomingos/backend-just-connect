@@ -1,4 +1,4 @@
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 import { LikePostData } from "../../interfaces/post/PostType";
 import { NotificationService } from "../notifications/NotificationService";
 import { SSEService } from "../notifications/SSEService";

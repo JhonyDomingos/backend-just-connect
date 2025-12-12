@@ -1,6 +1,6 @@
 import { compare, hash } from "bcryptjs";
 import { sign, verify } from "jsonwebtoken";
-import prismaClient from "../../prisma/index";
+import {prismaClient} from "../../prisma/index";
 import { AppError } from "../../Error/AppError.error";
 import { LoginData, ResetPasswordData } from "../../interfaces/auth/AuthTypes";
 import { UserMessagesEnum } from "../../Error/Enums/UserMessage.enum";

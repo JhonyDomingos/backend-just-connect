@@ -1,4 +1,4 @@
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 import { CreateTagData, ReturnTagData } from "../../interfaces/tag/TagTypes";
 
 class TagCreateService {

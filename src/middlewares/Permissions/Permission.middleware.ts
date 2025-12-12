@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 import { AppError } from "../../Error/AppError.error";
 import { AuthMessagesEnum } from "../../Error/Enums/AuthMessage.enum";
 

@@ -1,4 +1,4 @@
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 import { UpdateCommentData } from "../../interfaces/comments/CommentTypes";
 import { updateCommentSchema } from "../../schemas/commentSchemas";
 

@@ -1,6 +1,6 @@
 import { AppError } from "../../Error/AppError.error";
 import { FollowTagData } from "../../interfaces/tag/TagTypes";
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 
 class FollowTagService {
   async execute(tag: string, userId: string): Promise<FollowTagData> {

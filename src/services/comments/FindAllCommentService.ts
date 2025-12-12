@@ -1,4 +1,4 @@
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 import { ReturnCommentData } from "../../interfaces/comments/CommentTypes"; // Certifique-se de que esse tipo exista
 import { ListCommentSchema } from "../../schemas/commentSchemas";
 

@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es2016",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
-    "module": "commonjs",                                /* Specify what module code is generated. */
-    "rootDir": "./src",                                  /* Specify the root folder within your source files. */
-    "typeRoots": ["./src/@types"],                       /* Specify multiple folders that act like './node_modules/@types'. */
-     "resolveJsonModule": true,                        /* Enable importing .json files. */
-     "sourceMap": true,                                /* Create source map files for emitted JavaScript files. */
-    "outDir": "./dist",                                   /* Specify an output folder for all emitted files. */
-    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
-   "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
-    "strict": false,                                      /* Enable all strict type-checking options. */
-    "noImplicitAny": true,                            /* Enable error reporting for expressions and declarations with an implied 'any' type. */
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+    "target": "es2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2023"],
+    "typeRoots": ["./src/@types"],
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true
   },
-  "include": ["src/**/*"],                             /* Specify an array of 'glob' patterns that match files to include. */
-  "exclude": ["node_modules", "**./*.spec.ts"]                  /* Specify an array of 'glob' patterns that match files to exclude. */
+  "include": ["src/**/*", "prisma/**/*", "generated/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.spec.ts"]
 }

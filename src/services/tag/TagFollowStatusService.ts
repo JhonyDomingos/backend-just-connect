@@ -1,5 +1,5 @@
 import { FollowTagData } from "../../interfaces/tag/TagTypes";
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 
 class TagFollowStatusService {
   async execute(tag: string, userId: string): Promise<boolean> {

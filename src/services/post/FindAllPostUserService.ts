@@ -1,4 +1,4 @@
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 import { ListPostData } from "../../interfaces/post/PostType";
 import { listPostSchema } from "../../schemas/postSchemas";
 import { AppError } from "../../Error/AppError.error";

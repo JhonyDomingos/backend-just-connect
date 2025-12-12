@@ -1,4 +1,4 @@
-import prismaClient from "../../prisma";
+import { prismaClient } from "../../prisma";
 import { compare, hash } from "bcryptjs";
 import { ChangeUserPasswordData } from "../../interfaces/user/UserTypes";
 import { AppError } from "../../Error/AppError.error";
