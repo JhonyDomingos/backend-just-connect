@@ -1,36 +1,58 @@
-# Change Type
+## 📋 Tipo de Mudança
 
-Mark with an "x" in the fields you want to select:
+- [ ] 🐛 Bug Fix (PATCH)
+- [ ] ✨ Feature (MINOR)
+- [ ] 💥 Breaking Change (MAJOR)
+- [ ] ♻️ Refactor
+- [ ] 📚 Documentation
+- [ ] 🔧 Chore
 
-- [ ] Bug Fix (non-breaking change that fixes an issue)
-- [ ] New Feature (non-breaking change that adds functionality)
-- [ ] Chore (documentation, packages, or tests updates, nothing that affects the end user directly)
-- [ ] Release (new version of the application - for production only)
+---
 
-## Description
+## 📝 Descrição
 
-...
+<!-- Descreva o que foi feito e por quê -->
 
-## Screenshots
+---
 
-...
+## 🔗 Issues Relacionadas
 
-## Tasks
+<!-- Link para issues/tasks -->
 
-- [task-id](task-link) or N/A
+- Closes #
+- Fixes #
 
-## Checklist
+**Task ID:** [TASK-XXX](link) ou N/A
 
-Mark with an "x" in the fields you want to select:
+---
 
-- [ ] My changes are 400 lines or less
-- [ ] I have performed a self-review of my own code
-- [ ] The existing tests and linter pass locally with my changes
-- [ ] I have commented my code in hard-to-understand areas (if applicable)
-- [ ] I have created tests for my fix or feature (if applicable)
+## ✅ Checklist
 
-## Dependencies
+- [ ] Código segue os padrões do projeto
+- [ ] Commits seguem [Conventional Commits](https://www.conventionalcommits.org/)
+- [ ] Sem conflitos com a branch base
+- [ ] Testes passando (se aplicável)
+- [ ] Documentação atualizada (se necessário)
+- [ ] Code review auto-avaliado
 
-This pull request has dependencies on the following others:
+---
 
-- link-to-dependency PR or N/A
+## 🧪 Como Testar
+
+<!-- Descreva como testar as mudanças -->
+
+1. 
+2. 
+3. 
+
+---
+
+## 📸 Screenshots (opcional)
+
+<!-- Adicione screenshots se aplicável -->
+
+---
+
+## 💬 Notas Adicionais (opcional)
+
+<!-- Qualquer informação extra relevante -->
