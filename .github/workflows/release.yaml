@@ -1,8 +1,4 @@
 name: Release
-env:
-  GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
-  run: npm run release
 
 on:
   push:
@@ -25,27 +21,53 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: false
+          token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
-        run: npm install
-      
-      - name: Install dependencies
-        run: npm install semantic-release @semantic-release/git @semantic-release/changelog
+        run: npm ci
 
-      - name: Verify the integrity of provenance attestations
-        run: npm audit signatures
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Create Release Branch
+        run: |
+          git config --global user.name "semantic-release-bot"
+          git config --global user.email "semantic-release-bot@github.com"
+          git checkout -b release/automated
 
       - name: Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
         run: npm run release
 
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+          commit-message: "chore(release): version bump [skip ci]"
+          branch: release/automated
+          base: main
+          title: "🚀 Automated Release"
+          body: |
+            ## 🚀 Automated Release
 
+            This PR contains version bumps and changelog updates from semantic-release.
 
+            **Changes:**
+            - Updated version in package.json
+            - Updated CHANGELOG.md
+            - Created new release tag
+
+            Please review and merge to complete the release process.
+          labels: |
+            release
+            automated
