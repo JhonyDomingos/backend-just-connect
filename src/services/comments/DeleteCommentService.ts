@@ -1,4 +1,4 @@
-import {prismaClient} from "../../prisma";
+import { prismaClient } from "../../prisma";
 import { ReturnCommentData } from "../../interfaces/comments/CommentTypes";
 import { AppError } from "../../Error/AppError.error";
 
@@ -13,10 +13,9 @@ class DeleteCommentService {
    * @throws {Error} - Throws an error if the comment deletion fails.
    */
   async delete(id: string): Promise<void> {
-
     await prismaClient.comment.delete({
       where: {
-        id
+        id,
       },
     });
   }
