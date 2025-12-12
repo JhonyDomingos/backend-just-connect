@@ -9,6 +9,8 @@
     "dev": "tsx watch --clear-screen=false src/server.ts",
     "dev:debug": "tsx watch --inspect --clear-screen=false src/server.ts",
     "studio": "npx prisma studio",
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run",
     "docker:up": "docker compose up",
     "start:prod": "npm run dev",
     "migrate:dev": "npx prisma migrate dev",
