@@ -1,5 +1,5 @@
-import {prismaClient} from "../../prisma";
 import { CreateTagData, ReturnTagData } from "../../interfaces/tag/TagTypes";
+import { prismaClient } from "../../prisma";
 
 class TagCreateService {
   async findOrCreate(data: CreateTagData): Promise<ReturnTagData> {

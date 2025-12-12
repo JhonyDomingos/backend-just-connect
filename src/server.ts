@@ -1,12 +1,11 @@
-import express, { json } from "express";
-import { router } from "./routes/index.routes";
-import swaggerUi from "swagger-ui-express";
-import swaggerOutput from "../swagger_output.json";
-import { HandleErrors } from "./middlewares/handleErrors/HandleErrors.middleware";
 import cors from "cors";
 import dotenv from "dotenv";
+import express, { json } from "express";
+import swaggerUi from "swagger-ui-express";
+import swaggerOutput from "../swagger_output.json";
 import { logger } from "./log/logger";
-import prismaClient from "./prisma";
+import { HandleErrors } from "./middlewares/handleErrors/HandleErrors.middleware";
+import { router } from "./routes/index.routes";
 dotenv.config();
 
 const app = express();
