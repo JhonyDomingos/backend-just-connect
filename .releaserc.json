@@ -1,7 +1,7 @@
 {
+  "repositoryUrl": "https://github.com/JhonyDomingos/backend-just-connect",
   "branches": [
     "main",
-    "master",
     {
       "name": "developer",
       "prerelease": "beta"
@@ -36,9 +36,9 @@
             { "type": "perf", "section": "⚡ Performance Improvements" },
             { "type": "refactor", "section": "♻️ Code Refactoring" },
             { "type": "docs", "section": "📚 Documentation" },
-            { "type": "chore", "section": "🔧 Chores", "hidden": true },
-            { "type": "style", "section": "💎 Styles", "hidden": true },
-            { "type": "test", "section": "✅ Tests", "hidden": true }
+            { "type": "chore", "hidden": true },
+            { "type": "style", "hidden": true },
+            { "type": "test", "hidden": true }
           ]
         }
       }
@@ -63,6 +63,14 @@
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ],
-    "@semantic-release/github"
+    [
+      "@semantic-release/github",
+      {
+        "assets": [],
+        "successComment": false,
+        "failComment": false,
+        "releasedLabels": false
+      }
+    ]
   ]
 }
