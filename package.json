@@ -4,25 +4,57 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
+    "build": "npx tsc",
+    "swagger": "tsx src/swagger.ts",
+    "dev": "tsx watch --clear-screen=false src/server.ts",
+    "dev:debug": "tsx watch --inspect --clear-screen=false src/server.ts",
     "studio": "npx prisma studio",
-    "docker:up": "docker compose up"
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run",
+    "docker:up": "docker compose up",
+    "start:prod": "npm run dev",
+    "migrate:dev": "npx prisma migrate dev",
+    "generate": "npx prisma generate",
+    "postinstall": "prisma generate"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
     "@types/bcryptjs": "^2.4.6",
-    "@types/cors": "^2.8.17",
-    "@types/jsonwebtoken": "^9.0.7",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.6.3"
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.25",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.0.1",
+    "@types/nodemailer": "^6.4.21",
+    "@types/pg": "^8.16.0",
+    "@types/swagger-ui-express": "^4.1.8",
+    "@typescript-eslint/eslint-plugin": "^8.49.0",
+    "@typescript-eslint/parser": "^8.49.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "nodemailer": "^7.0.11",
+    "prettier": "^3.7.4",
+    "prisma": "^7.1.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.49.0"
   },
   "dependencies": {
-    "@prisma/client": "^5.21.0",
-    "@types/express": "^4.17.21",
+    "@prisma/adapter-pg": "^7.1.0",
+    "@prisma/client": "^7.1.0",
     "bcryptjs": "^2.4.3",
+    "chalk": "^5.6.2",
     "cors": "^2.8.5",
-    "express": "^4.21.1",
-    "express-async-errors": "^3.1.1",
-    "jsonwebtoken": "^9.0.2",
-    "prisma": "^5.21.0"
+    "dotenv": "^16.6.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.16.3",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^3.25.76"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
   }
 }

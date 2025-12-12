@@ -1,5 +1,24 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../generated/prisma/client";
+import "dotenv/config";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { logger } from "../log/logger";
 
-const prismaClient = new PrismaClient();
+const connectionString = `${process.env.DATABASE_URL}`;
 
-export default prismaClient;
+const adapter = new PrismaPg({ connectionString });
+
+const prismaClient = new PrismaClient({
+  adapter,
+  log:
+    process.env.NODE_ENV === "development"
+      ? ["query", "info", "warn", "error"]
+      : ["error"],
+});
+if (process.env.NODE_ENV === "development") {
+  logger.success(`🐘 [Prisma & Database] Client initialized successfully`, {
+    hasClient: !!prismaClient,
+    hasAdapter: !!adapter,
+  });
+}
+
+export { prismaClient };

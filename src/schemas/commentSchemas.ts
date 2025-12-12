@@ -1,0 +1,67 @@
+import { z } from "zod";
+import { commentLikeSchema } from "./likeSchemas";
+
+const commentSchema = z.object({
+  id: z.string().uuid(),
+  user: z.string().optional(),
+  user_id: z.string().uuid(),
+  post: z.string().optional(),
+  post_id: z.string().uuid(),
+  comment: z.string(),
+  score: z.number(),
+  created_at: z.date().optional(),
+  updated_at: z.date().optional(),
+  admin_comment_block: z.boolean().optional(),
+  username: z.string().optional(),
+});
+
+const commentOnPostSchema = commentSchema
+  .pick({
+    id: true,
+    user_id: true,
+    comment: true,
+    score: true,
+    created_at: true,
+    updated_at: true,
+  })
+  .extend({
+    username: z.string(),
+    comment_like: z.array(commentLikeSchema),
+  });
+
+const createCommentSchema = commentSchema.pick({
+  user_id: true,
+  post_id: true,
+  comment: true,
+});
+
+const updateCommentSchema = commentSchema.pick({
+  comment: true,
+  updated_at: true,
+});
+
+const ListCommentSchema = z.array(
+  commentSchema.pick({
+    id: true,
+    comment: true,
+    score: true,
+    post_id: true,
+    user_id: true,
+    username: true,
+    created_at: true,
+  })
+);
+
+const likeCommentSchema = z.object({
+  id: z.string().uuid(),
+  user_id: z.string().uuid(),
+});
+
+export {
+  commentSchema,
+  createCommentSchema,
+  updateCommentSchema,
+  commentOnPostSchema,
+  ListCommentSchema,
+  likeCommentSchema,
+};

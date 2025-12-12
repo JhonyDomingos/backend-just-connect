@@ -1,33 +1,17 @@
-import { Request, Response } from 'express';
-import { EditUserService } from '../../services/user/EditUserService';
-import { UserRequest } from '../../interfaces/user/UserRequest';
+import { Request, Response } from "express";
+import { EditUserService } from "../../services/user/EditUserService";
+import { UpdateUserData } from "../../interfaces/user/UserTypes";
+import { userUpdateSchema } from "../../schemas/userSchemas";
 
 class EditUserController {
-  async handle(request: Request, response: Response) {
-    const { id } = request.params;  
-    const { name, username, email, password, bio_description, role, admin_user_block, linkedin, instagram, github }: UserRequest = request.body;
-    
+  async handle(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const data: UpdateUserData = userUpdateSchema.parse(request.body);
+
     const editUserService = new EditUserService();
-    
-    try {
-      const user = await editUserService.execute({ 
-        id, 
-        name, 
-        username, 
-        email, 
-        password,
-        bio_description,
-        role,
-        admin_user_block,
-        linkedin,
-        instagram,
-        github
-      });
-      
-      return response.json(user);
-    } catch (error) {
-      return response.status(400).json({ error: error.message });
-    }
+    const user = await editUserService.execute(id, data);
+
+    return response.status(200).json(user);
   }
 }
 

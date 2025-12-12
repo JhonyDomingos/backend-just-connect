@@ -1,15 +1,14 @@
 import { Request, Response } from 'express';
 import { AuthService } from '../../services/auth/AuthService';
-import { AuthRequest } from '../../interfaces/auth/authRequest';
+import { LoginData } from '../../interfaces/auth/AuthTypes';
+import { loginSchema } from '../../schemas/authSchemas';
 
 class AuthController {
-    async handle(request: Request, response: Response) {
+    async handle(request: Request, response: Response): Promise<Response> {
       const authService = new AuthService();
-      const { email, username, password, role } = request.body as AuthRequest;
-      const auth = await authService.execute({
-        email, username, password, role
-      });
-      return response.json(auth);
+      const loginData: LoginData = loginSchema.parse(request.body);
+      const auth = await authService.execute(loginData);
+      return response.status(200).json(auth);
   }
 }
 export { AuthController };

@@ -5,74 +5,173 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model User {
-  id               String  @id @default(uuid())
-  name             String?
-  username         String  @unique @db.VarChar(20)
-  email            String  @unique
-  password         String
-  bio_description  String? @db.VarChar(140)
-  role             String  @default("user")
-  admin_user_block Boolean @default(false)
-  linkedin         String?
-  instagram        String?
-  github           String?
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  posts            Post[]   //lista de postagens
-  comments         Comment[]//lista de comentários
+  id                 String          @id @default(uuid())
+  name               String?         @db.VarChar(100)
+  username           String          @unique @db.VarChar(20)
+  email              String          @unique
+  password           String          @db.VarChar(60)
+  bio_description    String?         @db.VarChar(140)
+  role               Role            @default(USER)
+  admin_user_block   Boolean         @default(false)
+  linkedin           String?         @unique //adicionada condição UNIQUE
+  instagram          String?         @unique //adicionada condição UNIQUE
+  github             String?         @unique //adicionada condição UNIQUE
+  reset_token        String?         @unique //snake_case
+  reset_token_expiry DateTime? //snake_case
+  created_at         DateTime        @default(now())
+  updated_at         DateTime?       @updatedAt //Retirada da condição NOT NULL
+  posts              Post[]
+  comments           Comment[]
+  post_reports       PostReport[]
+  post_like          PostLike[]
+  comment_reports    CommentReport[]
+  comment_like       CommentLike[]
+  tag_follow         TagFollow[]
 
   @@map("users")
 }
 
 model Post {
-  id               String   @id @default(uuid())
-  user             User     @relation(fields: [userId], references: [id])
-  userId           String   // Uma postagem tem um autor/usuário
-  title            String   @db.VarChar(50)
-  description      String   @db.Text
-  statusOpen       Boolean  @default(true)
-  postCreatedAt    DateTime @default(now())
-  postUpdatedAt    DateTime @updatedAt
-  adminPostBlock   Boolean  @default(false)
-  comment          Comment[] //lista de comentários
-  tags             Tag[]    //lista de tags
+  id               String       @id @default(uuid())
+  user             User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id          String
+  title            String       @db.VarChar(50)
+  description      String       @db.Text
+  score            Int          @default(0)
+  status_open      Boolean      @default(true) //snake_case
+  created_at       DateTime     @default(now())
+  updated_at       DateTime?    @updatedAt //Retirada da condição NOT NULL
+  admin_post_block Boolean      @default(false)
+  comment          Comment[]
+  tags             Tag[]
+  post_reports     PostReport[]
+  post_like        PostLike[]
 
   @@map("posts")
 }
 
 model Comment {
-  id               String   @id @default(uuid())
-  user             User     @relation(fields: [userId], references: [id])
-  userId           String   // Um comentário tem um autor/usuário
-  post             Post     @relation(fields: [postId], references: [id])
-  postId           String   // Um comentário pertence a uma postagem
-  comment          String   @db.Text
-  score            Int      @default(0)
-  commentCreatedAt DateTime @default(now())
-  commentUpdatedAt DateTime @updatedAt
-  adminCommentBlock Boolean @default(false)
+  id                  String          @id @default(uuid())
+  user                User            @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id             String
+  post                Post            @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  post_id             String
+  comment             String          @db.Text
+  score               Int             @default(0)
+  created_at          DateTime        @default(now())
+  updated_at          DateTime?       @updatedAt //Retirada da condição NOT NULL
+  admin_comment_block Boolean         @default(false)
+  comment_reports     CommentReport[]
+  comment_like        CommentLike[]
 
   @@map("comments")
 }
 
 model Tag {
-  id               String   @id @default(uuid())
-  tag              String   @db.VarChar(15)
-  posts            Post[]   //lista de postagens
+  id         String      @id @default(uuid())
+  tag        String      @unique @db.VarChar(15)
+  posts      Post[]
+  tag_follow TagFollow[]
 
   @@map("tags")
 }
 
-enum Role { //Regra (role) do usuário
+model PostReport {
+  id               String     @id @default(uuid())
+  user             User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id          String
+  post             Post       @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  post_id          String
+  type_report      TypeReport
+  post_report      String     @db.VarChar(140)
+  created_at       DateTime   @default(now())
+  updated_at       DateTime?  @updatedAt
+  admin_validation Boolean    @default(false)
+
+  @@map("postreport")
+}
+
+model PostLike {
+  id         String   @id @default(uuid())
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id    String
+  post       Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  post_id    String
+  created_at DateTime @default(now())
+
+  @@map("postlike")
+}
+
+model CommentReport {
+  id               String     @id @default(uuid())
+  user             User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id          String
+  comment          Comment    @relation(fields: [comment_id], references: [id], onDelete: Cascade)
+  comment_id       String
+  type_report      TypeReport
+  post_report      String     @db.VarChar(140)
+  created_at       DateTime   @default(now())
+  updated_at       DateTime?  @updatedAt
+  admin_validation Boolean    @default(false)
+
+  @@map("commentreport")
+}
+
+model CommentLike {
+  id         String   @id @default(uuid())
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id    String
+  comment    Comment  @relation(fields: [comment_id], references: [id], onDelete: Cascade)
+  comment_id String
+  created_at DateTime @default(now())
+
+  @@map("commentlike")
+}
+
+model TagFollow {
+  id         String   @id @default(uuid())
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id    String
+  tag        Tag      @relation(fields: [tag_id], references: [id], onDelete: Cascade)
+  tag_id     String
+  created_at DateTime @default(now())
+
+  @@map("tagFollow")
+}
+
+model Notification {
+  id         String   @id @default(uuid())
+  user_id    String
+  type       String   @db.VarChar(15)
+  username   String
+  message    String
+  is_read    Boolean  @default(false)
+  related_id String?
+  created_at DateTime @default(now())
+
+  @@map("notifications")
+}
+
+enum Role {
   USER
   ADMIN
+}
+
+enum TypeReport {
+  Spam
+  FraudeGolpe
+  ExposicaoDeViolencia
+  Assedio
+  NudezPornografia
+  DiscursoDeOdio
+  VendaDeProdutosIlicitos
 }

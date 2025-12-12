@@ -1,110 +1,243 @@
-# Projeto JustConnect - Guia de Instalação
+# 🚀 JustConnect - Backend API
 
-## Avisos
+API RESTful para a plataforma JustConnect, uma rede social focada em conectar profissionais e compartilhar conhecimento.
 
-> [!IMPORTANT]  
-> Por favor, não faça commit direto na branch main.  
-> Abaixo está um padrão de commits semânticos para melhor identificação das alterações realizadas.
+[![Node.js](https://img.shields.io/badge/Node.js-20.x-green.svg)](https://nodejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
+[![Express](https://img.shields.io/badge/Express-5.x-lightgrey.svg)](https://expressjs.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-7.x-2D3748.svg)](https://www.prisma.io/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-## Pré-requisitos
+---
 
-Antes de começar, certifique-se de ter o Node.js e o npm (Node Package Manager) instalados em seu sistema operacional. Você pode instalá-los a partir do [Site Oficial](https://nodejs.org/).
+## 📋 Índice
 
-## Passos de Instalação
+- [Sobre](#-sobre)
+- [Documentação](#-documentação)
+- [Quick Start](#-quick-start)
+- [Tecnologias](#-tecnologias)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [Contribuindo](#-contribuindo)
+- [Licença](#-licença)
 
-1. **Fork do repositório**
+---
 
-2. **Clone o repositório:**
+## 📖 Sobre
 
-   ```bash
-    git clone https://github.com/seu-usuario/justconnect.git
-    ```
+JustConnect é uma plataforma social profissional que conecta pessoas através de conhecimento compartilhado. Esta é a API backend construída com Node.js, TypeScript, Express e Prisma.
 
-3. **Instale as dependências:**
+### Principais Recursos
 
-    ```bash
-    npm install
-    ```
-4. **Rodar o docker:**
+- ✨ Autenticação JWT
+- 👥 Gestão de usuários e perfis
+- 📝 Sistema de posts e comentários
+- 🔒 Controle de permissões granular
+- 📊 Validação robusta com Zod
+- 🗄️ PostgreSQL com Prisma ORM
+- 📚 Documentação Swagger interativa
 
-    ```bash
-    npm run docker:up
-    ```
+---
 
-5. **Inicie o servidor de desenvolvimento:**
+## 📚 Documentação
 
-    ```bash
-    npm run dev
-    ```
+A documentação completa está organizada em módulos:
 
-Este comando iniciará o servidor de desenvolvimento local. Você pode acessar sua aplicação em <http://localhost:3000/> (ou outra porta especificada na sua configuração).
+### Guias de Início
 
-## Padrão de Commits a Serem Seguidos
+- 📦 **[Instalação](docs/installation.md)** - Como configurar o projeto
+- 🛠️ **[Scripts Disponíveis](docs/scripts.md)** - Todos os comandos npm
+- 🤝 **[Guia de Contribuição](docs/contributing.md)** - Como contribuir
 
-Evite fazer commits de grandes quantidades de código de uma só vez; às vezes, menos é mais. Também siga esses padrões de descrição de commits para facilitar a leitura e compreensão das alterações feitas:
+### Documentação Técnica
 
-## Padrão de Commits a Serem Seguidos
+- 🔒 **[Middlewares](docs/middleware-documentation.md)** - Documentação de middlewares
+- 📁 **[Estrutura do Projeto](docs/project-structure.md)** - Organização de arquivos
+- 🔄 **[Versionamento](docs/versioning-and-release.md)** - Sistema de releases
 
-Evite fazer commits de grandes quantidades de código de uma só vez; às vezes, menos é mais. Também siga esses padrões de descrição de commits para facilitar a leitura e compreensão das alterações feitas:
+### API
 
-- **Feat:** Addition of a new feature.
-  - **Exemplo:**
+- 🌐 **Swagger**: `http://localhost:3000/api-docs`
 
-    ```bash
-    git commit -m "Feat: Create AuthUser"
-    ```
+---
 
-- **Fix:** Correction of logic in a feature, tests, etc.
-  - **Exemplo:**
-
-    ```bash
-    git commit -m "Fix: Correct user login error"
-    ```
-
-- **Refactor:** Refactoring and/or optimization of code, correcting indentation, etc.
-  - **Exemplo:**
-
-    ```bash
-    git commit -m "Refactor: Clean up authentication logic"
-    ```
-
-- **Style:** Addition and modification of styling (ONLY STYLING).
-  - **Exemplo:**
-
-    ```bash
-    git commit -m "Style: Update API response format"
-    ```
-
-- **Chore:** Chore commits indicate updates to build tasks, admin configurations, packages, etc. (does not include code changes).
-  - **Exemplo:**
-
-    ```bash
-    git commit -m "Chore: Update dependencies in package.json"
-    ```
-
-- **Docs:** Addition of documentation to the project.
-  - **Exemplo:**
-
-    ```bash
-    git commit -m "Docs: Add API documentation"
-    ```
-
-## Pull Requests
-
-Ao criar um pull request, verifique se não há conflitos. **Pull requests com conflitos não serão aceitos.**
-
-Se houver conflitos, pesquise sobre como resolvê-los em projetos open-source.
-
-## Branches
-
-- **main:** -> Main branch.
-- **developer:** -> Development branch.
-- **build:** -> Branch for architecture and other dependencies.
-- **feature:** -> Branch for new features.
-- **docs:** -> Branch for internal documentation.
-
-**Para acessar e navegar entre as branches:**
+## ⚡ Quick Start
 
 ```bash
-git checkout nome_da_branch   # para trocar de branch.
-git checkout -b nome_da_branch # para criar uma nova branch.
+# 1. Clone o repositório
+git clone https://github.com/seu-usuario/backend-just-connect.git
+cd backend-just-connect
+
+# 2. Instale as dependências
+npm install
+
+# 3. Configure as variáveis de ambiente
+cp .env.example .env
+
+# 4. Inicie o banco de dados
+npm run docker:up
+
+# 5. Execute as migrações
+npm run migrate:dev
+
+# 6. Inicie o servidor
+npm run dev
+```
+
+O servidor estará disponível em:
+
+- 🌐 API: http://localhost:3000
+- 📚 Docs: http://localhost:3000/api-docs
+
+📖 **[Guia completo de instalação](docs/installation.md)**
+
+---
+
+## 🛠️ Tecnologias
+
+<table>
+  <tr>
+    <td align="center" width="96">
+      <img src="https://skillicons.dev/icons?i=nodejs" width="48" height="48" alt="Node.js" />
+      <br>Node.js
+    </td>
+    <td align="center" width="96">
+      <img src="https://skillicons.dev/icons?i=typescript" width="48" height="48" alt="TypeScript" />
+      <br>TypeScript
+    </td>
+    <td align="center" width="96">
+      <img src="https://skillicons.dev/icons?i=express" width="48" height="48" alt="Express" />
+      <br>Express
+    </td>
+    <td align="center" width="96">
+      <img src="https://skillicons.dev/icons?i=prisma" width="48" height="48" alt="Prisma" />
+      <br>Prisma
+    </td>
+    <td align="center" width="96">
+      <img src="https://skillicons.dev/icons?i=postgres" width="48" height="48" alt="PostgreSQL" />
+      <br>PostgreSQL
+    </td>
+    <td align="center" width="96">
+      <img src="https://skillicons.dev/icons?i=docker" width="48" height="48" alt="Docker" />
+      <br>Docker
+    </td>
+  </tr>
+</table>
+
+### Stack Completo
+
+- **Runtime**: Node.js 20+
+- **Linguagem**: TypeScript 5+
+- **Framework**: Express 5
+- **ORM**: Prisma 7
+- **Banco de Dados**: PostgreSQL
+- **Validação**: Zod
+- **Autenticação**: JWT
+- **Documentação**: Swagger/OpenAPI
+- **Versionamento**: Semantic Release
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+backend-just-connect/
+├── docs/                      # 📚 Documentação
+├── src/
+│   ├── controllers/          # 🎮 Controladores
+│   ├── services/             # 💼 Lógica de negócio
+│   ├── middlewares/          # 🔒 Middlewares
+│   ├── schemas/              # ✅ Validações Zod
+│   ├── routes/               # 🛣️ Rotas
+│   └── server.ts             # 🚀 Entry point
+├── prisma/
+│   ├── schema.prisma         # 📊 Schema
+│   └── migrations/           # 🔄 Migrações
+└── package.json
+```
+
+📖 **[Estrutura completa do projeto](docs/project-structure.md)**
+
+---
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Siga estes passos:
+
+1. 🍴 Fork o projeto
+2. 🌿 Crie sua branch (`git checkout -b feature/AmazingFeature`)
+3. ✅ Commit com [Conventional Commits](https://www.conventionalcommits.org/)
+4. 📤 Push para a branch (`git push origin feature/AmazingFeature`)
+5. 🔀 Abra um Pull Request
+
+### Padrão de Commits
+
+```bash
+feat(users): adicionar endpoint de perfil
+fix(auth): corrigir validação de token
+docs: atualizar README
+```
+
+📖 **[Guia completo de contribuição](docs/contributing.md)**
+
+---
+
+## 📜 Scripts Principais
+
+```bash
+npm run dev          # Desenvolvimento
+npm run build        # Build produção
+npm run lint:fix     # Corrigir lint
+npm run format       # Formatar código
+npm run release      # Gerar release
+```
+
+📖 **[Todos os scripts disponíveis](docs/scripts.md)**
+
+---
+
+## ⚠️ Avisos Importantes
+
+> [!IMPORTANT]  
+> **Não faça commits diretos na branch `main`!**  
+> Todas as alterações devem ser feitas através de Pull Requests.
+
+> [!NOTE]  
+> Este projeto utiliza **Conventional Commits** e **Semantic Versioning**.  
+> O versionamento é automático baseado nos commits.
+
+---
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 🙏 Agradecimentos
+
+- Contribuidores do projeto
+- Time de desenvolvimento JustConnect
+
+---
+
+## 👥 Contribuidores
+
+### 💼 Core Team
+
+- **Ana Clara** - [@banaclara](https://github.com/banaclara) - Backend Developer | Designer
+- **Hallan Pedrosa** - [@hallanpf](https://github.com/hallanpf) - Backend Developer
+- **Guilherme Medeiros** - [@guimferreira](https://github.com/guimferreira) - Backend Developer
+- **Gabriel Marques** - [@gazinmarks](https://github.com/gazinmarks) - Backend Developer
+- **Jhonatan Domingos** - [@JhonyDomingos](https://github.com/JhonyDomingos) - Backend Developer
+
+### 🤝 Contribuidores
+
+- **Clara Ferraz** - [@claraferraz](https://github.com/claraferraz) - Front | Scrum Master | BOSS
+
+---
+
+<div align="center">
+
+**Feito com ❤️ pelo time JustConnect**
+
+[⬆ Voltar ao topo](#-justconnect---backend-api)
+
+</div>
