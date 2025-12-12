@@ -34,6 +34,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        run: npm install semantic-release @semantic-release/git @semantic-release/changelog
 
       - name: Verify the integrity of provenance attestations
         run: npm audit signatures
@@ -43,4 +44,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run release
+
 
