@@ -32,9 +32,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run build
-
       - name: Create Release Branch
         run: |
           git config --global user.name "semantic-release-bot"
