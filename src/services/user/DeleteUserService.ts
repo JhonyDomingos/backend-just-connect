@@ -1,4 +1,4 @@
-import prismaClient from "../../prisma";
+import { prismaClient } from "../../prisma";
 
 class DeleteUserService {
   async execute(id: string): Promise<void> {

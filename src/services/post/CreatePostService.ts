@@ -1,4 +1,4 @@
-import prismaClient from '../../prisma';
+import {prismaClient} from '../../prisma';
 import { CreatePostData, ReturnPostData } from "../../interfaces/post/PostType";
 import { TagCreateService } from '../tag/CreateTagService';
 import { returnPostSchema } from '../../schemas/postSchemas';

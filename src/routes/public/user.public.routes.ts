@@ -1,4 +1,3 @@
-import { Router } from "express";
 import { FindAllUserController } from "../../controllers/user/FindAllUserController";
 import { FindUserController } from "../../controllers/user/FindUserController";
 import { CreateUserController } from "../../controllers/user/CreateUserController";
@@ -6,7 +5,7 @@ import { GetUserByUsernameController } from "../../controllers/user/GetUserByUse
 import { ensureMiddleware } from "../../middlewares/ensure/ensure.middleware";
 import { UserMessagesEnum } from "../../Error/Enums/UserMessage.enum";
 import { userRegisterSchema } from "../../schemas/userSchemas";
-
+import { Router } from "express";
 
 const userPublicRoutes: Router = Router();
 
@@ -38,6 +37,6 @@ userPublicRoutes.get(
   new GetUserByUsernameController().handle
 );
 
-userPublicRoutes.get("/", new FindAllUserController().handle); // lists all users
+userPublicRoutes.get("/", new FindAllUserController().handle);
 
 export { userPublicRoutes };

@@ -1,4 +1,4 @@
-import prismaClient from "../../prisma";
+import { prismaClient } from "../../prisma";
 import { UpdateUserData } from "../../interfaces/user/UserTypes";
 import { userUpdateSchema } from "../../schemas/userSchemas";
 

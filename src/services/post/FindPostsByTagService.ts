@@ -1,5 +1,5 @@
 import { ListPostData } from "../../interfaces/post/PostType";
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 import { listPostSchema } from "../../schemas/postSchemas";
 
 class FindPostsByTagService {

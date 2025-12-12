@@ -1,5 +1,5 @@
 import { AppError } from "../../Error/AppError.error";
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 
 class UnfollowTagService {
   async execute(tag: string, userId: string): Promise<void> {

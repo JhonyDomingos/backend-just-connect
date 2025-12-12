@@ -1,12 +1,12 @@
 import express, { json } from "express";
-import "express-async-errors";
 import { router } from "./routes/index.routes";
 import swaggerUi from "swagger-ui-express";
 import swaggerOutput from "../swagger_output.json";
 import { HandleErrors } from "./middlewares/handleErrors/HandleErrors.middleware";
 import cors from "cors";
 import dotenv from "dotenv";
-
+import { logger } from "./log/logger";
+import prismaClient from "./prisma";
 dotenv.config();
 
 const app = express();
@@ -20,7 +20,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 app.use(HandleErrors.execute);
 
 app.listen(port, () => {
-  console.log(
-    `Server running at ${port} port documetation at http://localhost:3000/api-docs`
-  );
+  logger.success(`🚀 Server running on port ${port}`);
+  logger.info(`📚 API Documentation: http://localhost:${port}/api-docs`);
+  logger.info(`⚡ Environment: ${process.env.NODE_ENV || "development"}`);
 });
