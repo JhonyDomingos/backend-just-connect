@@ -1,6 +1,7 @@
 name: Release
 env:
   GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
   run: npm run release
 
 on:
@@ -17,7 +18,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,7 +29,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install dependencies
         run: npm ci
