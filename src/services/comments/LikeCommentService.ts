@@ -1,4 +1,4 @@
-import {prismaClient} from "../../prisma";
+import { prismaClient } from "../../prisma";
 import { LikeCommentData } from "../../interfaces/comments/CommentTypes";
 import { NotificationService } from "../notifications/NotificationService";
 import { SSEService } from "../notifications/SSEService";
@@ -45,7 +45,7 @@ class LikeCommentService {
 
     if (userId !== comment.user_id) {
       const notificationService = new NotificationService();
-      
+
       const notification = await notificationService.createNotification({
         user_id: comment.user_id,
         type: "likeComment",
@@ -54,7 +54,9 @@ class LikeCommentService {
         related_id: comment.post_id,
       });
 
-      SSEService.sendNotificationToUser(showNotificationSchema.parse(notification));
+      SSEService.sendNotificationToUser(
+        showNotificationSchema.parse(notification)
+      );
     }
 
     return like;
