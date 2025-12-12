@@ -14,8 +14,7 @@
     "docker:up": "docker compose up",
     "start:prod": "npm run dev",
     "migrate:dev": "npx prisma migrate dev",
-    "generate": "npx prisma generate",
-    "postinstall": "prisma generate"
+    "generate": "npx prisma generate"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
