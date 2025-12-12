@@ -1,4 +1,4 @@
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 import { ReturnCommentData } from "../../interfaces/comments/CommentTypes";
 import { AppError } from "../../Error/AppError.error";
 

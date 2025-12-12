@@ -1,4 +1,4 @@
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 import { ListTagData } from "../../interfaces/tag/TagTypes";
 import { ListTagSchema } from "../../schemas/tagSchemas";
 

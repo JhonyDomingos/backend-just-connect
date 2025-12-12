@@ -1,4 +1,4 @@
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 import { ReturnPostData } from "../../interfaces/post/PostType";
 import { returnPostSchema } from "../../schemas/postSchemas";
 

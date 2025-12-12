@@ -1,6 +1,6 @@
 import { AppError } from "../../Error/AppError.error";
 import { ReturnUserData } from "../../interfaces/user/UserTypes";
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 import { userReturnSchema } from "../../schemas/userSchemas";
 
 class FindUserService {

@@ -1,4 +1,4 @@
-import type { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../generated/prisma/client";
 
 type FilterNotStartingWith<T, K extends string> = T extends
   | `${K}${infer _X}`

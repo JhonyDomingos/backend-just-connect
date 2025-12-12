@@ -3,10 +3,11 @@ import type {
   DynamicParamsIdFinder,
   PrismaClientGeneric,
 } from "../../interfaces/utils.interface";
-import prismaClient from "../../prisma";
+
 import { AppError } from "../../Error/AppError.error";
 import type { AnyZodObject, ZodEffects } from "zod";
 import { UserMessagesEnum } from "../../Error/Enums/UserMessage.enum";
+import { prismaClient } from "../../prisma";
 
 class EnsureMiddleware {
   public validateBody =
@@ -23,7 +24,9 @@ class EnsureMiddleware {
 
       const client = prismaClient[model] as PrismaClientGeneric;
 
-      const resource = await client.findFirst({ where: { [searchKey]: paramsValue } });
+      const resource = await client.findFirst({
+        where: { [searchKey]: paramsValue },
+      });
 
       if (!resource) {
         throw new AppError({ error: [error] }, 404);

@@ -1,5 +1,5 @@
 import { ReturnProfileUserData } from "../../interfaces/user/UserTypes";
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 import { userProfileReturnSchema } from "../../schemas/userSchemas";
 
 class GetUserProfileService {

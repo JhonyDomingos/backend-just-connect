@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { postOnUserSchema } from "./postSchemas";
+import { userPostSchema } from "./userPostSchema";
 
 const userSchema = z.object({
   id: z.string().uuid().optional(),
@@ -54,17 +55,17 @@ const userRegisteredSchema = userSchema.pick({
   role: true,
 });
 
-const userUpdateSchema = userSchema.pick({
-  name: true,
-  username: true,
-  email: true,
-  bio_description: true,
-  linkedin: true,
-  instagram: true,
-  github: true,
-}).partial();
-
-
+const userUpdateSchema = userSchema
+  .pick({
+    name: true,
+    username: true,
+    email: true,
+    bio_description: true,
+    linkedin: true,
+    instagram: true,
+    github: true,
+  })
+  .partial();
 
 const userProfileReturnSchema = userSchema.omit({
   password: true,
@@ -84,11 +85,6 @@ const ListUserSchema = z.array(
     .pick({ id: true, name: true, username: true })
     .extend({ postCount: z.number() })
 );
-
-const userPostSchema = z.object({
-  id: z.string().uuid(),
-  username: z.string(),
-});
 
 const userChangePasswordSchema = userSchema
   .pick({ password: true })
@@ -114,6 +110,5 @@ export {
   userProfileReturnSchema,
   userReturnSchema,
   ListUserSchema,
-  userPostSchema,
   userChangePasswordSchema,
 };

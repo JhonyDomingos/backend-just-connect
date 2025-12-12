@@ -1,5 +1,5 @@
 import { CreateNotificationData } from "../../interfaces/notification/NotificationTypes";
-import prismaClient from "../../prisma";
+import {prismaClient} from "../../prisma";
 import { listNotificationsSchema } from "../../schemas/notificationSchemas";
 
 class NotificationService {

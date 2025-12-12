@@ -1,4 +1,3 @@
-import { Router } from "express";
 import { FindAllPostController } from "../../controllers/post/FindAllPostController";
 import { FindOnePostController } from "../../controllers/post/FindOnePostController";
 import { FindAllPostUserController } from "../../controllers/post/FindAllPostUserController";
@@ -7,6 +6,7 @@ import { FindPostsByTagController } from "../../controllers/post/FindPostsByTagC
 import { ensureMiddleware } from "../../middlewares/ensure/ensure.middleware";
 import { CommonMessagesEnum } from "../../Error/Enums/CommonMesages.enum";
 import { UserMessagesEnum } from "../../Error/Enums/UserMessage.enum";
+import { Router } from "express";
 
 /**
  * @module postsPublicRoutes
