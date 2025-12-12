@@ -226,7 +226,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 - **Hallan Pedrosa** - [@hallanpf](https://github.com/hallanpf) - Backend Developer
 - **Guilherme Medeiros** - [@guimferreira](https://github.com/guimferreira) - Backend Developer
 - **Gabriel Marques** - [@gazinmarks](https://github.com/gazinmarks) - Backend Developer
-- **Jhonatan Domingos** - [@JhonyDomingos](https://github.com/JhonyDomingos) Backend Developer
+- **Jhonatan Domingos** - [@JhonyDomingos](https://github.com/JhonyDomingos) - Backend Developer
 
 ### 🤝 Contribuidores
 
