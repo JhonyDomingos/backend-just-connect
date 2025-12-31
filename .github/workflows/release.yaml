@@ -36,6 +36,8 @@ jobs:
         run: |
           git config --global user.name "semantic-release-bot"
           git config --global user.email "semantic-release-bot@github.com"
+          git branch -D release/automated 2>/dev/null || true
+          git push origin --delete release/automated 2>/dev/null || true
           git checkout -b release/automated
 
       - name: Release
