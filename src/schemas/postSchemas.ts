@@ -1,8 +1,8 @@
-import { object, z } from "zod";
-import { userPostSchema } from "./userSchemas";
-import { tagSchema } from "./tagSchemas";
-import { commentOnPostSchema, commentSchema } from "./commentSchemas";
+import { z } from "zod";
+import { commentOnPostSchema } from "./commentSchemas";
 import { postLikeSchema } from "./likeSchemas";
+import { tagSchema } from "./tagSchemas";
+import { userPostSchema } from "./userPostSchema";
 
 /**
  * Schema for validating the structure of a post object returned from the database.
@@ -67,11 +67,6 @@ const likePostSchema = z.object({
 });
 
 export {
-  postSchema,
-  createPostSchema,
-  updatePostSchema,
-  postOnUserSchema,
-  listPostSchema,
-  returnPostSchema,
-  likePostSchema,
+  createPostSchema, likePostSchema, listPostSchema, postOnUserSchema, postSchema, returnPostSchema, updatePostSchema
 };
+

@@ -1,11 +1,13 @@
 import { AppError } from "../../Error/AppError.error";
 import { FollowTagData } from "../../interfaces/tag/TagTypes";
-import {prismaClient} from "../../prisma";
+import { prismaClient } from "../../prisma";
 
 class FollowTagService {
   async execute(tag: string, userId: string): Promise<FollowTagData> {
     const findTag = await prismaClient.tag.findUnique({ where: { tag } });
-
+    if (!findTag) {
+      throw new AppError("Tag does not exist");
+    }
     const existingFollow = await prismaClient.tagFollow.findFirst({
       where: {
         user_id: userId,

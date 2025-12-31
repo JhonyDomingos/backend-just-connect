@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from "express";
-import {prismaClient} from "../../prisma";
+import { NextFunction, Request, Response } from "express";
 import { AppError } from "../../Error/AppError.error";
 import { AuthMessagesEnum } from "../../Error/Enums/AuthMessage.enum";
+import { prismaClient } from "../../prisma";
 
 export class PermissionsMiddleware {
   async canEditPost(req: Request, res: Response, next: NextFunction) {
@@ -13,7 +13,7 @@ export class PermissionsMiddleware {
       select: { user_id: true },
     });
 
-    const isPostAuthor = post.user_id === userId;
+    const isPostAuthor = post?.user_id === userId;
 
     if (!isPostAuthor) {
       throw new AppError(
@@ -33,7 +33,7 @@ export class PermissionsMiddleware {
       select: { user_id: true },
     });
 
-    const isCommentAutor = comment.user_id === userId;
+    const isCommentAutor = comment?.user_id === userId;
 
     if (!isCommentAutor) {
       throw new AppError(
@@ -55,7 +55,7 @@ export class PermissionsMiddleware {
       select: { user_id: true },
     });
 
-    const isCommentAutor = post.user_id === userId;
+    const isCommentAutor = post?.user_id === userId;
     const isAdmin = userRole.toUpperCase() === "ADMIN";
 
     if (!isCommentAutor && !isAdmin) {
@@ -77,7 +77,7 @@ export class PermissionsMiddleware {
       select: { user_id: true },
     });
 
-    const isCommentAuthor = comment.user_id === userId;
+    const isCommentAuthor = comment?.user_id === userId;
     const isAdmin = userRole.toUpperCase() === "ADMIN";
 
     if (!isCommentAuthor && !isAdmin) {
