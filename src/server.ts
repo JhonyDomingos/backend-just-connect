@@ -18,8 +18,14 @@ app.use(router);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 app.use(HandleErrors.execute);
 
-app.listen(port, () => {
-  logger.success(`🚀 Server running on port ${port}`);
-  logger.info(`📚 API Documentation: http://localhost:${port}/api-docs`);
-  logger.info(`⚡ Environment: ${process.env.NODE_ENV || "development"}`);
-});
+// Para desenvolvimento local
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => {
+    logger.success(`🚀 Server running on port ${port}`);
+    logger.info(`📚 API Documentation: http://localhost:${port}/api-docs`);
+    logger.info(`⚡ Environment: ${process.env.NODE_ENV || "development"}`);
+  });
+}
+
+// Exporta para Vercel (Serverless)
+export default app;
