@@ -1,12 +1,12 @@
-import {prismaClient} from "../../prisma";
 import {
   CreateCommentData,
   ReturnCommentData,
 } from "../../interfaces/comments/CommentTypes";
+import { prismaClient } from "../../prisma";
 import { commentSchema } from "../../schemas/commentSchemas";
+import { showNotificationSchema } from "../../schemas/notificationSchemas";
 import { NotificationService } from "../notifications/NotificationService";
 import { SSEService } from "../notifications/SSEService";
-import { showNotificationSchema } from "../../schemas/notificationSchemas";
 
 class CommentCreateService {
   /**
@@ -40,7 +40,12 @@ class CommentCreateService {
       where: { id: postId },
       select: { user_id: true },
     });
-
+    if (!postOwner) {
+      throw new Error("Post not found");
+    }
+    if (!user) {
+      throw new Error("User not found");
+    }
     if (userId !== postOwner.user_id) {
       const notificationService = new NotificationService();
 
@@ -52,7 +57,9 @@ class CommentCreateService {
         related_id: postId,
       });
 
-      SSEService.sendNotificationToUser(showNotificationSchema.parse(notification));
+      SSEService.sendNotificationToUser(
+        showNotificationSchema.parse(notification)
+      );
     }
 
     return commentSchema.parse(comment);

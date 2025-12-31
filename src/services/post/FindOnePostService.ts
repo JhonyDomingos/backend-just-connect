@@ -1,5 +1,5 @@
-import {prismaClient} from "../../prisma";
 import { ReturnPostData } from "../../interfaces/post/PostType";
+import { prismaClient } from "../../prisma";
 import { returnPostSchema } from "../../schemas/postSchemas";
 
 class FindOnePostService {
@@ -24,13 +24,17 @@ class FindOnePostService {
             score: true,
             created_at: true,
             updated_at: true,
-            comment_like: true
+            comment_like: true,
           },
         },
         post_like: true,
         user: true,
       },
     });
+
+    if (!post) {
+      throw new Error("Post not found");
+    }
 
     const formatComments = post.comment.map((comment) => ({
       ...comment,

@@ -1,7 +1,7 @@
+import { Prisma } from "../../../generated/prisma/client";
 import { ReturnUsersData } from "../../interfaces/user/UserTypes";
-import {prismaClient} from "../../prisma";
+import { prismaClient } from "../../prisma";
 import { ListUserSchema } from "../../schemas/userSchemas";
-import { Prisma } from "@prisma/client";
 
 class FindAllUserService {
   async execute(

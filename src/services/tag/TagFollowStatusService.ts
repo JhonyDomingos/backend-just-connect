@@ -1,5 +1,4 @@
-import { FollowTagData } from "../../interfaces/tag/TagTypes";
-import {prismaClient} from "../../prisma";
+import { prismaClient } from "../../prisma";
 
 class TagFollowStatusService {
   async execute(tag: string, userId: string): Promise<boolean> {
@@ -8,7 +7,7 @@ class TagFollowStatusService {
     const followStatus = await prismaClient.tagFollow.findFirst({
       where: {
         user_id: userId,
-        tag_id: findTag.id,
+        tag_id: findTag?.id,
       },
     });
 
