@@ -18,6 +18,11 @@ app.use(router);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 app.use(HandleErrors.execute);
 
+app.get("/health", (_, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
+
 // Para desenvolvimento local
 if (process.env.NODE_ENV !== "production") {
   app.listen(port, () => {
@@ -27,5 +32,4 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
-// Exporta para Vercel (Serverless)
 export default app;
