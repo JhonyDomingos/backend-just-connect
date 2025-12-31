@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "npx tsc",
+    "build": "npx tsc && npm run swagger",
     "swagger": "tsx src/swagger.ts",
     "dev": "tsx watch --clear-screen=false src/server.ts",
     "dev:debug": "tsx watch --inspect --clear-screen=false src/server.ts",
@@ -12,9 +12,11 @@
     "release": "semantic-release",
     "release:dry": "semantic-release --dry-run",
     "docker:up": "docker compose up",
-    "start:prod": "npm run dev",
+    "start:prod": "node dist/server.js",
     "migrate:dev": "npx prisma migrate dev",
-    "generate": "npx prisma generate"
+    "generate": "npx prisma generate",
+    "migrate:deploy": "npx prisma migrate deploy",
+    "postinstall": "npm run generate"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

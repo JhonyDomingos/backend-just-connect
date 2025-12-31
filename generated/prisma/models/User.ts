@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums.js"
-import type * as Prisma from "../internal/prismaNamespace.js"
+import type * as $Enums from "../enums"
+import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model User
@@ -31,15 +31,15 @@ export type UserMinAggregateOutputType = {
   email: string | null
   password: string | null
   bio_description: string | null
-  role: $Enums.Role | null
   admin_user_block: boolean | null
   linkedin: string | null
   instagram: string | null
   github: string | null
-  reset_token: string | null
-  reset_token_expiry: Date | null
+  role: $Enums.Role | null
   created_at: Date | null
   updated_at: Date | null
+  reset_token: string | null
+  reset_token_expiry: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -49,15 +49,15 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   password: string | null
   bio_description: string | null
-  role: $Enums.Role | null
   admin_user_block: boolean | null
   linkedin: string | null
   instagram: string | null
   github: string | null
-  reset_token: string | null
-  reset_token_expiry: Date | null
+  role: $Enums.Role | null
   created_at: Date | null
   updated_at: Date | null
+  reset_token: string | null
+  reset_token_expiry: Date | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -67,15 +67,15 @@ export type UserCountAggregateOutputType = {
   email: number
   password: number
   bio_description: number
-  role: number
   admin_user_block: number
   linkedin: number
   instagram: number
   github: number
-  reset_token: number
-  reset_token_expiry: number
+  role: number
   created_at: number
   updated_at: number
+  reset_token: number
+  reset_token_expiry: number
   _all: number
 }
 
@@ -87,15 +87,15 @@ export type UserMinAggregateInputType = {
   email?: true
   password?: true
   bio_description?: true
-  role?: true
   admin_user_block?: true
   linkedin?: true
   instagram?: true
   github?: true
-  reset_token?: true
-  reset_token_expiry?: true
+  role?: true
   created_at?: true
   updated_at?: true
+  reset_token?: true
+  reset_token_expiry?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -105,15 +105,15 @@ export type UserMaxAggregateInputType = {
   email?: true
   password?: true
   bio_description?: true
-  role?: true
   admin_user_block?: true
   linkedin?: true
   instagram?: true
   github?: true
-  reset_token?: true
-  reset_token_expiry?: true
+  role?: true
   created_at?: true
   updated_at?: true
+  reset_token?: true
+  reset_token_expiry?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -123,15 +123,15 @@ export type UserCountAggregateInputType = {
   email?: true
   password?: true
   bio_description?: true
-  role?: true
   admin_user_block?: true
   linkedin?: true
   instagram?: true
   github?: true
-  reset_token?: true
-  reset_token_expiry?: true
+  role?: true
   created_at?: true
   updated_at?: true
+  reset_token?: true
+  reset_token_expiry?: true
   _all?: true
 }
 
@@ -214,15 +214,15 @@ export type UserGroupByOutputType = {
   email: string
   password: string
   bio_description: string | null
-  role: $Enums.Role
   admin_user_block: boolean
   linkedin: string | null
   instagram: string | null
   github: string | null
-  reset_token: string | null
-  reset_token_expiry: Date | null
+  role: $Enums.Role
   created_at: Date
   updated_at: Date | null
+  reset_token: string | null
+  reset_token_expiry: Date | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -253,21 +253,21 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   bio_description?: Prisma.StringNullableFilter<"User"> | string | null
-  role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   admin_user_block?: Prisma.BoolFilter<"User"> | boolean
   linkedin?: Prisma.StringNullableFilter<"User"> | string | null
   instagram?: Prisma.StringNullableFilter<"User"> | string | null
   github?: Prisma.StringNullableFilter<"User"> | string | null
-  reset_token?: Prisma.StringNullableFilter<"User"> | string | null
-  reset_token_expiry?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   created_at?: Prisma.DateTimeFilter<"User"> | Date | string
   updated_at?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  posts?: Prisma.PostListRelationFilter
-  comments?: Prisma.CommentListRelationFilter
-  post_reports?: Prisma.PostReportListRelationFilter
-  post_like?: Prisma.PostLikeListRelationFilter
-  comment_reports?: Prisma.CommentReportListRelationFilter
+  reset_token?: Prisma.StringNullableFilter<"User"> | string | null
+  reset_token_expiry?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   comment_like?: Prisma.CommentLikeListRelationFilter
+  comment_reports?: Prisma.CommentReportListRelationFilter
+  comments?: Prisma.CommentListRelationFilter
+  post_like?: Prisma.PostLikeListRelationFilter
+  post_reports?: Prisma.PostReportListRelationFilter
+  posts?: Prisma.PostListRelationFilter
   tag_follow?: Prisma.TagFollowListRelationFilter
 }
 
@@ -278,21 +278,21 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   bio_description?: Prisma.SortOrderInput | Prisma.SortOrder
-  role?: Prisma.SortOrder
   admin_user_block?: Prisma.SortOrder
   linkedin?: Prisma.SortOrderInput | Prisma.SortOrder
   instagram?: Prisma.SortOrderInput | Prisma.SortOrder
   github?: Prisma.SortOrderInput | Prisma.SortOrder
-  reset_token?: Prisma.SortOrderInput | Prisma.SortOrder
-  reset_token_expiry?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  posts?: Prisma.PostOrderByRelationAggregateInput
-  comments?: Prisma.CommentOrderByRelationAggregateInput
-  post_reports?: Prisma.PostReportOrderByRelationAggregateInput
-  post_like?: Prisma.PostLikeOrderByRelationAggregateInput
-  comment_reports?: Prisma.CommentReportOrderByRelationAggregateInput
+  reset_token?: Prisma.SortOrderInput | Prisma.SortOrder
+  reset_token_expiry?: Prisma.SortOrderInput | Prisma.SortOrder
   comment_like?: Prisma.CommentLikeOrderByRelationAggregateInput
+  comment_reports?: Prisma.CommentReportOrderByRelationAggregateInput
+  comments?: Prisma.CommentOrderByRelationAggregateInput
+  post_like?: Prisma.PostLikeOrderByRelationAggregateInput
+  post_reports?: Prisma.PostReportOrderByRelationAggregateInput
+  posts?: Prisma.PostOrderByRelationAggregateInput
   tag_follow?: Prisma.TagFollowOrderByRelationAggregateInput
 }
 
@@ -310,17 +310,17 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringNullableFilter<"User"> | string | null
   password?: Prisma.StringFilter<"User"> | string
   bio_description?: Prisma.StringNullableFilter<"User"> | string | null
-  role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   admin_user_block?: Prisma.BoolFilter<"User"> | boolean
-  reset_token_expiry?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   created_at?: Prisma.DateTimeFilter<"User"> | Date | string
   updated_at?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  posts?: Prisma.PostListRelationFilter
-  comments?: Prisma.CommentListRelationFilter
-  post_reports?: Prisma.PostReportListRelationFilter
-  post_like?: Prisma.PostLikeListRelationFilter
-  comment_reports?: Prisma.CommentReportListRelationFilter
+  reset_token_expiry?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   comment_like?: Prisma.CommentLikeListRelationFilter
+  comment_reports?: Prisma.CommentReportListRelationFilter
+  comments?: Prisma.CommentListRelationFilter
+  post_like?: Prisma.PostLikeListRelationFilter
+  post_reports?: Prisma.PostReportListRelationFilter
+  posts?: Prisma.PostListRelationFilter
   tag_follow?: Prisma.TagFollowListRelationFilter
 }, "id" | "username" | "email" | "linkedin" | "instagram" | "github" | "reset_token">
 
@@ -331,15 +331,15 @@ export type UserOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   bio_description?: Prisma.SortOrderInput | Prisma.SortOrder
-  role?: Prisma.SortOrder
   admin_user_block?: Prisma.SortOrder
   linkedin?: Prisma.SortOrderInput | Prisma.SortOrder
   instagram?: Prisma.SortOrderInput | Prisma.SortOrder
   github?: Prisma.SortOrderInput | Prisma.SortOrder
-  reset_token?: Prisma.SortOrderInput | Prisma.SortOrder
-  reset_token_expiry?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  reset_token?: Prisma.SortOrderInput | Prisma.SortOrder
+  reset_token_expiry?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -355,15 +355,15 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
   bio_description?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   admin_user_block?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   linkedin?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   instagram?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   github?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  reset_token?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  reset_token_expiry?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   created_at?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  reset_token?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  reset_token_expiry?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
 }
 
 export type UserCreateInput = {
@@ -373,21 +373,21 @@ export type UserCreateInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  posts?: Prisma.PostCreateNestedManyWithoutUserInput
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  post_reports?: Prisma.PostReportCreateNestedManyWithoutUserInput
-  post_like?: Prisma.PostLikeCreateNestedManyWithoutUserInput
-  comment_reports?: Prisma.CommentReportCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
   comment_like?: Prisma.CommentLikeCreateNestedManyWithoutUserInput
+  comment_reports?: Prisma.CommentReportCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  post_like?: Prisma.PostLikeCreateNestedManyWithoutUserInput
+  post_reports?: Prisma.PostReportCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
   tag_follow?: Prisma.TagFollowCreateNestedManyWithoutUserInput
 }
 
@@ -398,21 +398,21 @@ export type UserUncheckedCreateInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  post_reports?: Prisma.PostReportUncheckedCreateNestedManyWithoutUserInput
-  post_like?: Prisma.PostLikeUncheckedCreateNestedManyWithoutUserInput
-  comment_reports?: Prisma.CommentReportUncheckedCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
   comment_like?: Prisma.CommentLikeUncheckedCreateNestedManyWithoutUserInput
+  comment_reports?: Prisma.CommentReportUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  post_like?: Prisma.PostLikeUncheckedCreateNestedManyWithoutUserInput
+  post_reports?: Prisma.PostReportUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
   tag_follow?: Prisma.TagFollowUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -423,21 +423,21 @@ export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  post_reports?: Prisma.PostReportUpdateManyWithoutUserNestedInput
-  post_like?: Prisma.PostLikeUpdateManyWithoutUserNestedInput
-  comment_reports?: Prisma.CommentReportUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   comment_like?: Prisma.CommentLikeUpdateManyWithoutUserNestedInput
+  comment_reports?: Prisma.CommentReportUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  post_like?: Prisma.PostLikeUpdateManyWithoutUserNestedInput
+  post_reports?: Prisma.PostReportUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
   tag_follow?: Prisma.TagFollowUpdateManyWithoutUserNestedInput
 }
 
@@ -448,21 +448,21 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  post_reports?: Prisma.PostReportUncheckedUpdateManyWithoutUserNestedInput
-  post_like?: Prisma.PostLikeUncheckedUpdateManyWithoutUserNestedInput
-  comment_reports?: Prisma.CommentReportUncheckedUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   comment_like?: Prisma.CommentLikeUncheckedUpdateManyWithoutUserNestedInput
+  comment_reports?: Prisma.CommentReportUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  post_like?: Prisma.PostLikeUncheckedUpdateManyWithoutUserNestedInput
+  post_reports?: Prisma.PostReportUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
   tag_follow?: Prisma.TagFollowUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -473,15 +473,15 @@ export type UserCreateManyInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -491,15 +491,15 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -509,15 +509,15 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -527,15 +527,15 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   bio_description?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   admin_user_block?: Prisma.SortOrder
   linkedin?: Prisma.SortOrder
   instagram?: Prisma.SortOrder
   github?: Prisma.SortOrder
-  reset_token?: Prisma.SortOrder
-  reset_token_expiry?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  reset_token?: Prisma.SortOrder
+  reset_token_expiry?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -545,15 +545,15 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   bio_description?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   admin_user_block?: Prisma.SortOrder
   linkedin?: Prisma.SortOrder
   instagram?: Prisma.SortOrder
   github?: Prisma.SortOrder
-  reset_token?: Prisma.SortOrder
-  reset_token_expiry?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  reset_token?: Prisma.SortOrder
+  reset_token_expiry?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -563,15 +563,15 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   bio_description?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   admin_user_block?: Prisma.SortOrder
   linkedin?: Prisma.SortOrder
   instagram?: Prisma.SortOrder
   github?: Prisma.SortOrder
-  reset_token?: Prisma.SortOrder
-  reset_token_expiry?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  reset_token?: Prisma.SortOrder
+  reset_token_expiry?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -587,20 +587,20 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
-export type EnumRoleFieldUpdateOperationsInput = {
-  set?: $Enums.Role
-}
-
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
+export type EnumRoleFieldUpdateOperationsInput = {
+  set?: $Enums.Role
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type UserCreateNestedOneWithoutPostsInput = {
@@ -708,20 +708,20 @@ export type UserCreateWithoutPostsInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  post_reports?: Prisma.PostReportCreateNestedManyWithoutUserInput
-  post_like?: Prisma.PostLikeCreateNestedManyWithoutUserInput
-  comment_reports?: Prisma.CommentReportCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
   comment_like?: Prisma.CommentLikeCreateNestedManyWithoutUserInput
+  comment_reports?: Prisma.CommentReportCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  post_like?: Prisma.PostLikeCreateNestedManyWithoutUserInput
+  post_reports?: Prisma.PostReportCreateNestedManyWithoutUserInput
   tag_follow?: Prisma.TagFollowCreateNestedManyWithoutUserInput
 }
 
@@ -732,20 +732,20 @@ export type UserUncheckedCreateWithoutPostsInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  post_reports?: Prisma.PostReportUncheckedCreateNestedManyWithoutUserInput
-  post_like?: Prisma.PostLikeUncheckedCreateNestedManyWithoutUserInput
-  comment_reports?: Prisma.CommentReportUncheckedCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
   comment_like?: Prisma.CommentLikeUncheckedCreateNestedManyWithoutUserInput
+  comment_reports?: Prisma.CommentReportUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  post_like?: Prisma.PostLikeUncheckedCreateNestedManyWithoutUserInput
+  post_reports?: Prisma.PostReportUncheckedCreateNestedManyWithoutUserInput
   tag_follow?: Prisma.TagFollowUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -772,20 +772,20 @@ export type UserUpdateWithoutPostsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  post_reports?: Prisma.PostReportUpdateManyWithoutUserNestedInput
-  post_like?: Prisma.PostLikeUpdateManyWithoutUserNestedInput
-  comment_reports?: Prisma.CommentReportUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   comment_like?: Prisma.CommentLikeUpdateManyWithoutUserNestedInput
+  comment_reports?: Prisma.CommentReportUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  post_like?: Prisma.PostLikeUpdateManyWithoutUserNestedInput
+  post_reports?: Prisma.PostReportUpdateManyWithoutUserNestedInput
   tag_follow?: Prisma.TagFollowUpdateManyWithoutUserNestedInput
 }
 
@@ -796,20 +796,20 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  post_reports?: Prisma.PostReportUncheckedUpdateManyWithoutUserNestedInput
-  post_like?: Prisma.PostLikeUncheckedUpdateManyWithoutUserNestedInput
-  comment_reports?: Prisma.CommentReportUncheckedUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   comment_like?: Prisma.CommentLikeUncheckedUpdateManyWithoutUserNestedInput
+  comment_reports?: Prisma.CommentReportUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  post_like?: Prisma.PostLikeUncheckedUpdateManyWithoutUserNestedInput
+  post_reports?: Prisma.PostReportUncheckedUpdateManyWithoutUserNestedInput
   tag_follow?: Prisma.TagFollowUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -820,20 +820,20 @@ export type UserCreateWithoutCommentsInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  posts?: Prisma.PostCreateNestedManyWithoutUserInput
-  post_reports?: Prisma.PostReportCreateNestedManyWithoutUserInput
-  post_like?: Prisma.PostLikeCreateNestedManyWithoutUserInput
-  comment_reports?: Prisma.CommentReportCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
   comment_like?: Prisma.CommentLikeCreateNestedManyWithoutUserInput
+  comment_reports?: Prisma.CommentReportCreateNestedManyWithoutUserInput
+  post_like?: Prisma.PostLikeCreateNestedManyWithoutUserInput
+  post_reports?: Prisma.PostReportCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
   tag_follow?: Prisma.TagFollowCreateNestedManyWithoutUserInput
 }
 
@@ -844,20 +844,20 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
-  post_reports?: Prisma.PostReportUncheckedCreateNestedManyWithoutUserInput
-  post_like?: Prisma.PostLikeUncheckedCreateNestedManyWithoutUserInput
-  comment_reports?: Prisma.CommentReportUncheckedCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
   comment_like?: Prisma.CommentLikeUncheckedCreateNestedManyWithoutUserInput
+  comment_reports?: Prisma.CommentReportUncheckedCreateNestedManyWithoutUserInput
+  post_like?: Prisma.PostLikeUncheckedCreateNestedManyWithoutUserInput
+  post_reports?: Prisma.PostReportUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
   tag_follow?: Prisma.TagFollowUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -884,20 +884,20 @@ export type UserUpdateWithoutCommentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
-  post_reports?: Prisma.PostReportUpdateManyWithoutUserNestedInput
-  post_like?: Prisma.PostLikeUpdateManyWithoutUserNestedInput
-  comment_reports?: Prisma.CommentReportUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   comment_like?: Prisma.CommentLikeUpdateManyWithoutUserNestedInput
+  comment_reports?: Prisma.CommentReportUpdateManyWithoutUserNestedInput
+  post_like?: Prisma.PostLikeUpdateManyWithoutUserNestedInput
+  post_reports?: Prisma.PostReportUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
   tag_follow?: Prisma.TagFollowUpdateManyWithoutUserNestedInput
 }
 
@@ -908,20 +908,20 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
-  post_reports?: Prisma.PostReportUncheckedUpdateManyWithoutUserNestedInput
-  post_like?: Prisma.PostLikeUncheckedUpdateManyWithoutUserNestedInput
-  comment_reports?: Prisma.CommentReportUncheckedUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   comment_like?: Prisma.CommentLikeUncheckedUpdateManyWithoutUserNestedInput
+  comment_reports?: Prisma.CommentReportUncheckedUpdateManyWithoutUserNestedInput
+  post_like?: Prisma.PostLikeUncheckedUpdateManyWithoutUserNestedInput
+  post_reports?: Prisma.PostReportUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
   tag_follow?: Prisma.TagFollowUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -932,20 +932,20 @@ export type UserCreateWithoutPost_reportsInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
+  comment_like?: Prisma.CommentLikeCreateNestedManyWithoutUserInput
+  comment_reports?: Prisma.CommentReportCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   post_like?: Prisma.PostLikeCreateNestedManyWithoutUserInput
-  comment_reports?: Prisma.CommentReportCreateNestedManyWithoutUserInput
-  comment_like?: Prisma.CommentLikeCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
   tag_follow?: Prisma.TagFollowCreateNestedManyWithoutUserInput
 }
 
@@ -956,20 +956,20 @@ export type UserUncheckedCreateWithoutPost_reportsInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
+  comment_like?: Prisma.CommentLikeUncheckedCreateNestedManyWithoutUserInput
+  comment_reports?: Prisma.CommentReportUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   post_like?: Prisma.PostLikeUncheckedCreateNestedManyWithoutUserInput
-  comment_reports?: Prisma.CommentReportUncheckedCreateNestedManyWithoutUserInput
-  comment_like?: Prisma.CommentLikeUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
   tag_follow?: Prisma.TagFollowUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -996,20 +996,20 @@ export type UserUpdateWithoutPost_reportsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  comment_like?: Prisma.CommentLikeUpdateManyWithoutUserNestedInput
+  comment_reports?: Prisma.CommentReportUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   post_like?: Prisma.PostLikeUpdateManyWithoutUserNestedInput
-  comment_reports?: Prisma.CommentReportUpdateManyWithoutUserNestedInput
-  comment_like?: Prisma.CommentLikeUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
   tag_follow?: Prisma.TagFollowUpdateManyWithoutUserNestedInput
 }
 
@@ -1020,20 +1020,20 @@ export type UserUncheckedUpdateWithoutPost_reportsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  comment_like?: Prisma.CommentLikeUncheckedUpdateManyWithoutUserNestedInput
+  comment_reports?: Prisma.CommentReportUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   post_like?: Prisma.PostLikeUncheckedUpdateManyWithoutUserNestedInput
-  comment_reports?: Prisma.CommentReportUncheckedUpdateManyWithoutUserNestedInput
-  comment_like?: Prisma.CommentLikeUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
   tag_follow?: Prisma.TagFollowUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -1044,20 +1044,20 @@ export type UserCreateWithoutPost_likeInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
+  comment_like?: Prisma.CommentLikeCreateNestedManyWithoutUserInput
+  comment_reports?: Prisma.CommentReportCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   post_reports?: Prisma.PostReportCreateNestedManyWithoutUserInput
-  comment_reports?: Prisma.CommentReportCreateNestedManyWithoutUserInput
-  comment_like?: Prisma.CommentLikeCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
   tag_follow?: Prisma.TagFollowCreateNestedManyWithoutUserInput
 }
 
@@ -1068,20 +1068,20 @@ export type UserUncheckedCreateWithoutPost_likeInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
+  comment_like?: Prisma.CommentLikeUncheckedCreateNestedManyWithoutUserInput
+  comment_reports?: Prisma.CommentReportUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   post_reports?: Prisma.PostReportUncheckedCreateNestedManyWithoutUserInput
-  comment_reports?: Prisma.CommentReportUncheckedCreateNestedManyWithoutUserInput
-  comment_like?: Prisma.CommentLikeUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
   tag_follow?: Prisma.TagFollowUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -1108,20 +1108,20 @@ export type UserUpdateWithoutPost_likeInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  comment_like?: Prisma.CommentLikeUpdateManyWithoutUserNestedInput
+  comment_reports?: Prisma.CommentReportUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   post_reports?: Prisma.PostReportUpdateManyWithoutUserNestedInput
-  comment_reports?: Prisma.CommentReportUpdateManyWithoutUserNestedInput
-  comment_like?: Prisma.CommentLikeUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
   tag_follow?: Prisma.TagFollowUpdateManyWithoutUserNestedInput
 }
 
@@ -1132,20 +1132,20 @@ export type UserUncheckedUpdateWithoutPost_likeInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  comment_like?: Prisma.CommentLikeUncheckedUpdateManyWithoutUserNestedInput
+  comment_reports?: Prisma.CommentReportUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   post_reports?: Prisma.PostReportUncheckedUpdateManyWithoutUserNestedInput
-  comment_reports?: Prisma.CommentReportUncheckedUpdateManyWithoutUserNestedInput
-  comment_like?: Prisma.CommentLikeUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
   tag_follow?: Prisma.TagFollowUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -1156,20 +1156,20 @@ export type UserCreateWithoutComment_reportsInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  posts?: Prisma.PostCreateNestedManyWithoutUserInput
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  post_reports?: Prisma.PostReportCreateNestedManyWithoutUserInput
-  post_like?: Prisma.PostLikeCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
   comment_like?: Prisma.CommentLikeCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  post_like?: Prisma.PostLikeCreateNestedManyWithoutUserInput
+  post_reports?: Prisma.PostReportCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
   tag_follow?: Prisma.TagFollowCreateNestedManyWithoutUserInput
 }
 
@@ -1180,20 +1180,20 @@ export type UserUncheckedCreateWithoutComment_reportsInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  post_reports?: Prisma.PostReportUncheckedCreateNestedManyWithoutUserInput
-  post_like?: Prisma.PostLikeUncheckedCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
   comment_like?: Prisma.CommentLikeUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  post_like?: Prisma.PostLikeUncheckedCreateNestedManyWithoutUserInput
+  post_reports?: Prisma.PostReportUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
   tag_follow?: Prisma.TagFollowUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -1220,20 +1220,20 @@ export type UserUpdateWithoutComment_reportsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  post_reports?: Prisma.PostReportUpdateManyWithoutUserNestedInput
-  post_like?: Prisma.PostLikeUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   comment_like?: Prisma.CommentLikeUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  post_like?: Prisma.PostLikeUpdateManyWithoutUserNestedInput
+  post_reports?: Prisma.PostReportUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
   tag_follow?: Prisma.TagFollowUpdateManyWithoutUserNestedInput
 }
 
@@ -1244,20 +1244,20 @@ export type UserUncheckedUpdateWithoutComment_reportsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  post_reports?: Prisma.PostReportUncheckedUpdateManyWithoutUserNestedInput
-  post_like?: Prisma.PostLikeUncheckedUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   comment_like?: Prisma.CommentLikeUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  post_like?: Prisma.PostLikeUncheckedUpdateManyWithoutUserNestedInput
+  post_reports?: Prisma.PostReportUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
   tag_follow?: Prisma.TagFollowUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -1268,20 +1268,20 @@ export type UserCreateWithoutComment_likeInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  posts?: Prisma.PostCreateNestedManyWithoutUserInput
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  post_reports?: Prisma.PostReportCreateNestedManyWithoutUserInput
-  post_like?: Prisma.PostLikeCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
   comment_reports?: Prisma.CommentReportCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  post_like?: Prisma.PostLikeCreateNestedManyWithoutUserInput
+  post_reports?: Prisma.PostReportCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
   tag_follow?: Prisma.TagFollowCreateNestedManyWithoutUserInput
 }
 
@@ -1292,20 +1292,20 @@ export type UserUncheckedCreateWithoutComment_likeInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  post_reports?: Prisma.PostReportUncheckedCreateNestedManyWithoutUserInput
-  post_like?: Prisma.PostLikeUncheckedCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
   comment_reports?: Prisma.CommentReportUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  post_like?: Prisma.PostLikeUncheckedCreateNestedManyWithoutUserInput
+  post_reports?: Prisma.PostReportUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
   tag_follow?: Prisma.TagFollowUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -1332,20 +1332,20 @@ export type UserUpdateWithoutComment_likeInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  post_reports?: Prisma.PostReportUpdateManyWithoutUserNestedInput
-  post_like?: Prisma.PostLikeUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   comment_reports?: Prisma.CommentReportUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  post_like?: Prisma.PostLikeUpdateManyWithoutUserNestedInput
+  post_reports?: Prisma.PostReportUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
   tag_follow?: Prisma.TagFollowUpdateManyWithoutUserNestedInput
 }
 
@@ -1356,20 +1356,20 @@ export type UserUncheckedUpdateWithoutComment_likeInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  post_reports?: Prisma.PostReportUncheckedUpdateManyWithoutUserNestedInput
-  post_like?: Prisma.PostLikeUncheckedUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   comment_reports?: Prisma.CommentReportUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  post_like?: Prisma.PostLikeUncheckedUpdateManyWithoutUserNestedInput
+  post_reports?: Prisma.PostReportUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
   tag_follow?: Prisma.TagFollowUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -1380,21 +1380,21 @@ export type UserCreateWithoutTag_followInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  posts?: Prisma.PostCreateNestedManyWithoutUserInput
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  post_reports?: Prisma.PostReportCreateNestedManyWithoutUserInput
-  post_like?: Prisma.PostLikeCreateNestedManyWithoutUserInput
-  comment_reports?: Prisma.CommentReportCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
   comment_like?: Prisma.CommentLikeCreateNestedManyWithoutUserInput
+  comment_reports?: Prisma.CommentReportCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  post_like?: Prisma.PostLikeCreateNestedManyWithoutUserInput
+  post_reports?: Prisma.PostReportCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTag_followInput = {
@@ -1404,21 +1404,21 @@ export type UserUncheckedCreateWithoutTag_followInput = {
   email: string
   password: string
   bio_description?: string | null
-  role?: $Enums.Role
   admin_user_block?: boolean
   linkedin?: string | null
   instagram?: string | null
   github?: string | null
-  reset_token?: string | null
-  reset_token_expiry?: Date | string | null
+  role?: $Enums.Role
   created_at?: Date | string
   updated_at?: Date | string | null
-  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  post_reports?: Prisma.PostReportUncheckedCreateNestedManyWithoutUserInput
-  post_like?: Prisma.PostLikeUncheckedCreateNestedManyWithoutUserInput
-  comment_reports?: Prisma.CommentReportUncheckedCreateNestedManyWithoutUserInput
+  reset_token?: string | null
+  reset_token_expiry?: Date | string | null
   comment_like?: Prisma.CommentLikeUncheckedCreateNestedManyWithoutUserInput
+  comment_reports?: Prisma.CommentReportUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  post_like?: Prisma.PostLikeUncheckedCreateNestedManyWithoutUserInput
+  post_reports?: Prisma.PostReportUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTag_followInput = {
@@ -1444,21 +1444,21 @@ export type UserUpdateWithoutTag_followInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  post_reports?: Prisma.PostReportUpdateManyWithoutUserNestedInput
-  post_like?: Prisma.PostLikeUpdateManyWithoutUserNestedInput
-  comment_reports?: Prisma.CommentReportUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   comment_like?: Prisma.CommentLikeUpdateManyWithoutUserNestedInput
+  comment_reports?: Prisma.CommentReportUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  post_like?: Prisma.PostLikeUpdateManyWithoutUserNestedInput
+  post_reports?: Prisma.PostReportUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTag_followInput = {
@@ -1468,21 +1468,21 @@ export type UserUncheckedUpdateWithoutTag_followInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   bio_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   admin_user_block?: Prisma.BoolFieldUpdateOperationsInput | boolean
   linkedin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  post_reports?: Prisma.PostReportUncheckedUpdateManyWithoutUserNestedInput
-  post_like?: Prisma.PostLikeUncheckedUpdateManyWithoutUserNestedInput
-  comment_reports?: Prisma.CommentReportUncheckedUpdateManyWithoutUserNestedInput
+  reset_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reset_token_expiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   comment_like?: Prisma.CommentLikeUncheckedUpdateManyWithoutUserNestedInput
+  comment_reports?: Prisma.CommentReportUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  post_like?: Prisma.PostLikeUncheckedUpdateManyWithoutUserNestedInput
+  post_reports?: Prisma.PostReportUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1491,22 +1491,22 @@ export type UserUncheckedUpdateWithoutTag_followInput = {
  */
 
 export type UserCountOutputType = {
-  posts: number
-  comments: number
-  post_reports: number
-  post_like: number
-  comment_reports: number
   comment_like: number
+  comment_reports: number
+  comments: number
+  post_like: number
+  post_reports: number
+  posts: number
   tag_follow: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  posts?: boolean | UserCountOutputTypeCountPostsArgs
-  comments?: boolean | UserCountOutputTypeCountCommentsArgs
-  post_reports?: boolean | UserCountOutputTypeCountPost_reportsArgs
-  post_like?: boolean | UserCountOutputTypeCountPost_likeArgs
-  comment_reports?: boolean | UserCountOutputTypeCountComment_reportsArgs
   comment_like?: boolean | UserCountOutputTypeCountComment_likeArgs
+  comment_reports?: boolean | UserCountOutputTypeCountComment_reportsArgs
+  comments?: boolean | UserCountOutputTypeCountCommentsArgs
+  post_like?: boolean | UserCountOutputTypeCountPost_likeArgs
+  post_reports?: boolean | UserCountOutputTypeCountPost_reportsArgs
+  posts?: boolean | UserCountOutputTypeCountPostsArgs
   tag_follow?: boolean | UserCountOutputTypeCountTag_followArgs
 }
 
@@ -1523,29 +1523,8 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountPostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PostWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CommentWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountPost_reportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PostReportWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountPost_likeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PostLikeWhereInput
+export type UserCountOutputTypeCountComment_likeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CommentLikeWhereInput
 }
 
 /**
@@ -1558,8 +1537,29 @@ export type UserCountOutputTypeCountComment_reportsArgs<ExtArgs extends runtime.
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountComment_likeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CommentLikeWhereInput
+export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CommentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPost_likeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PostLikeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPost_reportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PostReportWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PostWhereInput
 }
 
 /**
@@ -1577,21 +1577,21 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   password?: boolean
   bio_description?: boolean
-  role?: boolean
   admin_user_block?: boolean
   linkedin?: boolean
   instagram?: boolean
   github?: boolean
-  reset_token?: boolean
-  reset_token_expiry?: boolean
+  role?: boolean
   created_at?: boolean
   updated_at?: boolean
-  posts?: boolean | Prisma.User$postsArgs<ExtArgs>
-  comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
-  post_reports?: boolean | Prisma.User$post_reportsArgs<ExtArgs>
-  post_like?: boolean | Prisma.User$post_likeArgs<ExtArgs>
-  comment_reports?: boolean | Prisma.User$comment_reportsArgs<ExtArgs>
+  reset_token?: boolean
+  reset_token_expiry?: boolean
   comment_like?: boolean | Prisma.User$comment_likeArgs<ExtArgs>
+  comment_reports?: boolean | Prisma.User$comment_reportsArgs<ExtArgs>
+  comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
+  post_like?: boolean | Prisma.User$post_likeArgs<ExtArgs>
+  post_reports?: boolean | Prisma.User$post_reportsArgs<ExtArgs>
+  posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   tag_follow?: boolean | Prisma.User$tag_followArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -1603,15 +1603,15 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   password?: boolean
   bio_description?: boolean
-  role?: boolean
   admin_user_block?: boolean
   linkedin?: boolean
   instagram?: boolean
   github?: boolean
-  reset_token?: boolean
-  reset_token_expiry?: boolean
+  role?: boolean
   created_at?: boolean
   updated_at?: boolean
+  reset_token?: boolean
+  reset_token_expiry?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1621,15 +1621,15 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   password?: boolean
   bio_description?: boolean
-  role?: boolean
   admin_user_block?: boolean
   linkedin?: boolean
   instagram?: boolean
   github?: boolean
-  reset_token?: boolean
-  reset_token_expiry?: boolean
+  role?: boolean
   created_at?: boolean
   updated_at?: boolean
+  reset_token?: boolean
+  reset_token_expiry?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -1639,25 +1639,25 @@ export type UserSelectScalar = {
   email?: boolean
   password?: boolean
   bio_description?: boolean
-  role?: boolean
   admin_user_block?: boolean
   linkedin?: boolean
   instagram?: boolean
   github?: boolean
-  reset_token?: boolean
-  reset_token_expiry?: boolean
+  role?: boolean
   created_at?: boolean
   updated_at?: boolean
+  reset_token?: boolean
+  reset_token_expiry?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "username" | "email" | "password" | "bio_description" | "role" | "admin_user_block" | "linkedin" | "instagram" | "github" | "reset_token" | "reset_token_expiry" | "created_at" | "updated_at", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "username" | "email" | "password" | "bio_description" | "admin_user_block" | "linkedin" | "instagram" | "github" | "role" | "created_at" | "updated_at" | "reset_token" | "reset_token_expiry", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  posts?: boolean | Prisma.User$postsArgs<ExtArgs>
-  comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
-  post_reports?: boolean | Prisma.User$post_reportsArgs<ExtArgs>
-  post_like?: boolean | Prisma.User$post_likeArgs<ExtArgs>
-  comment_reports?: boolean | Prisma.User$comment_reportsArgs<ExtArgs>
   comment_like?: boolean | Prisma.User$comment_likeArgs<ExtArgs>
+  comment_reports?: boolean | Prisma.User$comment_reportsArgs<ExtArgs>
+  comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
+  post_like?: boolean | Prisma.User$post_likeArgs<ExtArgs>
+  post_reports?: boolean | Prisma.User$post_reportsArgs<ExtArgs>
+  posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   tag_follow?: boolean | Prisma.User$tag_followArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1667,12 +1667,12 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    posts: Prisma.$PostPayload<ExtArgs>[]
-    comments: Prisma.$CommentPayload<ExtArgs>[]
-    post_reports: Prisma.$PostReportPayload<ExtArgs>[]
-    post_like: Prisma.$PostLikePayload<ExtArgs>[]
-    comment_reports: Prisma.$CommentReportPayload<ExtArgs>[]
     comment_like: Prisma.$CommentLikePayload<ExtArgs>[]
+    comment_reports: Prisma.$CommentReportPayload<ExtArgs>[]
+    comments: Prisma.$CommentPayload<ExtArgs>[]
+    post_like: Prisma.$PostLikePayload<ExtArgs>[]
+    post_reports: Prisma.$PostReportPayload<ExtArgs>[]
+    posts: Prisma.$PostPayload<ExtArgs>[]
     tag_follow: Prisma.$TagFollowPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1682,15 +1682,15 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     email: string
     password: string
     bio_description: string | null
-    role: $Enums.Role
     admin_user_block: boolean
     linkedin: string | null
     instagram: string | null
     github: string | null
-    reset_token: string | null
-    reset_token_expiry: Date | null
+    role: $Enums.Role
     created_at: Date
     updated_at: Date | null
+    reset_token: string | null
+    reset_token_expiry: Date | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -2085,12 +2085,12 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  posts<T extends Prisma.User$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  comments<T extends Prisma.User$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  post_reports<T extends Prisma.User$post_reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$post_reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  post_like<T extends Prisma.User$post_likeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$post_likeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  comment_reports<T extends Prisma.User$comment_reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$comment_reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comment_like<T extends Prisma.User$comment_likeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$comment_likeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  comment_reports<T extends Prisma.User$comment_reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$comment_reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  comments<T extends Prisma.User$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  post_like<T extends Prisma.User$post_likeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$post_likeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  post_reports<T extends Prisma.User$post_reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$post_reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  posts<T extends Prisma.User$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tag_follow<T extends Prisma.User$tag_followArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tag_followArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagFollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2127,15 +2127,15 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly bio_description: Prisma.FieldRef<"User", 'String'>
-  readonly role: Prisma.FieldRef<"User", 'Role'>
   readonly admin_user_block: Prisma.FieldRef<"User", 'Boolean'>
   readonly linkedin: Prisma.FieldRef<"User", 'String'>
   readonly instagram: Prisma.FieldRef<"User", 'String'>
   readonly github: Prisma.FieldRef<"User", 'String'>
-  readonly reset_token: Prisma.FieldRef<"User", 'String'>
-  readonly reset_token_expiry: Prisma.FieldRef<"User", 'DateTime'>
+  readonly role: Prisma.FieldRef<"User", 'Role'>
   readonly created_at: Prisma.FieldRef<"User", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"User", 'DateTime'>
+  readonly reset_token: Prisma.FieldRef<"User", 'String'>
+  readonly reset_token_expiry: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 
@@ -2524,99 +2524,27 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.posts
+ * User.comment_like
  */
-export type User$postsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$comment_likeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Post
+   * Select specific fields to fetch from the CommentLike
    */
-  select?: Prisma.PostSelect<ExtArgs> | null
+  select?: Prisma.CommentLikeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Post
+   * Omit specific fields from the CommentLike
    */
-  omit?: Prisma.PostOmit<ExtArgs> | null
+  omit?: Prisma.CommentLikeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.PostInclude<ExtArgs> | null
-  where?: Prisma.PostWhereInput
-  orderBy?: Prisma.PostOrderByWithRelationInput | Prisma.PostOrderByWithRelationInput[]
-  cursor?: Prisma.PostWhereUniqueInput
+  include?: Prisma.CommentLikeInclude<ExtArgs> | null
+  where?: Prisma.CommentLikeWhereInput
+  orderBy?: Prisma.CommentLikeOrderByWithRelationInput | Prisma.CommentLikeOrderByWithRelationInput[]
+  cursor?: Prisma.CommentLikeWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.PostScalarFieldEnum | Prisma.PostScalarFieldEnum[]
-}
-
-/**
- * User.comments
- */
-export type User$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Comment
-   */
-  select?: Prisma.CommentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Comment
-   */
-  omit?: Prisma.CommentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CommentInclude<ExtArgs> | null
-  where?: Prisma.CommentWhereInput
-  orderBy?: Prisma.CommentOrderByWithRelationInput | Prisma.CommentOrderByWithRelationInput[]
-  cursor?: Prisma.CommentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CommentScalarFieldEnum | Prisma.CommentScalarFieldEnum[]
-}
-
-/**
- * User.post_reports
- */
-export type User$post_reportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PostReport
-   */
-  select?: Prisma.PostReportSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PostReport
-   */
-  omit?: Prisma.PostReportOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PostReportInclude<ExtArgs> | null
-  where?: Prisma.PostReportWhereInput
-  orderBy?: Prisma.PostReportOrderByWithRelationInput | Prisma.PostReportOrderByWithRelationInput[]
-  cursor?: Prisma.PostReportWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PostReportScalarFieldEnum | Prisma.PostReportScalarFieldEnum[]
-}
-
-/**
- * User.post_like
- */
-export type User$post_likeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PostLike
-   */
-  select?: Prisma.PostLikeSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PostLike
-   */
-  omit?: Prisma.PostLikeOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PostLikeInclude<ExtArgs> | null
-  where?: Prisma.PostLikeWhereInput
-  orderBy?: Prisma.PostLikeOrderByWithRelationInput | Prisma.PostLikeOrderByWithRelationInput[]
-  cursor?: Prisma.PostLikeWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PostLikeScalarFieldEnum | Prisma.PostLikeScalarFieldEnum[]
+  distinct?: Prisma.CommentLikeScalarFieldEnum | Prisma.CommentLikeScalarFieldEnum[]
 }
 
 /**
@@ -2644,27 +2572,99 @@ export type User$comment_reportsArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
- * User.comment_like
+ * User.comments
  */
-export type User$comment_likeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the CommentLike
+   * Select specific fields to fetch from the Comment
    */
-  select?: Prisma.CommentLikeSelect<ExtArgs> | null
+  select?: Prisma.CommentSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the CommentLike
+   * Omit specific fields from the Comment
    */
-  omit?: Prisma.CommentLikeOmit<ExtArgs> | null
+  omit?: Prisma.CommentOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.CommentLikeInclude<ExtArgs> | null
-  where?: Prisma.CommentLikeWhereInput
-  orderBy?: Prisma.CommentLikeOrderByWithRelationInput | Prisma.CommentLikeOrderByWithRelationInput[]
-  cursor?: Prisma.CommentLikeWhereUniqueInput
+  include?: Prisma.CommentInclude<ExtArgs> | null
+  where?: Prisma.CommentWhereInput
+  orderBy?: Prisma.CommentOrderByWithRelationInput | Prisma.CommentOrderByWithRelationInput[]
+  cursor?: Prisma.CommentWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.CommentLikeScalarFieldEnum | Prisma.CommentLikeScalarFieldEnum[]
+  distinct?: Prisma.CommentScalarFieldEnum | Prisma.CommentScalarFieldEnum[]
+}
+
+/**
+ * User.post_like
+ */
+export type User$post_likeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PostLike
+   */
+  select?: Prisma.PostLikeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PostLike
+   */
+  omit?: Prisma.PostLikeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PostLikeInclude<ExtArgs> | null
+  where?: Prisma.PostLikeWhereInput
+  orderBy?: Prisma.PostLikeOrderByWithRelationInput | Prisma.PostLikeOrderByWithRelationInput[]
+  cursor?: Prisma.PostLikeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PostLikeScalarFieldEnum | Prisma.PostLikeScalarFieldEnum[]
+}
+
+/**
+ * User.post_reports
+ */
+export type User$post_reportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PostReport
+   */
+  select?: Prisma.PostReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PostReport
+   */
+  omit?: Prisma.PostReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PostReportInclude<ExtArgs> | null
+  where?: Prisma.PostReportWhereInput
+  orderBy?: Prisma.PostReportOrderByWithRelationInput | Prisma.PostReportOrderByWithRelationInput[]
+  cursor?: Prisma.PostReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PostReportScalarFieldEnum | Prisma.PostReportScalarFieldEnum[]
+}
+
+/**
+ * User.posts
+ */
+export type User$postsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Post
+   */
+  select?: Prisma.PostSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Post
+   */
+  omit?: Prisma.PostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PostInclude<ExtArgs> | null
+  where?: Prisma.PostWhereInput
+  orderBy?: Prisma.PostOrderByWithRelationInput | Prisma.PostOrderByWithRelationInput[]
+  cursor?: Prisma.PostWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PostScalarFieldEnum | Prisma.PostScalarFieldEnum[]
 }
 
 /**

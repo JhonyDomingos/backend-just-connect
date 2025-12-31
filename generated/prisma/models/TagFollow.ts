@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums.js"
-import type * as Prisma from "../internal/prismaNamespace.js"
+import type * as $Enums from "../enums"
+import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model TagFollow
@@ -174,8 +174,8 @@ export type TagFollowWhereInput = {
   user_id?: Prisma.StringFilter<"TagFollow"> | string
   tag_id?: Prisma.StringFilter<"TagFollow"> | string
   created_at?: Prisma.DateTimeFilter<"TagFollow"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   tag?: Prisma.XOR<Prisma.TagScalarRelationFilter, Prisma.TagWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type TagFollowOrderByWithRelationInput = {
@@ -183,8 +183,8 @@ export type TagFollowOrderByWithRelationInput = {
   user_id?: Prisma.SortOrder
   tag_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
   tag?: Prisma.TagOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type TagFollowWhereUniqueInput = Prisma.AtLeast<{
@@ -195,8 +195,8 @@ export type TagFollowWhereUniqueInput = Prisma.AtLeast<{
   user_id?: Prisma.StringFilter<"TagFollow"> | string
   tag_id?: Prisma.StringFilter<"TagFollow"> | string
   created_at?: Prisma.DateTimeFilter<"TagFollow"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   tag?: Prisma.XOR<Prisma.TagScalarRelationFilter, Prisma.TagWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type TagFollowOrderByWithAggregationInput = {
@@ -222,8 +222,8 @@ export type TagFollowScalarWhereWithAggregatesInput = {
 export type TagFollowCreateInput = {
   id?: string
   created_at?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutTag_followInput
   tag: Prisma.TagCreateNestedOneWithoutTag_followInput
+  user: Prisma.UserCreateNestedOneWithoutTag_followInput
 }
 
 export type TagFollowUncheckedCreateInput = {
@@ -236,8 +236,8 @@ export type TagFollowUncheckedCreateInput = {
 export type TagFollowUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutTag_followNestedInput
   tag?: Prisma.TagUpdateOneRequiredWithoutTag_followNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutTag_followNestedInput
 }
 
 export type TagFollowUncheckedUpdateInput = {
@@ -522,8 +522,8 @@ export type TagFollowSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   user_id?: boolean
   tag_id?: boolean
   created_at?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tagFollow"]>
 
 export type TagFollowSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -531,8 +531,8 @@ export type TagFollowSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   user_id?: boolean
   tag_id?: boolean
   created_at?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tagFollow"]>
 
 export type TagFollowSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -540,8 +540,8 @@ export type TagFollowSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   user_id?: boolean
   tag_id?: boolean
   created_at?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tagFollow"]>
 
 export type TagFollowSelectScalar = {
@@ -553,23 +553,23 @@ export type TagFollowSelectScalar = {
 
 export type TagFollowOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "tag_id" | "created_at", ExtArgs["result"]["tagFollow"]>
 export type TagFollowInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type TagFollowIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type TagFollowIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $TagFollowPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "TagFollow"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     tag: Prisma.$TagPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -970,8 +970,8 @@ readonly fields: TagFollowFieldRefs;
  */
 export interface Prisma__TagFollowClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tag<T extends Prisma.TagDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TagDefaultArgs<ExtArgs>>): Prisma.Prisma__TagClient<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
