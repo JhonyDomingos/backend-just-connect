@@ -1,9 +1,12 @@
 import { FollowTagData } from "../../interfaces/tag/TagTypes";
-import {prismaClient} from "../../prisma";
+import { prismaClient } from "../../prisma";
 
 class TagFollowService {
   async execute(tag: string, userId: string): Promise<FollowTagData | null> {
     const findTag = await prismaClient.tag.findUnique({ where: { tag } });
+    if (!findTag) {
+      throw new Error("Tag not found");
+    }
 
     const existingFollow = await prismaClient.tagFollow.findFirst({
       where: {
@@ -27,7 +30,7 @@ class TagFollowService {
           user_id: userId,
         },
       });
-      
+
       return followTag;
     }
   }

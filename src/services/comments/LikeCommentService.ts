@@ -1,8 +1,8 @@
-import { prismaClient } from "../../prisma";
 import { LikeCommentData } from "../../interfaces/comments/CommentTypes";
+import { prismaClient } from "../../prisma";
+import { showNotificationSchema } from "../../schemas/notificationSchemas";
 import { NotificationService } from "../notifications/NotificationService";
 import { SSEService } from "../notifications/SSEService";
-import { showNotificationSchema } from "../../schemas/notificationSchemas";
 
 class LikeCommentService {
   async likeComment(
@@ -49,7 +49,7 @@ class LikeCommentService {
       const notification = await notificationService.createNotification({
         user_id: comment.user_id,
         type: "likeComment",
-        username: `${user.username}`,
+        username: `${user?.username}`,
         message: "curtiu seu comentário",
         related_id: comment.post_id,
       });

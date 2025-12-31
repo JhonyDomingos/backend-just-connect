@@ -1,8 +1,8 @@
-import { prismaClient } from "../../prisma";
 import { compare, hash } from "bcryptjs";
-import { ChangeUserPasswordData } from "../../interfaces/user/UserTypes";
 import { AppError } from "../../Error/AppError.error";
 import { FieldMessagesEnum } from "../../Error/Enums/FieldErrors.enum";
+import { ChangeUserPasswordData } from "../../interfaces/user/UserTypes";
+import { prismaClient } from "../../prisma";
 
 class ChangePasswordService {
   async execute(data: ChangeUserPasswordData, id: string) {
@@ -13,7 +13,9 @@ class ChangePasswordService {
         id: id,
       },
     });
-
+    if (!user) {
+      throw new AppError("User not found", 404);
+    }
     const passwordCheck = await compare(password, user.password);
 
     if (!passwordCheck) {

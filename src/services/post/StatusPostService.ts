@@ -1,5 +1,5 @@
-import {prismaClient} from "../../prisma";
 import { ReturnPostData } from "../../interfaces/post/PostType";
+import { prismaClient } from "../../prisma";
 import { returnPostSchema } from "../../schemas/postSchemas";
 
 class StatusPostService {
@@ -9,7 +9,7 @@ class StatusPostService {
       include: { tags: true },
     });
 
-    const newPostStatus = post.status_open ? false : true;
+    const newPostStatus = post?.status_open ? false : true;
 
     const updatedPost = await prismaClient.post.update({
       where: { id },

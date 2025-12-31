@@ -1,7 +1,7 @@
-import { prismaClient } from "../../prisma";
 import { ReturnPostData, UpdatePostData } from "../../interfaces/post/PostType";
-import { TagCreateService } from "../tag/CreateTagService";
+import { prismaClient } from "../../prisma";
 import { returnPostSchema } from "../../schemas/postSchemas";
+import { TagCreateService } from "../tag/CreateTagService";
 
 class UpdatePostService {
   /**
@@ -21,10 +21,10 @@ class UpdatePostService {
 
     const tagService = new TagCreateService();
 
-    const currentTags = post.tags.map((tag) => tag.id);
+    const currentTags = post?.tags.map((tag) => tag.id) || [];
 
     const tags = await Promise.all(
-      data.tags.map(async (tagName) => {
+      (data?.tags || []).map(async (tagName) => {
         return tagService.findOrCreate({ tag: tagName });
       })
     );

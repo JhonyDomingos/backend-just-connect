@@ -1,8 +1,8 @@
-import {prismaClient} from "../../prisma";
 import { LikePostData } from "../../interfaces/post/PostType";
+import { prismaClient } from "../../prisma";
+import { showNotificationSchema } from "../../schemas/notificationSchemas";
 import { NotificationService } from "../notifications/NotificationService";
 import { SSEService } from "../notifications/SSEService";
-import { showNotificationSchema } from "../../schemas/notificationSchemas";
 
 class LikePostService {
   async likePost(postId: string, userId: string): Promise<LikePostData> {
@@ -40,6 +40,10 @@ class LikePostService {
       select: { username: true },
     });
 
+     if (!user) {
+      throw new Error("User not found");
+    }
+
     if (userId !== post.user_id) {
       const notificationService = new NotificationService();
 
@@ -51,7 +55,9 @@ class LikePostService {
         related_id: postId,
       });
 
-      SSEService.sendNotificationToUser(showNotificationSchema.parse(notification));
+      SSEService.sendNotificationToUser(
+        showNotificationSchema.parse(notification)
+      );
     }
 
     return like;
