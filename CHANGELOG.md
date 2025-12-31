@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.3](https://github.com/JhonyDomingos/backend-just-connect/compare/v1.1.2...v1.1.3) (2025-12-31)
+
+### 🐛 Bug Fixes
+
+* fixing ci ([cb93911](https://github.com/JhonyDomingos/backend-just-connect/commit/cb93911383fa26468bd35ebacd7b68fedd8f2476))
+
 ## [1.1.2](https://github.com/JhonyDomingos/backend-just-connect/compare/v1.1.1...v1.1.2) (2025-12-31)
 
 ### 🐛 Bug Fixes
