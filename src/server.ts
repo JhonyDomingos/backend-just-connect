@@ -18,9 +18,10 @@ app.use(router);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 app.use(HandleErrors.execute);
 
+app.get("/health", (_, res) => {
+  res.status(200).json({ status: "ok" });
+});
 
-
-export default app;
 
 // Para desenvolvimento local
 if (process.env.NODE_ENV !== "production") {
@@ -31,3 +32,4 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
+export default app;
