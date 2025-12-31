@@ -39,6 +39,7 @@ jobs:
           git branch -D release/automated 2>/dev/null || true
           git push origin --delete release/automated 2>/dev/null || true
           git checkout -b release/automated
+          git push -u origin release/automated
 
       - name: Release
         env:
