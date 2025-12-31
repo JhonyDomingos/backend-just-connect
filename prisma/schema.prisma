@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -20,21 +14,21 @@ model User {
   email              String          @unique
   password           String          @db.VarChar(60)
   bio_description    String?         @db.VarChar(140)
-  role               Role            @default(USER)
   admin_user_block   Boolean         @default(false)
-  linkedin           String?         @unique //adicionada condição UNIQUE
-  instagram          String?         @unique //adicionada condição UNIQUE
-  github             String?         @unique //adicionada condição UNIQUE
-  reset_token        String?         @unique //snake_case
-  reset_token_expiry DateTime? //snake_case
+  linkedin           String?         @unique
+  instagram          String?         @unique
+  github             String?         @unique
+  role               Role            @default(USER)
   created_at         DateTime        @default(now())
-  updated_at         DateTime?       @updatedAt //Retirada da condição NOT NULL
-  posts              Post[]
-  comments           Comment[]
-  post_reports       PostReport[]
-  post_like          PostLike[]
-  comment_reports    CommentReport[]
+  updated_at         DateTime?       @updatedAt
+  reset_token        String?         @unique
+  reset_token_expiry DateTime?
   comment_like       CommentLike[]
+  comment_reports    CommentReport[]
+  comments           Comment[]
+  post_like          PostLike[]
+  post_reports       PostReport[]
+  posts              Post[]
   tag_follow         TagFollow[]
 
   @@map("users")
@@ -42,36 +36,36 @@ model User {
 
 model Post {
   id               String       @id @default(uuid())
-  user             User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id          String
   title            String       @db.VarChar(50)
-  description      String       @db.Text
-  score            Int          @default(0)
-  status_open      Boolean      @default(true) //snake_case
-  created_at       DateTime     @default(now())
-  updated_at       DateTime?    @updatedAt //Retirada da condição NOT NULL
+  description      String
   admin_post_block Boolean      @default(false)
+  user_id          String
+  created_at       DateTime     @default(now())
+  updated_at       DateTime?    @updatedAt
+  score            Int          @default(0)
+  status_open      Boolean      @default(true)
   comment          Comment[]
-  tags             Tag[]
-  post_reports     PostReport[]
   post_like        PostLike[]
+  post_reports     PostReport[]
+  user             User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  tags             Tag[]        @relation("PostToTag")
 
   @@map("posts")
 }
 
 model Comment {
   id                  String          @id @default(uuid())
-  user                User            @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id             String
-  post                Post            @relation(fields: [post_id], references: [id], onDelete: Cascade)
-  post_id             String
-  comment             String          @db.Text
+  comment             String
   score               Int             @default(0)
-  created_at          DateTime        @default(now())
-  updated_at          DateTime?       @updatedAt //Retirada da condição NOT NULL
   admin_comment_block Boolean         @default(false)
-  comment_reports     CommentReport[]
+  post_id             String
+  user_id             String
+  created_at          DateTime        @default(now())
+  updated_at          DateTime?       @updatedAt
   comment_like        CommentLike[]
+  comment_reports     CommentReport[]
+  post                Post            @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  user                User            @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("comments")
 }
@@ -79,71 +73,71 @@ model Comment {
 model Tag {
   id         String      @id @default(uuid())
   tag        String      @unique @db.VarChar(15)
-  posts      Post[]
   tag_follow TagFollow[]
+  posts      Post[]      @relation("PostToTag")
 
   @@map("tags")
 }
 
 model PostReport {
   id               String     @id @default(uuid())
-  user             User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id          String
-  post             Post       @relation(fields: [post_id], references: [id], onDelete: Cascade)
   post_id          String
   type_report      TypeReport
   post_report      String     @db.VarChar(140)
   created_at       DateTime   @default(now())
   updated_at       DateTime?  @updatedAt
   admin_validation Boolean    @default(false)
+  post             Post       @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  user             User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("postreport")
 }
 
 model PostLike {
   id         String   @id @default(uuid())
-  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id    String
-  post       Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
   post_id    String
   created_at DateTime @default(now())
+  post       Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("postlike")
 }
 
 model CommentReport {
   id               String     @id @default(uuid())
-  user             User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id          String
-  comment          Comment    @relation(fields: [comment_id], references: [id], onDelete: Cascade)
   comment_id       String
   type_report      TypeReport
   post_report      String     @db.VarChar(140)
   created_at       DateTime   @default(now())
   updated_at       DateTime?  @updatedAt
   admin_validation Boolean    @default(false)
+  comment          Comment    @relation(fields: [comment_id], references: [id], onDelete: Cascade)
+  user             User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("commentreport")
 }
 
 model CommentLike {
   id         String   @id @default(uuid())
-  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id    String
-  comment    Comment  @relation(fields: [comment_id], references: [id], onDelete: Cascade)
   comment_id String
   created_at DateTime @default(now())
+  comment    Comment  @relation(fields: [comment_id], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("commentlike")
 }
 
 model TagFollow {
   id         String   @id @default(uuid())
-  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id    String
-  tag        Tag      @relation(fields: [tag_id], references: [id], onDelete: Cascade)
   tag_id     String
   created_at DateTime @default(now())
+  tag        Tag      @relation(fields: [tag_id], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("tagFollow")
 }

@@ -16,7 +16,7 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: "postgresql://user:password@localhost:5432/db? schema=public"
+    DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy"
 
     steps:
       - name: Checkout
