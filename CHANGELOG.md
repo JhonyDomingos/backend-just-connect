@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.2](https://github.com/JhonyDomingos/backend-just-connect/compare/v1.1.1...v1.1.2) (2025-12-31)
+
+### 🐛 Bug Fixes
+
+* fixing confict ([414e50a](https://github.com/JhonyDomingos/backend-just-connect/commit/414e50a9aa1caed403d41cbd15cb6f0efc323340))
+
+### ♻️ Code Refactoring
+
+* adjusting server ([8de56c2](https://github.com/JhonyDomingos/backend-just-connect/commit/8de56c28db2fd36e8827f944eca10f84e1f36517))
+* fixing null types ([1b9e7ef](https://github.com/JhonyDomingos/backend-just-connect/commit/1b9e7ef26dc2d4c13a002af82ef4cd2067a1d46b))
+
 ## [1.1.1-beta.1](https://github.com/JhonyDomingos/backend-just-connect/compare/v1.1.0...v1.1.1-beta.1) (2025-12-31)
 
 ### ♻️ Code Refactoring
