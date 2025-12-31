@@ -1199,15 +1199,15 @@ export const UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   bio_description: 'bio_description',
-  role: 'role',
   admin_user_block: 'admin_user_block',
   linkedin: 'linkedin',
   instagram: 'instagram',
   github: 'github',
-  reset_token: 'reset_token',
-  reset_token_expiry: 'reset_token_expiry',
+  role: 'role',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  reset_token: 'reset_token',
+  reset_token_expiry: 'reset_token_expiry'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -1215,14 +1215,14 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const PostScalarFieldEnum = {
   id: 'id',
-  user_id: 'user_id',
   title: 'title',
   description: 'description',
-  score: 'score',
-  status_open: 'status_open',
+  admin_post_block: 'admin_post_block',
+  user_id: 'user_id',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  admin_post_block: 'admin_post_block'
+  score: 'score',
+  status_open: 'status_open'
 } as const
 
 export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
@@ -1230,13 +1230,13 @@ export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof Post
 
 export const CommentScalarFieldEnum = {
   id: 'id',
-  user_id: 'user_id',
-  post_id: 'post_id',
   comment: 'comment',
   score: 'score',
+  admin_comment_block: 'admin_comment_block',
+  post_id: 'post_id',
+  user_id: 'user_id',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  admin_comment_block: 'admin_comment_block'
+  updated_at: 'updated_at'
 } as const
 
 export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
@@ -1367,6 +1367,13 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'Role'
  */
 export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
@@ -1377,13 +1384,6 @@ export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'Role[]'
  */
 export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
