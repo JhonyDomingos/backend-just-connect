@@ -1,5 +1,5 @@
 import { ReturnProfileUserData } from "../../interfaces/user/UserTypes";
-import {prismaClient} from "../../prisma";
+import { prismaClient } from "../../prisma";
 import { userProfileReturnSchema } from "../../schemas/userSchemas";
 
 class GetUserProfileService {
@@ -26,7 +26,7 @@ class GetUserProfileService {
       },
     });
 
-    const postsWithCommentCount = user.posts.map((post) => ({
+    const postsWithCommentCount = user?.posts.map((post) => ({
       ...post,
       username: user.username,
       commentCount: post.comment.length,
